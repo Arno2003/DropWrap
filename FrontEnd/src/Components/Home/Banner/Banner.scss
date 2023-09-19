@@ -1,0 +1,155 @@
+@import "../../../css-config/mixins.scss";
+
+.hero-banner {
+  padding: 40px 0;
+  position: relative;
+  // background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+  // background-image: linear-gradient(to right, #f9cdb498, #947664c7);
+  background-image: linear-gradient(to right, #947664c7, #ffb68b98);
+  @include md {
+    height: calc(100vh - 80px);
+  }
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    .content {
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-direction: column-reverse;
+      max-width: calc(100% - 20px);
+      margin: 0 auto;
+      position: relative;
+      @include md {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        max-width: 1200px;
+      }
+      .banner-img {
+        position: relative;
+        z-index: 9;
+        width: 200px;
+        margin-bottom: 20px;
+        @include md {
+          width: 500px;
+          margin-right: 60px;
+          margin-top: 50px;
+          margin-bottom: 0;
+        }
+        @include xxl {
+          width: 700px;
+          margin-right: 0px;
+          margin-top: 0px;
+        }
+      }
+      .text-content {
+        font-family: "Italiana", serif;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include md {
+          // position: absolute;
+          // left: 50px;
+          // top: 50%;
+          // transform: translateY(-50%);
+        }
+        // @include xxl{
+        //     left: 0;
+        // }
+        h1 {
+          font-size: 80px;
+          font-weight: normal;
+          // font-weight: 700;
+          line-height: 1;
+          margin-bottom: 20px;
+          @include md {
+            font-size: 80px;
+            margin-bottom: 0px;
+          }
+        }
+        p {
+          font-family: "Mooli", sans-serif;
+          max-width: 300px;
+          font-size: 14px;
+          line-height: 20px;
+          margin-bottom: 20px;
+          @include md {
+            max-width: 500px;
+            font-size: 20px;
+            line-height: 24px;
+            margin: 50px 0;
+          }
+        }
+        .ctas {
+          font-family: "Mooli", sans-serif;
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          .banner-cta {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+              rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: 700;
+            border: 2px solid #e45a3c;
+            padding: 20px 20px;
+            cursor: pointer;
+            &.v2 {
+              background-color: #e45a3c;
+              color: rgb(255, 255, 255);
+              &:hover {
+                background-color: #ce3f1f;
+              }
+            }
+            &:hover {
+              border: 2px solid #ce3f1f;
+              // opacity: 0.6;
+            }
+          }
+        }
+      }
+    }
+    .buttons {
+      // border: 2px solid red;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .ctas {
+        font-family: "Open Sans", sans-serif;
+        // font-family: "Mooli", sans-serif;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        .banner-cta {
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+          text-align: center;
+          // text-transform: uppercase;
+          width: 250px;
+          font-size: 18px;
+          font-weight: 700;
+          // border: 2px solid #e45a3c;
+          background-color: #e45a3c;
+          padding: 20px 5px;
+          cursor: pointer;
+          color: rgb(255, 255, 255);
+          &.v2 {
+            background-color: #e45a3c;
+          }
+          &:hover {
+            background-color: #ce3f1f;
+
+            // opacity: 0.6;
+          }
+        }
+      }
+    }
+  }
+}
