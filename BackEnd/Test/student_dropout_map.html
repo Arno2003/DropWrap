@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_949877edafa751f2ac4f253e8b770014 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_949877edafa751f2ac4f253e8b770014" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_949877edafa751f2ac4f253e8b770014 = L.map(
+                "map_949877edafa751f2ac4f253e8b770014",
+                {
+                    center: [38.662620000000004, -95.86706000000001],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a1fa9f792f990c06008010f39491d9e1 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_949877edafa751f2ac4f253e8b770014);
+        
+    
+            var marker_d1f7c0568efade1eb15d426f9b6edfc9 = L.marker(
+                [40.7128, -74.006],
+                {}
+            ).addTo(map_949877edafa751f2ac4f253e8b770014);
+        
+    
+            var icon_eab34577794f31ed6a80a5bf7cf4d666 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d1f7c0568efade1eb15d426f9b6edfc9.setIcon(icon_eab34577794f31ed6a80a5bf7cf4d666);
+        
+    
+        var popup_3ab6ea963bf516da283b99fe7af00106 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_97e8678e71e932c250cb7e9fb1ee7e1e = $(`<div id="html_97e8678e71e932c250cb7e9fb1ee7e1e" style="width: 100.0%; height: 100.0%;">Student ID: 1, Dropout Reason: Financial, Cluster: 1</div>`)[0];
+                popup_3ab6ea963bf516da283b99fe7af00106.setContent(html_97e8678e71e932c250cb7e9fb1ee7e1e);
+            
+        
+
+        marker_d1f7c0568efade1eb15d426f9b6edfc9.bindPopup(popup_3ab6ea963bf516da283b99fe7af00106)
+        ;
+
+        
+    
+    
+            var marker_6c7c3f904835addf795ce5142470b9fe = L.marker(
+                [34.0522, -118.2437],
+                {}
+            ).addTo(map_949877edafa751f2ac4f253e8b770014);
+        
+    
+            var icon_42dbaf932801f006c8974bbc717042ea = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6c7c3f904835addf795ce5142470b9fe.setIcon(icon_42dbaf932801f006c8974bbc717042ea);
+        
+    
+        var popup_bceb4c8dab402c07fe128c5b03ed5c8b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_98787ec20d883d1b416dc8d5146b08d9 = $(`<div id="html_98787ec20d883d1b416dc8d5146b08d9" style="width: 100.0%; height: 100.0%;">Student ID: 2, Dropout Reason: Academic, Cluster: 2</div>`)[0];
+                popup_bceb4c8dab402c07fe128c5b03ed5c8b.setContent(html_98787ec20d883d1b416dc8d5146b08d9);
+            
+        
+
+        marker_6c7c3f904835addf795ce5142470b9fe.bindPopup(popup_bceb4c8dab402c07fe128c5b03ed5c8b)
+        ;
+
+        
+    
+    
+            var marker_c3fdf31c42e2540eadcd06dd4457dd48 = L.marker(
+                [41.8781, -87.6298],
+                {}
+            ).addTo(map_949877edafa751f2ac4f253e8b770014);
+        
+    
+            var icon_d73e8779e87b9020add69118afccff1b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_c3fdf31c42e2540eadcd06dd4457dd48.setIcon(icon_d73e8779e87b9020add69118afccff1b);
+        
+    
+        var popup_076ea3d217a5acee6348b245834d21e3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9e6463d4e6fa00f19ed96ad34e6f5cf6 = $(`<div id="html_9e6463d4e6fa00f19ed96ad34e6f5cf6" style="width: 100.0%; height: 100.0%;">Student ID: 3, Dropout Reason: Personal, Cluster: 1</div>`)[0];
+                popup_076ea3d217a5acee6348b245834d21e3.setContent(html_9e6463d4e6fa00f19ed96ad34e6f5cf6);
+            
+        
+
+        marker_c3fdf31c42e2540eadcd06dd4457dd48.bindPopup(popup_076ea3d217a5acee6348b245834d21e3)
+        ;
+
+        
+    
+    
+            var marker_9f8912dcfedc6b74609252791dd02d9c = L.marker(
+                [38.8951, -77.0364],
+                {}
+            ).addTo(map_949877edafa751f2ac4f253e8b770014);
+        
+    
+            var icon_331681448fcf9f8d533d2f352bdeacb8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_9f8912dcfedc6b74609252791dd02d9c.setIcon(icon_331681448fcf9f8d533d2f352bdeacb8);
+        
+    
+        var popup_07ac06703d60469bf13db5e6a04e2f1b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f9a6bf1ac984eb04cd7b2448d3a2d214 = $(`<div id="html_f9a6bf1ac984eb04cd7b2448d3a2d214" style="width: 100.0%; height: 100.0%;">Student ID: 4, Dropout Reason: Financial, Cluster: 3</div>`)[0];
+                popup_07ac06703d60469bf13db5e6a04e2f1b.setContent(html_f9a6bf1ac984eb04cd7b2448d3a2d214);
+            
+        
+
+        marker_9f8912dcfedc6b74609252791dd02d9c.bindPopup(popup_07ac06703d60469bf13db5e6a04e2f1b)
+        ;
+
+        
+    
+    
+            var marker_034d3c98683347f1644d82a7c83b29f0 = L.marker(
+                [37.7749, -122.4194],
+                {}
+            ).addTo(map_949877edafa751f2ac4f253e8b770014);
+        
+    
+            var icon_7bd55fbe7413e1450c7042f776293081 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_034d3c98683347f1644d82a7c83b29f0.setIcon(icon_7bd55fbe7413e1450c7042f776293081);
+        
+    
+        var popup_975b674da36a2909e91a00d770a6aabe = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_530768eff75b116db40351e6f392aa27 = $(`<div id="html_530768eff75b116db40351e6f392aa27" style="width: 100.0%; height: 100.0%;">Student ID: 5, Dropout Reason: Academic, Cluster: 2</div>`)[0];
+                popup_975b674da36a2909e91a00d770a6aabe.setContent(html_530768eff75b116db40351e6f392aa27);
+            
+        
+
+        marker_034d3c98683347f1644d82a7c83b29f0.bindPopup(popup_975b674da36a2909e91a00d770a6aabe)
+        ;
+
+        
+    
+</script>
+</html>
