@@ -1,111 +1,34 @@
-,State_UT,year,Cluster_Label
-0,A & N Islands,2012,0
-1,A & N Islands,2013,0
-2,A & N Islands,2014,0
-3,Andhra Pradesh,2012,0
-4,Andhra Pradesh,2013,1
-5,Andhra Pradesh,2014,3
-6,Arunachal  Pradesh,2013,1
-7,Arunachal Pradesh,2012,3
-8,Arunachal Pradesh,2014,1
-9,Assam,2012,3
-10,Assam,2013,3
-11,Assam,2014,3
-12,Bihar,2012,4
-13,Bihar,2013,4
-14,Bihar,2014,4
-15,Chandigarh,2012,0
-16,Chandigarh,2013,0
-17,Chandigarh,2014,0
-18,Chhattisgarh,2012,0
-19,Chhattisgarh,2013,4
-20,Chhattisgarh,2014,3
-21,Dadra & Nagar Haveli,2012,4
-22,Dadra & Nagar Haveli,2013,4
-23,Dadra & Nagar Haveli,2014,4
-24,Daman & Diu,2012,0
-25,Daman & Diu,2013,4
-26,Daman & Diu,2014,1
-27,Delhi,2012,0
-28,Delhi,2013,0
-29,Delhi,2014,0
-30,Goa,2012,0
-31,Goa,2013,0
-32,Goa,2014,0
-33,Gujarat,2012,0
-34,Gujarat,2013,4
-35,Gujarat,2014,4
-36,Haryana,2012,0
-37,Haryana,2013,0
-38,Haryana,2014,3
-39,Himachal Pradesh,2012,0
-40,Himachal Pradesh,2013,0
-41,Himachal Pradesh,2014,0
-42,Jammu & Kashmir,2012,1
-43,Jammu & Kashmir,2013,1
-44,Jammu & Kashmir,2014,1
-45,Jharkhand,2012,0
-46,Jharkhand,2013,3
-47,Jharkhand,2014,3
-48,Karnataka,2012,1
-49,Karnataka,2013,4
-50,Karnataka,2014,4
-51,Kerala,2012,0
-52,Kerala,2013,0
-53,Kerala,2014,0
-54,Lakshadweep,2012,0
-55,Lakshadweep,2013,0
-56,Lakshadweep,2014,0
-57,Madhya  Pradesh,2012,0
-58,Madhya Pradesh,2013,3
-59,Madhya Pradesh,2014,3
-60,Maharashtra,2012,0
-61,Maharashtra,2013,0
-62,Maharashtra,2014,0
-63,Manipur,2012,1
-64,Manipur,2013,3
-65,Manipur,2014,3
-66,Meghalaya,2012,3
-67,Meghalaya,2013,3
-68,Meghalaya,2014,3
-69,Mizoram,2012,2
-70,Mizoram,2013,3
-71,Mizoram,2014,3
-72,Nagaland,2012,1
-73,Nagaland,2013,2
-74,Nagaland,2014,3
-75,Odisha,2012,4
-76,Odisha,2013,4
-77,Odisha,2014,4
-78,Puducherry,2012,0
-79,Puducherry,2013,0
-80,Puducherry,2014,0
-81,Punjab,2012,0
-82,Punjab,2013,0
-83,Punjab,2014,0
-84,Rajasthan,2012,0
-85,Rajasthan,2013,3
-86,Rajasthan,2014,3
-87,Sikkim,2012,0
-88,Sikkim,2013,1
-89,Sikkim,2014,0
-90,Tamil  Nadu,2012,0
-91,Tamil Nadu,2013,0
-92,Tamil Nadu,2014,0
-93,Telangana,2013,1
-94,Telangana,2014,0
-95,Tripura,2012,4
-96,Tripura,2013,4
-97,Tripura,2014,4
-98,Uttar Pradesh,2012,0
-99,Uttar Pradesh,2013,0
-100,Uttar Pradesh,2014,0
-101,Uttarakhand,2012,0
-102,Uttarakhand,2013,0
-103,Uttarakhand,2014,0
-104,West Bengal,2012,1
-105,West Bengal,2013,1
-106,West Bengal,2014,4
-107,All India,2012,0
-108,All India,2013,3
-109,All India,2014,3
+,Name Of District,Cluster_Label
+0,Ahmedabad,2
+1,Amreli,0
+2,Anand,1
+3,Aravalli,2
+4,Banas Kantha,1
+5,Bharuch,0
+6,Bhavnagar,0
+7,Botad,1
+8,Chhotaudepur,0
+9,Devbhoomi Dwarka,1
+10,Dohad,4
+11,Gandhinagar,0
+12,Gir Somnath,2
+13,Jamnagar,0
+14,Junagadh,2
+15,Kachchh,3
+16,Kheda,1
+17,Mahesana,4
+18,Mahisagar,0
+19,Morbi,4
+20,Narmada,0
+21,Navsari,2
+22,Panch Mahals,4
+23,Patan,1
+24,Porbandar,0
+25,Rajkot,2
+26,Sabar Kantha,0
+27,Surat,2
+28,Surendranagar,4
+29,Tapi,0
+30,The Dangs,3
+31,Vadodara,4
+32,Valsad,2
