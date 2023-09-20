@@ -5,12 +5,12 @@ const Geographical = () => {
   return (
     <div className="geo-container">
       <div className="geo-content">
-        <h1 className="pri-head">Geographical Distribution</h1>
+        <h1 className="pri-head">GEOGRAPHICAL DISTRIBUTION</h1>
         <div className="map-content">
-          <div className="left">
+          <div className="top">
             <MapComponent />
           </div>
-          <div className="right"></div>
+          {/* <div className="bottom"></div> */}
         </div>
       </div>
     </div>

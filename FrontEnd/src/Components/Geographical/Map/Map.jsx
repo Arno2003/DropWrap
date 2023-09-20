@@ -12,6 +12,59 @@ import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import Overlay from "ol/Overlay";
 import "./Map.scss";
+import { Style, Circle as CircleStyle, Stroke, Fill, Text } from "ol/style";
+
+// Custom style function for clusters
+// Custom style function for clusters
+const clusterStyle = (feature) => {
+  const features = feature.get("features");
+  const clusterSize = features.length;
+
+  // Calculate the average rate for the cluster
+  let sum = 0;
+  features.forEach((feature) => {
+    sum += feature.get("rate");
+  });
+  const avgRate = sum / clusterSize || 0;
+
+  // Determine cluster color based on avgRate
+  let fillColor;
+  if (avgRate < 10) {
+    fillColor = "rgba(255, 107, 107, 0.27)";
+  } else if (avgRate < 20) {
+    fillColor = "rgba(91, 192, 235, 0.24)";
+  } else if (avgRate < 30) {
+    fillColor = "rgba(75, 144, 51, 0.20)";
+  } else if (avgRate < 40) {
+    fillColor = "rgba(181, 161, 57, 0.28)";
+  } else if (avgRate < 50) {
+    fillColor = "rgba(225, 122, 64, 0.68)";
+  } else {
+    fillColor = "rgba(225, 64, 64, 0.68)";
+  }
+
+  // Adjust the cluster radius based on your preference
+  const clusterRadius = 20 + clusterSize * 5;
+
+  return new Style({
+    image: new CircleStyle({
+      radius: clusterRadius,
+      stroke: new Stroke({
+        color: "black", // Cluster border color
+        width: 0.2, // Cluster border width
+      }),
+      fill: new Fill({
+        color: fillColor, // Cluster fill color based on avgRate
+      }),
+    }),
+    text: new Text({
+      text: clusterSize.toString(),
+      fill: new Fill({
+        color: "#fff", // Text color
+      }),
+    }),
+  });
+};
 
 const MapComponent = () => {
   const mapRef = useRef(null);
@@ -35,7 +88,7 @@ const MapComponent = () => {
     const vectorSource = new VectorSource();
 
     // Fetch and parse the CSV data
-    fetch("/in.csv")
+    fetch("/geocoded.csv")
       .then((response) => response.text())
       .then((csvData) => {
         // Parse CSV data here and create features
@@ -44,17 +97,16 @@ const MapComponent = () => {
 
         // Loop through CSV rows and create features
         for (let i = 1; i < rows.length; i++) {
-          const [city, lat, lng, country, iso2, admin_name, population] =
-            rows[i].split(",");
+          const [name, lat, lon, country, rate] = rows[i].split(",");
+
+          // console.log(village);
 
           // Create a feature for each city
           const feature = new Feature({
-            geometry: new Point(fromLonLat([parseFloat(lng), parseFloat(lat)])),
-            city,
+            geometry: new Point(fromLonLat([parseFloat(lon), parseFloat(lat)])),
+            name,
             country,
-            iso2,
-            admin_name,
-            population: parseInt(population),
+            rate: parseInt(rate),
           });
 
           vectorSource.addFeature(feature);
@@ -63,13 +115,14 @@ const MapComponent = () => {
         // Create a source for clustering
         // Create a cluster source
         const clusterSource = new Cluster({
-          distance: 40, // Adjust the cluster distance as needed
+          distance: 10, // Adjust the cluster distance as needed
           source: vectorSource,
         });
 
         // Create a vector layer for clusters
         const clusterLayer = new VectorLayer({
           source: clusterSource,
+          style: clusterStyle,
         });
 
         // Add the cluster layer to the map
@@ -84,7 +137,7 @@ const MapComponent = () => {
         map.addOverlay(overlay);
 
         map.on("pointermove", (e) => {
-          // console.log("TRIGGERED");
+          //console.log("TRIGGERED");
 
           const feature = map.forEachFeatureAtPixel(
             e.pixel,
@@ -94,19 +147,24 @@ const MapComponent = () => {
           if (feature) {
             overlay.setPosition(e.coordinate);
 
-            const populationList = feature.getProperties().features;
+            // console.log(feature);
+
+            const dropList = feature.getProperties().features;
             let sum = 0;
 
-            populationList.forEach((element) => {
-              sum = sum + element.values_.population;
+            // console.log(dropList);
+
+            dropList.forEach((element) => {
+              // console.log(element.values_.rate);
+              sum = sum + element.values_.rate;
             });
 
-            var avgPop = sum / populationList.length || 0;
-            avgPop = Math.round(avgPop);
-            console.log(avgPop);
+            var avgRate = sum / dropList.length || 0;
+            avgRate = Math.round(avgRate);
+            console.log(avgRate);
 
-            if (avgPop !== undefined) {
-              popupRef.current.innerHTML = `Population: ${avgPop}`;
+            if (avgRate !== undefined) {
+              popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
             }
           } else {
             overlay.setPosition(undefined);
