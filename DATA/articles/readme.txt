@@ -1,0 +1,1 @@
+Keep all articles, journals, other docs in this folder
