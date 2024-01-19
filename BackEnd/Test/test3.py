@@ -20,7 +20,7 @@ data = data.replace("NR", 0)
 data.dropna(inplace=True)
 
 # Extract the 'year' column, convert it to a numerical format
-#data['year'] = data['year'].str.extract(r'(\d{4})').astype(int)
+# data['year'] = data['year'].str.extract(r'(\d{4})').astype(int)
 
 # Standardize the numerical features for clustering
 scaler = StandardScaler()
@@ -45,4 +45,3 @@ plt.show()
 result_data = data[['Name Of District', 'Cluster_Label']]
 print(result_data)
 result_data.to_csv("cluster.csv")
-

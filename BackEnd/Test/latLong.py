@@ -12,6 +12,7 @@ def get_lat_lng(location):
         'apiKey': API_KEY,
     }
     response = requests.get(GEOAPIFY_ENDPOINT, params=params)
+    print(response)
     data = response.json()
     
     if 'features' in data and len(data['features']) > 0:
