@@ -1,9 +1,14 @@
 import tabula
 import pandas as pd
 
-pdf_file_path = "educationalstatisticsbook2019-20.pdf"
-page_number = 27  # Change this to your desired page number
-csv_file_path = "output_data.csv"
+#pdf_file_path = "educationalstatisticsbook2019-20.pdf"
+pdf_file_path = "BackEnd\\Test\\UDISE+2019_20_Booklet.pdf"
+
+#page_number = 27  # Change this to your desired page number
+page_number = 99
+
+#csv_file_path = "output_data.csv"
+csv_file_path = "output_data_2019-20.csv"
 
 # Extract tabular data using Tabula
 tables = tabula.read_pdf(pdf_file_path, pages=page_number)
