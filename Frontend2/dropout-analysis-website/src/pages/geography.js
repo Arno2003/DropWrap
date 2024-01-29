@@ -30,7 +30,7 @@ const ReasonsTab = ({ classes, reasonList }) => {
       </h3>
       {reasonList.map((item) => {
         return (
-          <div className="w-full flex flex-row mx-3 my-3">
+          <div key={item.id} className="w-full flex flex-row mx-3 my-3">
             <div className="w-[75%] text-lg">{item.reason}</div>
             <div className="w-[25%] text-lg font-bold">{item.rate}%</div>
           </div>
@@ -40,7 +40,7 @@ const ReasonsTab = ({ classes, reasonList }) => {
   );
 };
 
-const geography = () => {
+const Geography = () => {
   const [category, setCategory] = useState("O");
   const [caste, setCaste] = useState("Overall");
   const [std, setStd] = useState(2);
@@ -84,4 +84,4 @@ const geography = () => {
   );
 };
 
-export default geography;
+export default Geography;

@@ -80,6 +80,7 @@ export const CasteDropDown = ({ caste, setCaste }) => {
           {casteList.map((item) => {
             return (
               <button
+              key={item.id}
                 onClick={() => handleCasteClick(item)}
                 className="py-4 px-3 border-b-2 border-solid border-dark"
               >
