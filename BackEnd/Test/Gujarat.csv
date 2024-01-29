@@ -1,4 +1,4 @@
-Location,Social Category,Girls,Boys,Overall,Girls,Boys,Overall,Girls,Boys,Overall
+Location,Social Category,prim_Girls,prim_Boys,prim_Overall,upPrim_Girls,upPrim_Boys,upPrim_Overall,snr_Girls,snr_Boys,snr_Overall
 AHMEDABAD,General,0,0,0,0,0,0,8,8.51,8.28
 AHMEDABAD,OBC,0,0,0,7.17,4.03,5.49,17.23,20.13,18.96
 AHMEDABAD,SC,0,0,0,0,0,0,9.89,14.03,12.21
@@ -164,5 +164,3 @@ VALSAD,OBC,2.75,1.03,1.85,3.27,4.36,3.85,3.12,6.87,5.13
 VALSAD,SC,10.8,11.36,11.1,22.43,17.45,19.8,16.08,26.68,21.75
 VALSAD,ST,0.89,1,0.94,5.25,4.38,4.81,14.26,17.35,15.81
 VALSAD,Overall,0.5,0.29,0.39,4.65,3.97,4.3,11.43,14.63,13.1
-Total,Overall,0,0,0,5.76,4.23,4.95,15.89,19.39,17.85
-..,,,,,,,,,,
