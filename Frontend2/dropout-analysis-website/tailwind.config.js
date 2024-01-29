@@ -10,13 +10,14 @@ module.exports = {
     extend: {
       fontFamily: {
         mont: ["var(--font-mont)"],
+        raleway: ["Raleway", "sans-serif"],
       },
       colors: {
-        dark: "#001542",
-        light: "#FFFFFF",
-        secDark: "#085454",
-        alt: "#7A7A7A",
-        acc: "#FFB30D",
+        dark: "#0D0D0D",
+        light: "#DAE9D1",
+        secDark: "#027333",
+        alt: "#F2C029",
+        acc: "#BF2604",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

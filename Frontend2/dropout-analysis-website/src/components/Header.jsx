@@ -7,7 +7,7 @@ const Header = ({ mode, setMode }) => {
   };
 
   return (
-    <header className="text-light w-full flex flex-row items-center text-xl justify-between h-[70px] bg-dark px-5">
+    <header className="text-dark dark:text-light bg-light dark:bg-dark mx-3 flex flex-row items-center text-xl justify-between h-[70px] px-5 border-b-2 border-solid border-dark dark:border-light">
       <div>
         <Link href="/" className="ml-6 mr-4">
           Home
@@ -36,7 +36,9 @@ const Header = ({ mode, setMode }) => {
           </button>
         )}
       </div>
-      <div className="absolute left-[50%] top-5 translate-x-[-50%]">LOGO</div>
+      <div className="font-extrabold tracking-widest absolute left-[50%] top-5 translate-x-[-50%]">
+        DROPWRAP
+      </div>
     </header>
   );
 };

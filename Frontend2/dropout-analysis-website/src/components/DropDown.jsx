@@ -3,9 +3,9 @@ import React, { useState } from "react";
 export const CategoryDropDown = ({ category, setCategory }) => {
   const [isOpen, setIsOpen] = useState(false);
   const cat = () => {
-    if (category === "O") return "Overall";
-    if (category === "B") return "Only Boys";
-    if (category === "G") return "Only Girls";
+    if (category === "O") return "Both";
+    if (category === "B") return "Boys";
+    if (category === "G") return "Girls";
   };
   const handleClick = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
@@ -21,20 +21,20 @@ export const CategoryDropDown = ({ category, setCategory }) => {
   };
   return (
     <div>
-      <h3 className="text-dark">Category:</h3>
+      {/* <h3 className="text-dark">Gender:</h3> */}
       <button
         onClick={handleClick}
-        className="mr-3 mb-2 py-3 px-3 bg-dark w-[130px]"
+        className="mr-3 mb-2 py-3 px-3 bg-dark w-[130px] relative z-10"
       >
-        {cat()}
+        Sex : {cat()}
       </button>
       {isOpen && (
-        <div className="text-dark absolute flex flex-col text-md bg-acc w-[130px] ">
+        <div className="text-dark absolute flex flex-col text-md bg-acc w-[130px] z-10">
           <button
             onClick={handleOverallClick}
             className="py-4 px-3 border-b-2 border-solid border-dark"
           >
-            Overall
+            Both
           </button>
           <button
             onClick={handleBoysClick}
@@ -68,19 +68,19 @@ export const CasteDropDown = ({ caste, setCaste }) => {
 
   return (
     <div>
-      <h3 className="text-dark">Caste:</h3>
+      {/* <h3 className="text-dark">Caste:</h3> */}
       <button
         onClick={handleClick}
-        className="mr-3 mb-2 py-3 px-3 bg-dark w-[130px]"
+        className="mr-3 mb-2 py-3 px-3 bg-dark w-[140px] relative z-10"
       >
-        {caste}
+        Caste : {caste}
       </button>
       {isOpen && (
-        <div className="text-dark absolute flex flex-col text-md bg-acc w-[130px] z-1000">
+        <div className="text-dark absolute flex flex-col text-md bg-acc w-[140px] z-10">
           {casteList.map((item) => {
             return (
               <button
-              key={item.id}
+                key={item.id}
                 onClick={() => handleCasteClick(item)}
                 className="py-4 px-3 border-b-2 border-solid border-dark"
               >
@@ -115,15 +115,15 @@ export const StdDropDown = ({ std, setStd }) => {
   };
   return (
     <div>
-      <h3 className="text-dark">Standard:</h3>
+      {/* <h3 className="text-dark">Standard:</h3> */}
       <button
         onClick={handleClick}
-        className="mr-3 mb-2 py-3 px-3 bg-dark w-[150px]"
+        className="mr-3 mb-2 py-3 px-3 bg-dark w-[160px] z-10 relative"
       >
-        {standard()}
+        Std :{standard()}
       </button>
       {isOpen && (
-        <div className="text-dark absolute flex flex-col text-md bg-acc w-[150px]">
+        <div className="text-dark absolute flex flex-col text-md bg-acc w-[160px] z-10">
           <button
             onClick={handlePClick}
             className="py-4 px-3 border-b-2 border-solid border-dark"

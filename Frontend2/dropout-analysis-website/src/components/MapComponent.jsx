@@ -204,6 +204,8 @@ const MapComponent = ({ category, caste, std, classes, setRates }) => {
     };
   }, [category, caste, std]);
 
+  // setRates(rateArray);
+
   return (
     <div
       className={`h-full border-2 border-dark border-solid z-100 ${classes}`}

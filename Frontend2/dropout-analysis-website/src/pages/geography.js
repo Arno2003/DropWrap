@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import MapComponent from "@/components/MapComponent";
@@ -22,12 +22,22 @@ const demoReasons = [
   },
 ];
 
-const ReasonsTab = ({ classes, reasonList }) => {
+const ReasonsTab = ({
+  classes,
+  reasonList,
+  category,
+  setCategory,
+  caste,
+  setCaste,
+  std,
+  setStd,
+}) => {
   return (
     <div className={`${classes} `}>
       <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase border-b-2 border-solid border-dark">
         Reaons for Dropouts
       </h3>
+
       {reasonList.map((item) => {
         return (
           <div key={item.id} className="w-full flex flex-row mx-3 my-3">
@@ -47,7 +57,43 @@ const Geography = () => {
   const [reasonList, setReasonList] = useState(demoReasons);
   const [rates, setRates] = useState([]);
 
-  console.log(category);
+  useEffect(() => {
+    // Function to fetch and parse the CSV file
+    const fetchReasons = async () => {
+      try {
+        const response = await fetch("/data/reasons.csv");
+        const text = await response.text();
+        const rows = text.split("\n").slice(1); // Skip header row
+        // console.log(rates);
+        const reasons = rows.map((row) => {
+          const [
+            reason,
+            boys71,
+            girls71,
+            overall71,
+            boys75,
+            girls75,
+            overall75,
+          ] = row.split(",");
+
+          const getReasonRate = () => {
+            if (category === "O") return overall75;
+            if (category === "B") return boys75;
+            if (category === "G") return girls75;
+          };
+
+          return { reason, rate: parseFloat(getReasonRate()) };
+        });
+        setReasonList(reasons);
+      } catch (error) {
+        console.error("Error fetching reasons:", error);
+      }
+    };
+
+    // Call the fetchReasons function
+    fetchReasons();
+  }, [category]);
+
   return (
     <>
       <Head>
@@ -56,18 +102,27 @@ const Geography = () => {
       </Head>
       <div className="">
         <Layout classname="">
-          <h2 className="text-dark text-3xl w-full text-center mt-10">
-            GEOGRAPHICAL DISTRIBUTION
-          </h2>
-          <div className="text-light mt-10 w-[30%] flex flex-row  mr-4 justify-between">
-            <CategoryDropDown category={category} setCategory={setCategory} />
-            <CasteDropDown caste={caste} setCaste={setCaste} />
-            <StdDropDown std={std} setStd={setStd} />
+          <div className="flex flex-row justify-between h-[100px] items-center">
+            <h2 className="text-acc text-3xl text-left  font-extrabold ">
+              GEOGRAPHICAL DISTRIBUTION
+            </h2>
+            <div className="text-light mt-2 w-[30%] flex flex-row  mr-4 justify-between">
+              <CategoryDropDown category={category} setCategory={setCategory} />
+              <CasteDropDown caste={caste} setCaste={setCaste} />
+              <StdDropDown std={std} setStd={setStd} />
+            </div>
           </div>
-          <div className="w-full h-[500px] mx-auto mb-10 flex flex-row ">
+
+          <div className="w-full h-[650px] mx-auto mb-10 flex flex-row ">
             <ReasonsTab
               reasonList={reasonList}
               classes="text-dark w-[30%] mr-4 border-2 border-solid border-dark"
+              category={category}
+              setCategory={setCategory}
+              caste={caste}
+              setCaste={setCaste}
+              std={std}
+              setStd={setStd}
             />
 
             <MapComponent
@@ -76,6 +131,7 @@ const Geography = () => {
               caste={caste}
               std={std}
               setRates={setRates}
+              rates={rates}
             />
           </div>
         </Layout>
