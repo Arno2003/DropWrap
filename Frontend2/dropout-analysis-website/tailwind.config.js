@@ -15,8 +15,9 @@ module.exports = {
       colors: {
         dark: "#0D0D0D",
         light: "#DAE9D1",
-        secDark: "#027333",
-        alt: "#F2C029",
+        secDark: "#247547",
+        secLight: "#4DBD7D",
+        alt: "#D6B230",
         acc: "#BF2604",
       },
       backgroundImage: {

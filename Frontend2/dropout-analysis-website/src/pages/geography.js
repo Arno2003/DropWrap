@@ -22,27 +22,23 @@ const demoReasons = [
   },
 ];
 
-const ReasonsTab = ({
-  classes,
-  reasonList,
-  category,
-  setCategory,
-  caste,
-  setCaste,
-  std,
-  setStd,
-}) => {
+const ReasonsTab = ({ classes, reasonList }) => {
   return (
-    <div className={`${classes} `}>
-      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase border-b-2 border-solid border-dark">
+    <div className={`${classes} bg-secLight dark:bg-secDark rounded-xl  `}>
+      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-xl border-solid border-t-2 border-x-2 dark:border-secDark">
         Reaons for Dropouts
       </h3>
 
       {reasonList.map((item) => {
         return (
-          <div key={item.id} className="w-full flex flex-row mx-3 my-3">
-            <div className="w-[75%] text-lg">{item.reason}</div>
-            <div className="w-[25%] text-lg font-bold">{item.rate}%</div>
+          <div
+            key={item.id}
+            className="w-[95%] flex flex-row px-5 py-4 border-b-2 border-solid border-secDark dark:border-secLight dark:text-light mx-auto"
+          >
+            <div className="w-[80%] text-lg">{item.reason}</div>
+            <div className="w-[20%] text-lg font-bold flex items-center justify-center">
+              {item.rate}%
+            </div>
           </div>
         );
       })}
@@ -103,7 +99,7 @@ const Geography = () => {
       <div className="">
         <Layout classname="">
           <div className="flex flex-row justify-between h-[100px] items-center">
-            <h2 className="text-acc text-3xl text-left  font-extrabold ">
+            <h2 className="text-acc dark:text-alt text-3xl text-left  font-extrabold ">
               GEOGRAPHICAL DISTRIBUTION
             </h2>
             <div className="text-light mt-2 w-[30%] flex flex-row  mr-4 justify-between">
@@ -116,13 +112,7 @@ const Geography = () => {
           <div className="w-full h-[650px] mx-auto mb-10 flex flex-row ">
             <ReasonsTab
               reasonList={reasonList}
-              classes="text-dark w-[30%] mr-4 border-2 border-solid border-dark"
-              category={category}
-              setCategory={setCategory}
-              caste={caste}
-              setCaste={setCaste}
-              std={std}
-              setStd={setStd}
+              classes="text-dark w-[30%] mr-4 "
             />
 
             <MapComponent
