@@ -1,7 +1,10 @@
 import React from "react";
 import { SunIcon, MoonIcon } from "./Icons";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const Header = ({ mode, setMode }) => {
+  const router = useRouter();
+
   const handleClick = () => {
     mode == "dark" ? setMode("light") : setMode("dark");
   };

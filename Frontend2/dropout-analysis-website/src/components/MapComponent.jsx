@@ -66,7 +66,7 @@ const clusterStyle = (feature) => {
   });
 };
 
-const MapComponent = ({ category, caste, std, classes, setAvgRate }) => {
+const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
   const mapRef = useRef(null);
   const popupRef = useRef(null);
   useEffect(() => {
@@ -162,6 +162,12 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate }) => {
         });
         map.addOverlay(overlay);
 
+        if (mode === "dark") {
+          console.log("Hey");
+          map.on("postcompose", function (e) {
+            document.querySelector("canvas").style.filter = "invert(90%)";
+          });
+        }
         map.on("pointermove", (e) => {
           //console.log("TRIGGERED");
 
@@ -203,7 +209,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate }) => {
     return () => {
       map.setTarget(null);
     };
-  }, [category, caste, std]);
+  }, [category, caste, std, mode]);
 
   // setRates(rateArray);
 
@@ -213,7 +219,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate }) => {
     >
       <div
         ref={mapRef}
-        className="map z-100"
+        className="map z-100 rounded-xl"
         style={{ width: "100%", height: "100%" }}
       />
       <div

@@ -1,15 +1,15 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
-// import India from "@/components/India";
-// import Banner from "@/assets/banner.png";
-import Banner from "@/assets/in.svg";
+// import Banner from "@/assets/in.svg";
+import India from "@/components/India";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ mode }) {
   return (
     <>
       <Head>
@@ -45,11 +45,9 @@ export default function Home() {
             </div>
           </div>
           <div className="w-[50%] h-full flex flex-row items-center justify-center">
-            <Image
-              priority
-              src={Banner}
-              alt="Gujarat"
-              className="w-[80%] h-auto fill-dark dark:fill-light"
+            <India
+              color={mode === "dark" ? "#519CE1" : "#244475"}
+              stroke={mode === "dark" ? "#0D0D0D" : "#DCF2FF"}
             />
           </div>
         </Layout>

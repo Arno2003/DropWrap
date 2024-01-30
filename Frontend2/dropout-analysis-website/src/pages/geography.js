@@ -24,7 +24,9 @@ const demoReasons = [
 
 const ReasonsTab = ({ classes, reasonList }) => {
   return (
-    <div className={`${classes} bg-secLight dark:bg-secDark rounded-xl  `}>
+    <div
+      className={`${classes} bg-secLight bg-opacity-25  dark:bg-secDark rounded-xl  `}
+    >
       <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-xl border-solid border-t-2 border-x-2 dark:border-secDark">
         Reaons for Dropouts
       </h3>
@@ -46,14 +48,13 @@ const ReasonsTab = ({ classes, reasonList }) => {
   );
 };
 
-const Geography = () => {
+const Geography = ({ mode }) => {
   const [category, setCategory] = useState("O");
   const [caste, setCaste] = useState("Overall");
   const [std, setStd] = useState(2);
   const [reasonList, setReasonList] = useState(demoReasons);
   const [rates, setRates] = useState([]);
   const [avgRate, setAvgRate] = useState(-1);
-  console.log(avgRate);
   useEffect(() => {
     // Function to fetch and parse the CSV file
     const fetchReasons = async () => {
@@ -128,7 +129,8 @@ const Geography = () => {
             />
 
             <MapComponent
-              classes="w-[70%]"
+              mode={mode}
+              classes="w-[70%] "
               category={category}
               caste={caste}
               std={std}

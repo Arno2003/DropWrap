@@ -14,9 +14,9 @@ module.exports = {
       },
       colors: {
         dark: "#0D0D0D",
-        light: "#DAE9D1",
-        secDark: "#247547",
-        secLight: "#4DBD7D",
+        light: "#EAF7FF",
+        secDark: "#244475",
+        secLight: "#519CE1",
         alt: "#D6B230",
         acc: "#BF2604",
       },

@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
         className={` bg-light dark:bg-dark w-full min-h-screen font-raleway `}
       >
         <Header mode={mode} setMode={setMode} />
-        <Component key={router.asPath} {...pageProps} />
+        <Component mode={mode} key={router.asPath} {...pageProps} />
         <Footer />
       </main>
     </>
