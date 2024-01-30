@@ -1,14 +1,23 @@
-import pandas as pd
+from __future__ import print_function
+import time
+import cloudmersive_convert_api_client
+from cloudmersive_convert_api_client.rest import ApiException
+from pprint import pprint
 
-# Specify the Excel file path and the number of rows to skip
-excel_file = 'BackEnd\Test\Dropout Rate by Gender, Level of School Education and Social Category_State Name _Bihar   District - All District_21.xlsx'
-n_rows_to_skip = 3  # Adjust this value as needed
+# Configure API key authorization: Apikey
+configuration = cloudmersive_convert_api_client.Configuration()
+configuration.api_key['Apikey'] = 'YOUR_API_KEY'
 
-# Read the Excel file into a DataFrame, skipping the specified rows
-df = pd.read_excel(excel_file, skiprows=n_rows_to_skip)
 
-# Specify the desired CSV output file path
-csv_file = 'BackEnd\Test\Bihar20-2021.csv'
 
-# Save the DataFrame to a CSV file
-df.to_csv(csv_file)
+# create an instance of the API class
+api_instance = cloudmersive_convert_api_client.ConvertDocumentApi(cloudmersive_convert_api_client.ApiClient(configuration))
+input_file = 'DropoutBihar.xlsx'  # file | Input file to perform the operation on.
+output_encoding = 'output_encoding_example'  # str | Optional, set the output text encoding for the result; possible values are UTF-8, ASCII and UTF-32.  Default is UTF-8. (optional)
+
+try:
+    # Convert Excel XLSX Spreadsheet to CSV, Single Worksheet
+    api_response = api_instance.convert_document_xlsx_to_csv(input_file, output_encoding=output_encoding)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ConvertDocumentApi->convert_document_xlsx_to_csv: %s\n" % e)

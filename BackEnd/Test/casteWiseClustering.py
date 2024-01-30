@@ -1,11 +1,11 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-# from sklearn.cluster import AgglomerativeClustering
-# import scipy.cluster.hierarchy as sch
+from sklearn.cluster import AgglomerativeClustering
+from scipy.cluster.hierarchy import dendrogram, linkage
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-def clust(df, filePath):
+def KMclust(df, filePath):
     feat = [
         "prim_Girls",
         "prim_Boys",
@@ -22,7 +22,7 @@ def clust(df, filePath):
     for i in cast:
         if i not in clustNames:
             clustNames.append(i)
-    
+
     df.dropna(inplace=True)
     # Select relevant columns for clustering
     features = df[feat]
@@ -41,14 +41,14 @@ def clust(df, filePath):
     df['cluster'] = kmeans.fit_predict(features_scaled)
 
     # Displaying the resulting DataFrame
-    df.to_csv(opFilePath)
+    df.to_csv(filePath)
     # print(df)
     # Plot each cluster separately
     for cluster_label in range(n_clusters):
         cluster_data = df[df['cluster'] == cluster_label]
         plt.scatter(
-                    cluster_data["prim_Girls"], 
-                    cluster_data["prim_Boys"], 
+                    cluster_data["prim_Girls"],
+                    cluster_data["prim_Boys"],
                     label=f'{clustNames[cluster_label]}'
                 )
 
@@ -58,12 +58,12 @@ def clust(df, filePath):
     plt.title('Clusters based on primary Boys and Girls')
     plt.legend()
     plt.show()
-    
+
     for cluster_label in range(n_clusters):
         cluster_data = df[df['cluster'] == cluster_label]
         plt.scatter(
                     cluster_data["upPrim_Girls"],
-                    cluster_data["upPrim_Boys"], 
+                    cluster_data["upPrim_Boys"],
                     label=f'{clustNames[cluster_label]}'
                 )
 
@@ -73,11 +73,11 @@ def clust(df, filePath):
     plt.title('Clusters based on upper primary Boys and Girls')
     plt.legend()
     plt.show()
-    
+
     for cluster_label in range(n_clusters):
         cluster_data = df[df['cluster'] == cluster_label]
         plt.scatter(
-                    cluster_data["snr_Girls"], 
+                    cluster_data["snr_Girls"],
                     cluster_data["snr_Boys"],
                     label=f'{clustNames[cluster_label]}'
                 )
@@ -88,8 +88,32 @@ def clust(df, filePath):
     plt.title('Clusters based on senior Boys and Girls')
     plt.legend()
     plt.show()
-        
+
+def Hclust(df, destPath, n):
+    X = df[['DropoutRate']]
+    # Hierarchical clustering
+    ward_linkage = linkage(X, method='ward')
+    cluster_labels = AgglomerativeClustering(n_clusters=n, linkage='ward').fit_predict(X)
+
+    # Add cluster labels to the dataframe
+    df['Cluster'] = cluster_labels
+
+    # Print the caste-wise clusters
+    print(df[['Caste', 'Cluster']])
+
+    # Dendrogram visualization
+    plt.figure(figsize=(12, 6))
+    dendrogram(ward_linkage, labels=df['Caste'].tolist(), orientation='top', distance_sort='descending', show_leaf_counts=True)
+    plt.title('Hierarchical Clustering Dendrogram')
+    plt.xlabel('Caste')
+    plt.ylabel('Distance')
+    plt.show()
+
+
 if __name__ == "__main__":
-    data = pd.read_csv("BackEnd\Test\Gujarat.csv")
-    opFilePath = "BackEnd\Test\castClustGuj.csv"
-    clust(data, opFilePath)
+    dataForKM = pd.read_csv("BackEnd\Test\Gujarat.csv")
+    opFilePathKM = "BackEnd\Test\castClustGuj.csv"
+    KMclust(dataForKM, opFilePathKM)
+    dataForHC = pd.read_csv("BackEnd/Test/CastWiseGuj.csv")
+    opFilePAthHC = "BackEnd/Test/HClustCastWiseGuj.csv"
+    Hclust(dataForHC, opFilePAthHC)
