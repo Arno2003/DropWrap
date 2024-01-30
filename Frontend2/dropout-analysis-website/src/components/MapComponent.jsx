@@ -66,7 +66,7 @@ const clusterStyle = (feature) => {
   });
 };
 
-const MapComponent = ({ category, caste, std, classes, setRates }) => {
+const MapComponent = ({ category, caste, std, classes, setAvgRate }) => {
   const mapRef = useRef(null);
   const popupRef = useRef(null);
   useEffect(() => {
@@ -188,6 +188,7 @@ const MapComponent = ({ category, caste, std, classes, setRates }) => {
             var avgRate = sum / dropList.length || 0;
             avgRate = Math.round(avgRate);
             // console.log(avgRate);
+            setAvgRate(avgRate);
 
             if (avgRate !== undefined) {
               popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;

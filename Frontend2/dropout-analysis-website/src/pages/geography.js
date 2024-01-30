@@ -52,7 +52,8 @@ const Geography = () => {
   const [std, setStd] = useState(2);
   const [reasonList, setReasonList] = useState(demoReasons);
   const [rates, setRates] = useState([]);
-
+  const [avgRate, setAvgRate] = useState(-1);
+  console.log(avgRate);
   useEffect(() => {
     // Function to fetch and parse the CSV file
     const fetchReasons = async () => {
@@ -73,14 +74,25 @@ const Geography = () => {
           ] = row.split(",");
 
           const getReasonRate = () => {
-            if (category === "O") return overall75;
-            if (category === "B") return boys75;
-            if (category === "G") return girls75;
+            if (avgRate === -1) {
+              if (category === "O") return overall75;
+              if (category === "B") return boys75;
+              if (category === "G") return girls75;
+            } else {
+              if (category === "O")
+                return ((overall75 * avgRate) / 100).toFixed(2);
+              if (category === "B")
+                return ((boys75 * avgRate) / 100).toFixed(2);
+              if (category === "G")
+                return ((girls75 * avgRate) / 100).toFixed(2);
+            }
           };
 
           return { reason, rate: parseFloat(getReasonRate()) };
         });
-        setReasonList(reasons);
+        avgRate === -1
+          ? setReasonList(reasons)
+          : setReasonList(reasons.sort((a, b) => b.rate - a.rate).slice(0, 5));
       } catch (error) {
         console.error("Error fetching reasons:", error);
       }
@@ -88,7 +100,7 @@ const Geography = () => {
 
     // Call the fetchReasons function
     fetchReasons();
-  }, [category]);
+  }, [category, avgRate]);
 
   return (
     <>
@@ -120,8 +132,7 @@ const Geography = () => {
               category={category}
               caste={caste}
               std={std}
-              setRates={setRates}
-              rates={rates}
+              setAvgRate={setAvgRate}
             />
           </div>
         </Layout>
