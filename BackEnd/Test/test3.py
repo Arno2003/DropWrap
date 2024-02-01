@@ -51,7 +51,7 @@ numerical_features = data.drop(columns=['Location'])
 scaled_features = scaler.fit_transform(numerical_features)
 
 # hierarchical clustering
-agg_clustering = AgglomerativeClustering(n_clusters=6, linkage='ward')  # Adjust n_clusters as needed
+agg_clustering = AgglomerativeClustering(n_clusters=n_clusters, linkage='ward')  # Adjust n_clusters as needed
 data['Cluster_Label'] = agg_clustering.fit_predict(scaled_features)
 
 # Dendrogram
