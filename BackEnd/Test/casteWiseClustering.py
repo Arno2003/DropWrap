@@ -116,4 +116,4 @@ if __name__ == "__main__":
     KMclust(dataForKM, opFilePathKM)
     dataForHC = pd.read_csv("BackEnd/Test/CastWiseGuj.csv")
     opFilePAthHC = "BackEnd/Test/HClustCastWiseGuj.csv"
-    Hclust(dataForHC, opFilePAthHC)
+    # Hclust(dataForHC, opFilePAthHC)

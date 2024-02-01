@@ -1,3 +1,5 @@
+import os
+import csv
 import requests
 import pandas as pd
 
@@ -19,39 +21,56 @@ def get_lat_lng(location):
     else:
         return None
 
-# Read the CSV file
-input_file = 'BackEnd\Test\Gujarat.csv'
-output_file = 'BackEnd\Test\latlong.csv'
+def convert(input_file, output_file, state):
+    # Read the CSV file
+    df = pd.read_csv(input_file)
+    print(df)
 
-df = pd.read_csv(input_file)
-print(df)
+    # Initialize empty lists to store latitude and longitude
+    latitudes = []
+    longitudes = []
 
-# Initialize empty lists to store latitude and longitude
-latitudes = []
-longitudes = []
+    # Iterate through each row and get location data
+    for index, row in df.iterrows():
+        # Construct the location string
+        location = row['Location'] + f", {state}"
 
-# Iterate through each row and get location data
-for index, row in df.iterrows():
-    # Construct the location string
-    location = row['Location'] + ", Gujarat"
+        # Get latitude and longitude using Geoapify API
+        coordinates = get_lat_lng(location)
 
-    # Get latitude and longitude using Geoapify API
-    coordinates = get_lat_lng(location)
+        if coordinates:
+            latitudes.append(coordinates[0])
+            longitudes.append(coordinates[1])
+        else:
+            latitudes.append(None)
+            longitudes.append(None)
 
-    if coordinates:
-        latitudes.append(coordinates[0])
-        longitudes.append(coordinates[1])
-    else:
-        latitudes.append(None)
-        longitudes.append(None)
+    # Add latitude and longitude columns to the DataFrame
+    df['latitude'] = latitudes
+    df['longitude'] = longitudes
+    for index, rows in df.iterrows():
+        if index != 'latitude' or index != 'longitude':
+            df.pop(index)
+    # Save the updated DataFrame to a new CSV file
+    df.to_csv(output_file, index=False)
 
-# Add latitude and longitude columns to the DataFrame
-df['latitude'] = latitudes
-df['longitude'] = longitudes
-for index, rows in df.iterrows():
-    if index != 'latitude' or index != 'longitude':
-        df.pop(index)
-# Save the updated DataFrame to a new CSV file
-df.to_csv(output_file, index=False)
+    print(f"Latitude and longitude data saved to {output_file}")
 
-print(f"Latitude and longitude data saved to {output_file}")
+# Specify the path to the folder containing CSV files
+folder_path = 'DATA/dataframes/DistrictWise/2020-2021'
+
+# Iterate through all files in the folder
+for filename in os.listdir(folder_path):
+    if filename.endswith('.csv'):
+        state = filename
+        input_file = os.path.join(folder_path, filename)
+        output_file = 'BackEnd\Test\latlong.csv'
+        convert(input_file, output_file, state)
+
+        # # Open and read the CSV file
+        # with open(file_path, 'r') as csv_file:
+        #     reader = csv.reader(csv_file)
+        #
+        #     # Process the data as needed
+        #     for row in reader:
+        #         print(row)  # Replace this with your desired processing logic
