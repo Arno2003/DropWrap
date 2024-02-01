@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf33cb6-4e8d-406a-9056-a6678d227a1d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BackEnd/Test/CastWiseGuj.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/Test/HClustCastWiseGuj.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/Test/castWiseFormationCSV.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/Test/castClustGuj.csv" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/Test/castClustGuj.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/Test/Dropout Rate by Gender, Level of School Education and Social Category_State Name _Bihar   District - All District_21.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/Test/casteWiseClustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/Test/casteWiseClustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/Test/cluster.csv" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/Test/cluster.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/Test/excelToCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/Test/excelToCSV.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +30,7 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
