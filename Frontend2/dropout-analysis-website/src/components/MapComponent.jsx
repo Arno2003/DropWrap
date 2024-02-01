@@ -18,6 +18,7 @@ import { Style, Circle as CircleStyle, Stroke, Fill, Text } from "ol/style";
 // Custom style function for clusters
 const clusterStyle = (feature) => {
   const features = feature.get("features");
+
   const clusterSize = features.length;
 
   // Calculate the average rate for the cluster
@@ -29,22 +30,31 @@ const clusterStyle = (feature) => {
 
   // Determine cluster color based on avgRate
   let fillColor;
-  if (avgRate < 10) {
+  let cs;
+  if (avgRate < 5) {
     fillColor = "rgba(255, 107, 107, 0.27)";
-  } else if (avgRate < 20) {
+    cs = 1;
+  } else if (avgRate < 10) {
     fillColor = "rgba(91, 192, 235, 0.24)";
-  } else if (avgRate < 30) {
+    cs = 2;
+  } else if (avgRate < 15) {
     fillColor = "rgba(75, 144, 51, 0.20)";
-  } else if (avgRate < 40) {
+    cs = 3;
+  } else if (avgRate < 20) {
     fillColor = "rgba(181, 161, 57, 0.28)";
-  } else if (avgRate < 50) {
+    cs = 4;
+  } else if (avgRate < 25) {
     fillColor = "rgba(225, 122, 64, 0.68)";
+    cs = 5;
   } else {
     fillColor = "rgba(225, 64, 64, 0.68)";
+    cs = 6;
   }
 
   // Adjust the cluster radius based on your preference
-  const clusterRadius = 20 + clusterSize * 5;
+  var clusterRadius = 20 + cs * 5;
+  // var clusterRadius = 20 + clusterSize * 5;
+  // if (clusterRadius > 100) clusterRadius = 100;
 
   return new Style({
     image: new CircleStyle({
@@ -58,7 +68,7 @@ const clusterStyle = (feature) => {
       }),
     }),
     text: new Text({
-      text: clusterSize.toString(),
+      text: cs.toString(),
       fill: new Fill({
         color: "#fff", // Text color
       }),
@@ -79,8 +89,8 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         }),
       ],
       view: new View({
-        center: fromLonLat([71.5724, 22.6708]),
-        zoom: 7.5,
+        center: fromLonLat([78.5724, 18.6708]),
+        zoom: 4.5,
       }),
     });
     // Create a vector source for the CSV data
@@ -92,10 +102,9 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
       .then((csvData) => {
         // Parse CSV data here and create features
         const rows = csvData.split("\n");
-        // console.log(rows);
 
         // Loop through CSV rows and create features
-        for (let i = 1; i < rows.length; i++) {
+        for (let i = 1; i < rows.length - 1; i++) {
           const [
             loc,
             soc_cat,
@@ -112,7 +121,6 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
             longitude,
           ] = rows[i].split(",");
 
-          //   console.log(soc_cat, caste);
           if (soc_cat !== caste) continue;
 
           const rateOp = () => {
@@ -141,7 +149,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         // Create a source for clustering
         // Create a cluster source
         const clusterSource = new Cluster({
-          distance: 10, // Adjust the cluster distance as needed
+          distance: 60, // Adjust the cluster distance as needed
           source: vectorSource,
         });
 
@@ -154,6 +162,13 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         // Add the cluster layer to the map
         map.addLayer(clusterLayer);
 
+        map.getView().on("change:resolution", function (evt) {
+          const zoomLevel = map.getView().getZoom();
+          const newClusterDistance = 60 / Math.pow(2, zoomLevel - 6.5);
+          console.log(newClusterDistance);
+          clusterSource.setDistance(newClusterDistance);
+        });
+
         const overlay = new Overlay({
           element: popupRef.current,
           positioning: "bottom-center",
@@ -163,14 +178,11 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         map.addOverlay(overlay);
 
         if (mode === "dark") {
-          console.log("Hey");
           map.on("postcompose", function (e) {
             document.querySelector("canvas").style.filter = "invert(90%)";
           });
         }
         map.on("pointermove", (e) => {
-          //console.log("TRIGGERED");
-
           const feature = map.forEachFeatureAtPixel(
             e.pixel,
             (feature) => feature
@@ -179,24 +191,20 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
           if (feature) {
             overlay.setPosition(e.coordinate);
 
-            // console.log(feature);
-
             const dropList = feature.getProperties().features;
             let sum = 0;
 
-            // console.log(dropList);
-
             dropList.forEach((element) => {
-              // console.log(element.values_.rate);
               sum = sum + element.values_.rate;
             });
 
             var avgRate = sum / dropList.length || 0;
             avgRate = Math.round(avgRate);
-            // console.log(avgRate);
+
             setAvgRate(avgRate);
 
             if (avgRate !== undefined) {
+              // popupRef.current.innerHTML = `${latitude}, ${longitude}%`;
               popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
             }
           } else {
