@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf33cb6-4e8d-406a-9056-a6678d227a1d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DATA/dataframes/DistrictWise/AP.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DATA/dataframes/DistrictWise/Coordinates/CleanDistrictCd.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DATA/dataframes/processing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/Test/latLong.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/Test/latLong.py" afterDir="false" />
     </list>
@@ -25,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
