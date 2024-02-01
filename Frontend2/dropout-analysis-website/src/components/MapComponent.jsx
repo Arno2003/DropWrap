@@ -89,8 +89,8 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         }),
       ],
       view: new View({
-        center: fromLonLat([78.5724, 18.6708]),
-        zoom: 5.5,
+        center: fromLonLat([79.5724, 20.6708]),
+        zoom: 5,
       }),
     });
     // Create a vector source for the CSV data
