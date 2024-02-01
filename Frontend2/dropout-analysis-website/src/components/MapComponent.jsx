@@ -89,8 +89,8 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         }),
       ],
       view: new View({
-        center: fromLonLat([78.5724, 18.6708]),
-        zoom: 4.5,
+        center: fromLonLat([79.5724, 20.6708]),
+        zoom: 5,
       }),
     });
     // Create a vector source for the CSV data
@@ -149,7 +149,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         // Create a source for clustering
         // Create a cluster source
         const clusterSource = new Cluster({
-          distance: 60, // Adjust the cluster distance as needed
+          distance: 60 / Math.pow(2, 6.5 - 8.5), // Adjust the cluster distance as needed
           source: vectorSource,
         });
 
@@ -164,7 +164,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
 
         map.getView().on("change:resolution", function (evt) {
           const zoomLevel = map.getView().getZoom();
-          const newClusterDistance = 60 / Math.pow(2, zoomLevel - 6.5);
+          const newClusterDistance = 60 / Math.pow(2, zoomLevel - 8.5);
           console.log(newClusterDistance);
           clusterSource.setDistance(newClusterDistance);
         });
