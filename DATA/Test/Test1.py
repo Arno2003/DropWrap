@@ -16,7 +16,10 @@ def replace_column_names(df):
 
 def remove_rows_and_columns(df):
     # Drop the first 3 rows and last 2 rows
-    df = pd.read_csv("DATA\Test\ANI.csv", skiprows=range(4),skipfooter=2, engine='python')
+    df = pd.read_csv("DATA\Test\ANI.csv", skiprows=range(4), skipfooter=2, engine='python')
+    unnamed_rows = df[df.apply(lambda row: any(str(val).startswith('Unnamed:') for val in row), axis=1)]
+    # Drop the identified rows
+    df = df.drop(unnamed_rows.index)
     return df
 
 def main():
