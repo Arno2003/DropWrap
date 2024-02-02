@@ -165,7 +165,6 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         map.getView().on("change:resolution", function (evt) {
           const zoomLevel = map.getView().getZoom();
           const newClusterDistance = 60 / Math.pow(2, zoomLevel - 8.5);
-          console.log(newClusterDistance);
           clusterSource.setDistance(newClusterDistance);
         });
 
@@ -221,6 +220,10 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
 
   // setRates(rateArray);
 
+  const handleMouseOut = () => {
+    setAvgRate(-1);
+  };
+
   return (
     <div
       className={`h-full border-2 border-dark border-solid z-100 ${classes}`}
@@ -229,6 +232,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
         ref={mapRef}
         className="map z-100 rounded-xl"
         style={{ width: "100%", height: "100%" }}
+        onMouseOut={handleMouseOut}
       />
       <div
         ref={popupRef}

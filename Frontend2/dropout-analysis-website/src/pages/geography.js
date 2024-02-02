@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import MapComponent from "@/components/MapComponent";
+import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
   CategoryDropDown,
   CasteDropDown,
@@ -22,6 +23,32 @@ const demoReasons = [
   },
 ];
 
+const AnimatedNumbers = ({ value }) => {
+  const ref = useRef(null);
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    duration: 1000,
+  });
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value);
+    }
+  }, [isInView, value, motionValue]);
+
+  useEffect(() => {
+    springValue.on("change", (latest) => {
+      if (ref.current) {
+        // Display the decimal value with two decimal places
+        ref.current.textContent = latest.toFixed(2);
+      }
+    });
+  }, [springValue]);
+
+  return <span ref={ref}></span>;
+};
+
 const ReasonsTab = ({ classes, reasonList }) => {
   return (
     <div
@@ -33,15 +60,18 @@ const ReasonsTab = ({ classes, reasonList }) => {
 
       {reasonList.map((item) => {
         return (
-          <div
+          <motion.div
             key={item.id}
             className="w-[95%] flex flex-row px-5 py-4 border-b-2 border-solid border-secDark dark:border-secLight dark:text-light mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
           >
             <div className="w-[80%] text-lg">{item.reason}</div>
-            <div className="w-[20%] text-lg font-bold flex items-center justify-center">
-              {item.rate}%
+            <div className="w-[20%] text-lg font-bold flex items-center justify-center tracking-widest">
+              {item.rate === 0 ? <>0</> : <AnimatedNumbers value={item.rate} />}{" "}
+              %
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>
@@ -53,7 +83,6 @@ const Geography = ({ mode }) => {
   const [caste, setCaste] = useState("Overall");
   const [std, setStd] = useState(2);
   const [reasonList, setReasonList] = useState(demoReasons);
-  const [rates, setRates] = useState([]);
   const [avgRate, setAvgRate] = useState(-1);
   useEffect(() => {
     // Function to fetch and parse the CSV file
@@ -125,16 +154,17 @@ const Geography = ({ mode }) => {
           <div className="w-full h-[650px] mx-auto mb-10 flex flex-row ">
             <ReasonsTab
               reasonList={reasonList}
-              classes="text-dark w-[30%] mr-4 "
+              classes="text-dark w-[40%] mr-4 "
             />
 
             <MapComponent
               mode={mode}
-              classes="w-[70%] "
+              classes="w-[60%] "
               category={category}
               caste={caste}
               std={std}
               setAvgRate={setAvgRate}
+              // demoReasons={reasons}
             />
           </div>
         </Layout>

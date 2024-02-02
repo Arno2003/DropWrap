@@ -4,15 +4,36 @@ from sklearn.cluster import AgglomerativeClustering
 import scipy.cluster.hierarchy as sch
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('output_data.csv')
+data = pd.read_csv('BackEnd\Test\Gujarat.csv')
 
 # Selecting relevant features for clustering
-selected_features = [
-    'Name Of District',
-    'Boys',
-    'Girls',
-    'Boys + Girls'
+# selected_features = [
+#     'Name Of District',
+#     'Boys',
+#     'Girls',
+#     'Boys + Girls'
+# ]
+
+feat = [
+    "prim_Girls",
+    "prim_Boys",
+    "prim_Overall",
+    "upPrim_Girls",
+    "upPrim_Boys",
+    "upPrim_Overall",
+    "snr_Girls",
+    "snr_Boys",
+    "snr_Overall"
 ]
+clustNames = []
+cast = data["Social Category"]
+for i in cast:
+    if i not in clustNames:
+        clustNames.append(i)
+n_clusters = len(clustNames)
+
+selected_features = ['Location', 'prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
+
 data = data[selected_features]
 data = data.replace("NR", 0)
 
@@ -24,16 +45,17 @@ data.dropna(inplace=True)
 
 # Standardize the numerical features for clustering
 scaler = StandardScaler()
-numerical_features = data.drop(columns=['Name Of District'])
+
+numerical_features = data.drop(columns=['Location'])
 
 scaled_features = scaler.fit_transform(numerical_features)
 
 # hierarchical clustering
-agg_clustering = AgglomerativeClustering(n_clusters=5, linkage='ward')  # Adjust n_clusters as needed
+agg_clustering = AgglomerativeClustering(n_clusters=n_clusters, linkage='ward')  # Adjust n_clusters as needed
 data['Cluster_Label'] = agg_clustering.fit_predict(scaled_features)
 
 # Dendrogram
-lbl = data['Name Of District'].tolist()
+lbl = data['Location'].tolist()
 dendrogram = sch.dendrogram(sch.linkage(scaled_features, method='ward'), labels=lbl)
 
 # Visualize the dendrogram
@@ -42,6 +64,6 @@ plt.xlabel('Students')
 plt.ylabel('Euclidean Distances')
 plt.show()
 
-result_data = data[['Name Of District', 'Cluster_Label']]
+result_data = data[['Location', 'Cluster_Label']]
 print(result_data)
 result_data.to_csv("cluster.csv")
