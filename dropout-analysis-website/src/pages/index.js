@@ -24,10 +24,9 @@ export default function Home({ mode }) {
               OUR MOTIVE
             </h1>
             <p className=" w-[60%] text-xl text-center mb-10 ">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim eos
-              maiores quo eveniet rerum cupiditate, vitae, labore recusandae
-              fuga officiis esse et reprehenderit alias voluptate, neque animi
-              tempora quaerat rem.
+              Education is the ultimate key to reach towards your dream.
+              <span className="font-bold"> Dropwrap </span>is a online tool
+              which provides a visual analysis of School Dropout rates in India.
             </p>
             <div className="flex flex-row">
               <Link
