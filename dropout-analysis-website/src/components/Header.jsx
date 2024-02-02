@@ -2,6 +2,8 @@ import React from "react";
 import { SunIcon, MoonIcon } from "./Icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Logo from "../assets/DropWrapLogo.png";
+import Image from "next/image";
 const Header = ({ mode, setMode }) => {
   const router = useRouter();
 
@@ -40,6 +42,7 @@ const Header = ({ mode, setMode }) => {
         )}
       </div>
       <div className="font-extrabold tracking-widest absolute left-[50%] top-5 translate-x-[-50%]">
+        {/* <Image src={Logo} className="w-[60px] rounded-full" /> */}
         DROPWRAP
       </div>
     </header>

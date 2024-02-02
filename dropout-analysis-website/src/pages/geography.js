@@ -55,7 +55,7 @@ const ReasonsTab = ({ classes, reasonList }) => {
       className={`${classes} bg-secLight bg-opacity-25  dark:bg-secDark rounded-xl  `}
     >
       <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-xl border-solid border-t-2 border-x-2 dark:border-secDark">
-        Reaons for Dropouts
+        Reasons for Dropouts
       </h3>
 
       {reasonList.map((item) => {
