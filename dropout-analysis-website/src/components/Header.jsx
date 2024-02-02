@@ -2,7 +2,8 @@ import React from "react";
 import { SunIcon, MoonIcon } from "./Icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Logo from "../assets/DropWrapLogo.png";
+import LogoLight from "../assets/logoLight.jpeg";
+import LogoDark from "../assets/logoDark.jpeg";
 import Image from "next/image";
 const Header = ({ mode, setMode }) => {
   const router = useRouter();
@@ -41,10 +42,17 @@ const Header = ({ mode, setMode }) => {
           </button>
         )}
       </div>
-      <div className="font-extrabold tracking-widest absolute left-[50%] top-5 translate-x-[-50%]">
-        {/* <Image src={Logo} className="w-[60px] rounded-full" /> */}
-        DROPWRAP
-      </div>
+      <Link
+        href="/"
+        className="font-extrabold tracking-widest absolute left-[50%] top-0 translate-x-[-50%]"
+      >
+        {mode === "light" ? (
+          <Image priority src={LogoLight} className="w-[68px] rounded-full" />
+        ) : (
+          <Image priority src={LogoDark} className="w-[68px] rounded-full" />
+        )}
+        {/* DROPWRAP */}
+      </Link>
     </header>
   );
 };
