@@ -4,7 +4,7 @@ from sklearn.cluster import AgglomerativeClustering
 import scipy.cluster.hierarchy as sch
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('BackEnd\main\Gujarat.csv')
+data = pd.read_csv('BackEnd\main\Data\Gujarat.csv')
 
 # Selecting relevant features for clustering
 # selected_features = [
@@ -50,6 +50,7 @@ scaler = StandardScaler()
 
 numerical_features = data.drop(columns=['Location'])
 
+
 scaled_features = scaler.fit_transform(numerical_features)
 
 # hierarchical clustering
@@ -71,4 +72,4 @@ plt.show()
 
 result_data = data[['Location', 'Cluster_Label']]
 print(result_data)
-result_data.to_csv("BackEnd\main\cluster.csv")
+result_data.to_csv("BackEnd\main\Data\cluster.csv")
