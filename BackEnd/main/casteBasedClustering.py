@@ -5,6 +5,8 @@ import scipy.cluster.hierarchy as sch
 import matplotlib.pyplot as plt
 
 data = pd.read_csv('BackEnd\main\Data\Gujarat.csv')
+# setting parameters for dendrogram in matplotlib
+plt.rcParams['figure.figsize'] = [24, 16]
 
 # Selecting relevant features for clustering
 # selected_features = [
@@ -64,11 +66,17 @@ data['Cluster_Label'] = agg_clustering.fit_predict(scaled_features)
 lbl = data['Location'].tolist()
 dendrogram = sch.dendrogram(sch.linkage(scaled_features, method='ward'), labels=lbl)
 
+
+# Save the dendrogram as a PNG file with higher resolution
+plt.savefig('BackEnd\main\Images\GujaratCastWiseDendrogram.jpeg', dpi=600)
+
+
 # Visualize the dendrogram
 plt.title('Dendrogram')
 plt.xlabel('Students')
 plt.ylabel('Euclidean Distances')
 plt.show()
+# plt.savefig("BackEnd\main\Images\GujaratCastWiseDendrogram.jpeg")
 
 result_data = data[['Location', 'Cluster_Label']]
 print(result_data)
