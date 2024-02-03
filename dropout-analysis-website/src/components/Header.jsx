@@ -13,7 +13,7 @@ const Header = ({ mode, setMode }) => {
   };
 
   return (
-    <header className="text-dark dark:text-light bg-light dark:bg-dark mx-3 flex flex-row items-center text-xl justify-between h-[70px] px-5 border-b-2 border-solid border-dark dark:border-light">
+    <header className="text-dark dark:text-light bg-light dark:bg-dark mx-3 flex flex-row items-center text-xl justify-between h-[70px] px-5 border-b-2 border-solid border-dark dark:border-light z-10">
       <div>
         <Link href="/" className="ml-6 mr-4">
           Home
