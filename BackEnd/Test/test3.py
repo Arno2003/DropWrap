@@ -30,7 +30,7 @@ cast = data["Social Category"]
 for i in cast:
     if i not in clustNames:
         clustNames.append(i)
-n_clusters = len(clustNames)
+n_clusters = len(clustNames) # this defines the number of clusters required, by counting number of unique features or paramerts in a column for each location
 
 selected_features = ['Location', 'prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
 
@@ -51,7 +51,7 @@ numerical_features = data.drop(columns=['Location'])
 scaled_features = scaler.fit_transform(numerical_features)
 
 # hierarchical clustering
-agg_clustering = AgglomerativeClustering(n_clusters=n_clusters, linkage='ward')  # Adjust n_clusters as needed
+agg_clustering = AgglomerativeClustering(n_clusters=n_clusters, linkage='ward')  # Adjust n_clusters as needed, here cluster will be adjusted automatically accordin to the number of required clusters
 data['Cluster_Label'] = agg_clustering.fit_predict(scaled_features)
 
 # Dendrogram
