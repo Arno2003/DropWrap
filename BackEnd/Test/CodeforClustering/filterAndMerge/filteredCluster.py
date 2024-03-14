@@ -5,7 +5,7 @@ import scipy.cluster.hierarchy as sch
 import matplotlib.pyplot as plt
 import csv
 
-def clust(data, feat, c):
+def clust(data, feat, fileNo):
     # setting parameters for dendrogram in matplotlib
     plt.rcParams['figure.figsize'] = [24, 16]
 
@@ -25,9 +25,6 @@ def clust(data, feat, c):
     # Drop rows with NULL values (NaNs)
     data.dropna(inplace=True)
 
-    # Extract the 'year' column, convert it to a numerical format
-    # data['year'] = data['year'].str.extract(r'(\d{4})').astype(int)
-
     # Standardize the numerical features for clustering
     scaler = StandardScaler()
 
@@ -41,7 +38,8 @@ def clust(data, feat, c):
                                                                                     # here cluster will be adjusted  
                                                                                     # automatically accordin to the 
                                                                                     # number of required clusters
-    data['Cluster_Label'] = agg_clustering.fit_predict(scaled_features)
+    label = feat + '_Cluster_Label'
+    data[label] = agg_clustering.fit_predict(scaled_features)
 
     # Dendrogram
     lbl = data['Location'].tolist()
@@ -49,7 +47,7 @@ def clust(data, feat, c):
 
 
     # Save the dendrogram as a PNG file with higher resolution
-    plt.savefig(f'BackEnd\main\Images\GujaratCastWiseDendrogram({c}).jpeg', dpi=600)
+    plt.savefig(f'BackEnd\main\Images\GujaratCastWiseDendrogram({fileNo}).jpeg', dpi=600)
 
 
     # Visualize the dendrogram
@@ -59,7 +57,7 @@ def clust(data, feat, c):
     # plt.show()
     # plt.savefig("BackEnd\main\Images\GujaratCastWiseDendrogram.jpeg")
 
-    result_data = data[['Location', 'Cluster_Label']]
+    result_data = data[['Location', label]]
     return result_data
     
 if __name__ == "__main__":
@@ -80,18 +78,19 @@ if __name__ == "__main__":
     features = features[2:]
     #print(features)
     
-    c = 0
+    fileNo = 0
     dataFrames = []
     for feat in features:
         print(feat)
         data = totalData[['Location', 'Social Category', feat]]
-        temp = clust(data, feat, c)
+        temp = clust(data, feat, fileNo)
+        # print(temp)
         dataFrames.append(temp)
-        c+=1
-
+        fileNo += 1
+    
     noOfDF = len(dataFrames)
-    df1 = dataFrames[0]
+    df2 = totalData[['Location']]
     for i in range(1, noOfDF):
-        df2 = dataFrames[i]
-        merged_df = pd.merge(df1, df2, on='Location', how='inner')
-    print(df1)
+        df2[[dataFrames[i][0]]] = dataFrames[i]
+    df2.to_csv("BackEnd\Test\OutputData\temp.csv")
+    # print(df1)
