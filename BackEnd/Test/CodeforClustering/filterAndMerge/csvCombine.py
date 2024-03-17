@@ -1,43 +1,31 @@
-import os
 import pandas as pd
-import csv
+import os
 
-# Path to the folder containing CSV files
-folder_path = "BackEnd\\Test\\OutputData\\filteredOutputs\\clusters"
+# Directory containing your files
+directory = 'BackEnd\\Test\\InputData\\FilteredData'
 
-# Initialize an empty dataframe to store combined data
-combined_data = pd.DataFrame()
+# Initialize an empty DataFrame to store the combined data
+data = [['Location', 'Social Category']]
+combined_data = pd.DataFrame(data)
 
-colNames = []
+# Iterate over each file in the directory
+for filename in os.listdir(directory):
+    if filename.endswith('.csv'):  # Assuming files are in CSV format
+        filepath = os.path.join(directory, filename)
+        # Read the file into a DataFrame
+        df = pd.read_csv(filepath)
+        # print(df.head)
+        # Merge with combined_data based on 'Location' and 'Social Category'
+        print(df[['Location', 'Social Category']])
+        print(combined_data)
+        combined_data = combined_data.merge(df, on=['Location', 'Social Category'], how='outer')
+        print(combined_data.head)
 
-# Iterate through each file in the folder
-for filename in os.listdir(folder_path):
-    if filename.endswith(".csv"):
-        file_path = os.path.join(folder_path, filename)
-        
-        # Read the CSV file into a dataframe
-        df = pd.read_csv(file_path)
-        print()
-        print(df.head)
-        # Append the dataframe to combined_data
-        combined_data = combined_data.append(df, ignore_index=True)
-        
-        # csv_reader = csv.DictReader(file_path)
-        # # colNames.append(csv_reader[1])   # for storing the column names in a file
-        # print(list(csv_reader)[1])
-        
-# Replacing empty location values with 'Unknown'
-combined_data['Location'].fillna('Unknown', inplace=True)
+# Optionally, you can drop duplicates if any
+combined_data = combined_data.drop_duplicates()
 
-# Grouping by Location and Caste and aggregating with NaN mean
-combined_data_grouped = combined_data.groupby(['Location', 'Caste']).agg(lambda x: x.mean() if x.dtype=='float64' else ', '.join(x))
+# Save the combined DataFrame to a new CSV file
+combined_data.to_csv('combined_data.csv', index=False)
 
-# Reordering columns to match the desired format
-print(combined_data.head)
-# combined_data_grouped = combined_data_grouped[['prim_Boys','prim_Girls','Overall_prim_Boys','upPrim_Boys','upPrim_Girls','upPrim_Overall','snr_Boys','snr_Girls','snr_Overall']]
-
-# Writing the combined data to a new CSV file
-combined_data_grouped.to_csv("combined_data.csv")
-
-# Display the combined data
-print(combined_data_grouped)
+# Display the combined DataFrame
+print(combined_data)

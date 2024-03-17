@@ -1,166 +1,34 @@
-Location,Social Category,General_prim_Boys,General_prim_Girls,General_prim_Overall,General_snr_Boys,General_snr_Girls,General_snr_Overall,General_upPrim_Boys,General_upPrim_Girls,General_upPrim_Overall,OBC_prim_Boys,OBC_prim_Girls,OBC_prim_Overall,OBC_snr_Boys,OBC_snr_Girls,OBC_snr_Overall,OBC_upPrim_Boys,OBC_upPrim_Girls,OBC_upPrim_Overall,Overall_prim_Boys,Overall_prim_Girls,Overall_prim_Overall,Overall_snr_Boys,Overall_snr_Girls,Overall_snr_Overall,Overall_upPrim_Boys,Overall_upPrim_Girls,Overall_upPrim_Overall,SC_prim_Boys,SC_prim_Girls,SC_prim_Overall,SC_snr_Boys,SC_snr_Girls,SC_snr_Overall,SC_upPrim_Boys,SC_upPrim_Girls,SC_upPrim_Overall,ST_prim_Boys,ST_prim_Girls,ST_prim_Overall,ST_snr_Boys,ST_snr_Girls,ST_snr_Overall,ST_upPrim_Boys,ST_upPrim_Girls,ST_upPrim_Overall
-AHMEDABAD,General,0.0,0.0,0.0,8.51,8.0,8.28,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AHMEDABAD,OBC,,,,,,,,,,0.0,0.0,0.0,20.13,17.23,18.96,4.03,7.17,5.49,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AHMEDABAD,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,14.1,11.98,13.19,0.6,2.71,1.58,,,,,,,,,,,,,,,,,,
-AHMEDABAD,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,14.03,9.89,12.21,0.0,0.0,0.0,,,,,,,,,
-AHMEDABAD,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,25.31,29.3,27.06,15.37,17.65,16.39
-AMRELI,General,1.67,1.07,1.41,9.02,0.0,1.21,2.97,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AMRELI,OBC,,,,,,,,,,0.0,0.0,0.0,25.75,26.4,26.03,5.2,6.68,5.9,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AMRELI,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,21.39,18.25,20.0,4.33,4.56,4.44,,,,,,,,,,,,,,,,,,
-AMRELI,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.11,3.31,2.19,15.36,17.2,16.27,0.0,2.05,0.61,,,,,,,,,
-AMRELI,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,34.37,33.65,34.07,7.23,13.68,9.5
-ANAND,General,0.0,0.53,0.23,19.52,16.06,17.98,0.17,2.5,1.25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ANAND,OBC,,,,,,,,,,0.0,0.0,0.0,26.46,23.82,25.38,0.36,4.12,2.17,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ANAND,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,23.29,20.1,21.94,0.3,3.52,1.82,,,,,,,,,,,,,,,,,,
-ANAND,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.99,1.71,2.9,8.03,12.2,9.93,1.33,4.11,2.62,,,,,,,,,
-ANAND,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,22.92,10.14,17.46,0.0,0.85,0.0
-ARAVALLI,General,2.53,1.17,1.91,17.43,7.82,13.47,5.08,4.81,4.96,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ARAVALLI,OBC,,,,,,,,,,0.0,0.0,0.0,18.38,16.61,17.57,0.77,1.8,1.26,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ARAVALLI,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,18.74,14.54,16.83,1.78,2.08,1.92,,,,,,,,,,,,,,,,,,
-ARAVALLI,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.1,0.0,0.0,10.63,3.75,7.35,2.32,1.94,2.14,,,,,,,,,
-ARAVALLI,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,1.2,0.48,21.4,13.36,17.77,3.11,2.04,2.6
-BANAS KANTHA,General,0.0,0.0,0.0,11.1,15.37,12.87,0.16,5.07,2.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BANAS KANTHA,OBC,,,,,,,,,,0.13,0.66,0.38,19.6,20.36,19.89,6.93,12.7,9.61,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BANAS KANTHA,Overall,,,,,,,,,,,,,,,,,,,0.0,0.11,0.0,19.53,19.84,19.65,6.42,10.99,8.56,,,,,,,,,,,,,,,,,,
-BANAS KANTHA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,23.29,22.15,22.82,3.61,7.67,5.57,,,,,,,,,
-BANAS KANTHA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2.39,1.71,2.06,26.47,19.9,23.49,12.39,10.65,11.56
-BHARUCH,General,0.0,0.0,0.0,23.09,14.49,19.12,1.07,0.7,0.89,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BHARUCH,OBC,,,,,,,,,,0.28,0.0,0.0,33.62,17.43,26.34,4.86,4.68,4.78,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BHARUCH,Overall,,,,,,,,,,,,,,,,,,,0.01,0.0,0.0,28.1,16.88,22.95,3.17,3.56,3.36,,,,,,,,,,,,,,,,,,
-BHARUCH,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.55,0.0,0.18,20.51,5.49,13.53,3.12,0.0,0.0,,,,,,,,,
-BHARUCH,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,31.79,21.27,26.93,4.42,7.34,5.83
-BHAVNAGAR,General,0.0,0.0,0.0,7.74,16.45,11.54,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BHAVNAGAR,OBC,,,,,,,,,,0.88,0.07,0.49,18.08,12.09,15.44,5.78,5.68,5.73,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BHAVNAGAR,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,16.63,14.05,15.49,4.55,5.6,5.04,,,,,,,,,,,,,,,,,,
-BHAVNAGAR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,9.22,8.04,8.66,29.16,28.74,28.97,13.16,14.91,14.0,,,,,,,,,
-BHAVNAGAR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,24.89,28.98,26.6,37.91,40.25,38.79,38.82,44.56,41.26
-BOTAD,General,0.0,0.69,0.0,0.0,10.26,3.51,0.0,2.37,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BOTAD,OBC,,,,,,,,,,0.0,0.0,0.0,20.75,27.15,23.35,2.84,7.22,4.89,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BOTAD,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,18.72,23.81,20.78,1.7,6.93,4.1,,,,,,,,,,,,,,,,,,
-BOTAD,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.11,0.0,0.0,22.58,19.08,21.01,0.0,6.58,2.96,,,,,,,,,
-BOTAD,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,2.14,0.0,36.53,0.0,10.22,15.24,13.54,14.61
-CHHOTAUDEPUR,General,5.02,6.22,5.59,14.13,27.75,19.89,3.93,12.31,7.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHHOTAUDEPUR,OBC,,,,,,,,,,9.08,6.2,7.72,29.33,17.11,23.9,15.31,12.69,14.08,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHHOTAUDEPUR,Overall,,,,,,,,,,,,,,,,,,,0.38,0.61,0.49,16.53,13.96,15.32,7.69,8.71,8.18,,,,,,,,,,,,,,,,,,
-CHHOTAUDEPUR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,31.52,36.24,33.6,33.33,40.91,37.0,,,,,,,,,
-CHHOTAUDEPUR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,14.23,11.98,13.15,6.12,7.04,6.57
-DEVBHOOMI DWARKA,General,1.58,0.68,1.17,26.26,18.97,23.23,1.19,6.24,3.56,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DEVBHOOMI DWARKA,OBC,,,,,,,,,,0.71,0.82,0.76,28.18,25.96,27.2,6.88,7.62,7.23,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DEVBHOOMI DWARKA,Overall,,,,,,,,,,,,,,,,,,,0.09,0.24,0.16,28.59,24.25,26.68,5.59,6.3,5.93,,,,,,,,,,,,,,,,,,
-DEVBHOOMI DWARKA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,35.01,15.93,26.52,3.02,1.36,2.21,,,,,,,,,
-DEVBHOOMI DWARKA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,38.29,15.87,28.9,0.0,0.0,0.0
-DOHAD,General,4.11,0.0,1.48,31.9,24.46,28.48,6.23,3.35,4.92,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DOHAD,OBC,,,,,,,,,,3.53,3.39,3.46,35.11,27.86,31.78,9.16,8.93,9.05,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DOHAD,Overall,,,,,,,,,,,,,,,,,,,0.23,0.47,0.35,27.01,26.23,26.64,6.66,6.76,6.71,,,,,,,,,,,,,,,,,,
-DOHAD,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,19.18,10.52,15.17,0.0,0.0,0.0,,,,,,,,,
-DOHAD,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.09,0.0,24.83,26.24,25.52,6.57,6.7,6.63
-GANDHINAGAR,General,18.26,16.51,17.5,7.85,1.83,5.38,13.09,12.1,12.67,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-GANDHINAGAR,OBC,,,,,,,,,,1.67,2.01,1.83,17.94,17.27,17.67,4.99,8.05,6.42,,,,,,,,,,,,,,,,,,,,,,,,,,,
-GANDHINAGAR,Overall,,,,,,,,,,,,,,,,,,,7.61,7.72,7.66,14.67,10.81,13.09,7.91,9.74,8.74,,,,,,,,,,,,,,,,,,
-GANDHINAGAR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,11.04,16.13,13.42,15.75,5.87,11.48,6.57,9.3,7.8,,,,,,,,,
-GANDHINAGAR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.47,14.57,6.87,20.3,3.06,13.79,11.78,20.36,15.52
-GIR SOMNATH,General,0.0,0.0,0.0,16.12,19.02,17.37,5.83,6.33,6.06,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-GIR SOMNATH,OBC,,,,,,,,,,0.0,0.0,0.0,19.85,17.55,18.79,6.49,5.79,6.15,,,,,,,,,,,,,,,,,,,,,,,,,,,
-GIR SOMNATH,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,18.4,16.66,17.6,6.06,5.67,5.87,,,,,,,,,,,,,,,,,,
-GIR SOMNATH,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,1.3,0.0,9.98,8.88,9.44,4.77,4.81,4.79,,,,,,,,,
-GIR SOMNATH,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4.21,0.0,1.71,17.09,13.88,15.8,0.0,0.0,0.0
-JAMNAGAR,General,0.0,0.0,0.0,10.03,3.01,6.79,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JAMNAGAR,OBC,,,,,,,,,,6.94,2.36,4.75,29.47,28.75,29.14,14.07,12.82,13.47,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JAMNAGAR,Overall,,,,,,,,,,,,,,,,,,,2.63,0.11,1.48,22.34,19.21,20.92,7.38,7.36,7.37,,,,,,,,,,,,,,,,,,
-JAMNAGAR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,10.25,6.64,8.54,33.41,33.58,33.49,14.22,16.95,15.54,,,,,,,,,
-JAMNAGAR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5.82,4.96,5.49,26.68,38.4,30.72,7.18,15.39,10.31
-JUNAGADH,General,1.0,0.74,0.89,11.68,2.25,7.81,0.0,0.19,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JUNAGADH,OBC,,,,,,,,,,0.0,0.61,0.22,20.5,15.9,18.4,4.04,4.13,4.08,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JUNAGADH,Overall,,,,,,,,,,,,,,,,,,,0.22,0.79,0.49,17.72,12.23,15.26,1.95,2.84,2.37,,,,,,,,,,,,,,,,,,
-JUNAGADH,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.68,0.16,15.42,11.81,13.71,0.52,2.35,1.42,,,,,,,,,
-JUNAGADH,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.09,4.39,3.67,17.03,4.75,11.98,3.45,0.0,0.0
-KACHCHH,General,0.0,0.0,0.0,22.05,13.77,18.48,7.45,8.77,8.07,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-KACHCHH,OBC,,,,,,,,,,0.0,0.0,0.0,33.29,26.94,30.72,8.8,12.37,10.47,,,,,,,,,,,,,,,,,,,,,,,,,,,
-KACHCHH,Overall,,,,,,,,,,,,,,,,,,,0.0,0.04,0.0,28.32,20.61,25.06,7.97,10.41,9.12,,,,,,,,,,,,,,,,,,
-KACHCHH,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.9,0.31,1.14,27.92,19.97,24.32,5.75,7.46,6.56,,,,,,,,,
-KACHCHH,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5.53,4.01,4.82,45.16,37.92,42.28,11.81,15.53,13.46
-KHEDA,General,0.0,0.19,0.0,21.34,14.95,18.64,3.68,6.09,4.79,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-KHEDA,OBC,,,,,,,,,,0.0,0.0,0.0,23.57,26.93,25.02,2.83,4.76,3.74,,,,,,,,,,,,,,,,,,,,,,,,,,,
-KHEDA,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,23.86,24.47,24.13,3.07,5.01,3.98,,,,,,,,,,,,,,,,,,
-KHEDA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.11,2.58,1.8,30.49,20.69,26.14,8.2,8.24,8.22,,,,,,,,,
-KHEDA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,38.2,31.76,35.76,0.0,0.0,0.0
-MAHESANA,General,1.59,0.38,1.06,20.0,8.42,15.19,3.0,2.13,2.62,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-MAHESANA,OBC,,,,,,,,,,0.0,0.0,0.0,27.91,21.84,25.42,2.55,6.13,4.22,,,,,,,,,,,,,,,,,,,,,,,,,,,
-MAHESANA,Overall,,,,,,,,,,,,,,,,,,,0.23,0.0,0.05,25.37,17.71,22.19,2.46,5.03,3.64,,,,,,,,,,,,,,,,,,
-MAHESANA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.44,0.0,20.49,11.54,16.46,0.0,1.9,0.31,,,,,,,,,
-MAHESANA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2.53,0.0,1.36,13.19,11.17,12.27,6.28,8.87,7.45
-MAHISAGAR,General,0.0,0.0,0.0,20.15,13.82,17.18,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-MAHISAGAR,OBC,,,,,,,,,,0.0,0.0,0.0,15.93,16.03,15.97,0.55,3.35,1.91,,,,,,,,,,,,,,,,,,,,,,,,,,,
-MAHISAGAR,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,17.41,15.23,16.4,1.34,2.64,1.97,,,,,,,,,,,,,,,,,,
-MAHISAGAR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,18.56,7.05,13.49,10.78,8.24,9.59,,,,,,,,,
-MAHISAGAR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,18.23,15.52,16.96,1.93,2.36,2.14
-MORBI,General,0.0,0.0,0.0,2.56,3.45,2.96,0.0,0.11,0.05,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-MORBI,OBC,,,,,,,,,,0.31,0.59,0.44,28.97,28.62,28.83,10.52,14.38,12.32,,,,,,,,,,,,,,,,,,,,,,,,,,,
-MORBI,Overall,,,,,,,,,,,,,,,,,,,0.18,0.48,0.32,19.13,18.5,18.86,7.43,10.07,8.65,,,,,,,,,,,,,,,,,,
-MORBI,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,17.71,21.8,19.59,0.98,3.22,2.05,,,,,,,,,
-MORBI,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,6.6,13.61,9.41,44.44,38.46,42.47,22.23,32.99,26.08
-NARMADA,General,0.0,0.0,0.0,24.95,20.23,22.76,1.64,7.58,4.39,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NARMADA,OBC,,,,,,,,,,0.0,0.0,0.0,20.13,19.34,19.74,0.0,1.22,0.33,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NARMADA,Overall,,,,,,,,,,,,,,,,,,,0.0,1.6,0.62,19.61,17.7,18.69,2.49,4.78,3.61,,,,,,,,,,,,,,,,,,
-NARMADA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,39.29,55.56,48.91,0.0,0.0,0.0,,,,,,,,,
-NARMADA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.21,3.05,2.12,18.87,16.42,17.7,3.74,5.83,4.76
-NAVSARI,General,0.58,0.06,0.34,16.74,6.74,12.21,1.56,0.32,0.99,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAVSARI,OBC,,,,,,,,,,0.22,0.27,0.24,10.59,7.7,9.25,1.68,1.53,1.61,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAVSARI,Overall,,,,,,,,,,,,,,,,,,,0.0,0.22,0.08,16.78,10.85,13.98,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,
-NAVSARI,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,20.57,12.02,16.57,9.89,2.83,6.49,,,,,,,,,
-NAVSARI,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.66,0.28,19.21,13.29,16.35,0.0,0.0,0.0
-PANCH MAHALS,General,0.0,0.0,0.0,18.46,14.76,16.8,2.21,0.51,1.41,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-PANCH MAHALS,OBC,,,,,,,,,,0.0,0.0,0.0,24.81,22.15,23.6,3.75,5.27,4.49,,,,,,,,,,,,,,,,,,,,,,,,,,,
-PANCH MAHALS,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,24.65,20.37,22.69,4.13,5.42,4.76,,,,,,,,,,,,,,,,,,
-PANCH MAHALS,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.62,0.0,0.31,28.05,14.67,21.83,0.0,4.18,1.29,,,,,,,,,
-PANCH MAHALS,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,26.0,18.24,22.3,6.26,7.24,6.74
-PATAN,General,2.62,1.98,2.32,18.13,10.48,14.88,6.08,6.07,6.07,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-PATAN,OBC,,,,,,,,,,0.0,0.0,0.0,23.29,26.41,24.55,3.5,7.69,5.47,,,,,,,,,,,,,,,,,,,,,,,,,,,
-PATAN,Overall,,,,,,,,,,,,,,,,,,,0.0,0.37,0.1,22.06,22.38,22.19,3.81,7.12,5.36,,,,,,,,,,,,,,,,,,
-PATAN,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,1.96,0.56,17.01,13.39,15.39,3.19,3.24,3.21,,,,,,,,,
-PATAN,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,33.33,29.96,32.02,0.0,11.09,4.13
-PORBANDAR,General,0.0,2.37,0.0,19.28,6.2,13.51,0.0,4.18,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-PORBANDAR,OBC,,,,,,,,,,0.56,0.0,0.0,20.91,14.84,18.08,6.04,5.16,5.62,,,,,,,,,,,,,,,,,,,,,,,,,,,
-PORBANDAR,Overall,,,,,,,,,,,,,,,,,,,0.93,0.0,0.31,20.46,13.39,17.21,4.78,4.79,4.79,,,,,,,,,,,,,,,,,,
-PORBANDAR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.37,0.0,1.75,21.56,14.41,18.05,18.36,4.3,11.54,,,,,,,,,
-PORBANDAR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7.58,4.76,6.35,16.87,9.38,14.12,0.0,1.32,0.0
-RAJKOT,General,0.0,0.0,0.0,3.03,0.0,0.79,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RAJKOT,OBC,,,,,,,,,,2.38,2.2,2.29,22.81,18.29,20.85,8.04,9.19,8.58,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RAJKOT,Overall,,,,,,,,,,,,,,,,,,,1.05,1.0,1.03,14.88,9.37,12.51,5.04,5.64,5.31,,,,,,,,,,,,,,,,,,
-RAJKOT,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.94,0.0,0.26,18.24,5.84,12.48,4.51,4.29,4.41,,,,,,,,,
-RAJKOT,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4.83,0.0,2.52,35.77,25.19,31.75,18.34,13.38,16.44
-SABAR KANTHA,General,1.45,2.22,1.8,13.83,5.97,10.38,0.0,1.17,0.13,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SABAR KANTHA,OBC,,,,,,,,,,0.0,0.03,0.0,19.51,19.28,19.41,2.35,3.02,2.67,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SABAR KANTHA,Overall,,,,,,,,,,,,,,,,,,,0.08,0.4,0.24,17.78,15.15,16.59,4.02,4.54,4.26,,,,,,,,,,,,,,,,,,
-SABAR KANTHA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,12.17,8.27,10.4,0.0,0.04,0.0,,,,,,,,,
-SABAR KANTHA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.55,0.77,0.66,18.48,14.27,16.5,9.23,8.73,8.98
-SURAT,General,1.4,0.34,0.93,11.12,7.92,9.71,6.15,5.19,5.72,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SURAT,OBC,,,,,,,,,,0.0,0.0,0.0,14.92,12.7,13.96,5.76,8.07,6.83,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SURAT,Overall,,,,,,,,,,,,,,,,,,,0.81,0.0,0.4,13.42,9.96,11.88,5.86,5.97,5.91,,,,,,,,,,,,,,,,,,
-SURAT,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,14.87,7.34,11.53,2.41,1.2,1.85,,,,,,,,,
-SURAT,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.48,0.09,0.29,21.3,14.84,18.2,5.49,7.23,6.33
-SURENDRANAGAR,General,0.12,0.0,0.0,8.57,6.32,7.55,1.49,0.0,0.81,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SURENDRANAGAR,OBC,,,,,,,,,,0.0,0.27,0.13,22.29,22.18,22.24,6.76,12.26,9.38,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SURENDRANAGAR,Overall,,,,,,,,,,,,,,,,,,,0.28,0.03,0.16,20.53,18.94,19.87,6.5,10.93,8.59,,,,,,,,,,,,,,,,,,
-SURENDRANAGAR,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.63,2.47,2.03,19.77,12.72,16.39,2.91,7.44,5.1,,,,,,,,,
-SURENDRANAGAR,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.26,0.0,0.0,37.82,46.91,41.15,24.84,21.67,23.47
-TAPI,General,0.0,0.0,0.0,14.09,17.42,15.59,0.0,1.24,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-TAPI,OBC,,,,,,,,,,3.85,4.42,4.13,20.69,0.34,11.99,5.83,7.48,6.6,,,,,,,,,,,,,,,,,,,,,,,,,,,
-TAPI,Overall,,,,,,,,,,,,,,,,,,,0.8,0.16,0.49,13.65,10.17,11.92,5.1,6.24,5.66,,,,,,,,,,,,,,,,,,
-TAPI,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,14.84,13.19,14.11,0.0,0.0,0.0,,,,,,,,,
-TAPI,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2.23,1.58,1.91,12.91,10.28,11.57,6.29,6.91,6.6
-THE DANGS,General,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-THE DANGS,OBC,,,,,,,,,,5.34,8.31,6.73,32.69,15.56,24.74,0.0,13.94,5.83,,,,,,,,,,,,,,,,,,,,,,,,,,,
-THE DANGS,Overall,,,,,,,,,,,,,,,,,,,1.94,1.5,1.73,19.83,15.5,17.65,5.4,5.19,5.3,,,,,,,,,,,,,,,,,,
-THE DANGS,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,
-THE DANGS,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2.5,1.97,2.24,20.54,16.61,18.56,6.64,7.4,7.01
-VADODARA,General,0.0,0.0,0.0,15.23,5.81,11.08,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-VADODARA,OBC,,,,,,,,,,5.14,6.12,5.6,39.67,33.6,37.06,12.15,16.23,14.05,,,,,,,,,,,,,,,,,,,,,,,,,,,
-VADODARA,Overall,,,,,,,,,,,,,,,,,,,0.0,0.0,0.0,25.46,16.38,21.48,2.84,4.57,3.64,,,,,,,,,,,,,,,,,,
-VADODARA,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,6.55,5.05,5.87,36.39,23.34,30.33,10.77,8.34,9.66,,,,,,,,,
-VADODARA,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2.4,4.65,3.47,39.73,30.15,35.71,12.9,14.44,13.61
-VALSAD,General,0.0,0.0,0.0,13.72,10.61,12.33,1.64,2.27,1.92,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-VALSAD,OBC,,,,,,,,,,1.03,2.75,1.85,6.87,3.12,5.13,4.36,3.27,3.85,,,,,,,,,,,,,,,,,,,,,,,,,,,
-VALSAD,Overall,,,,,,,,,,,,,,,,,,,0.29,0.5,0.39,14.63,11.43,13.1,3.97,4.65,4.3,,,,,,,,,,,,,,,,,,
-VALSAD,SC,,,,,,,,,,,,,,,,,,,,,,,,,,,,11.36,10.8,11.1,26.68,16.08,21.75,17.45,22.43,19.8,,,,,,,,,
-VALSAD,ST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1.0,0.89,0.94,17.35,14.26,15.81,4.38,5.25,4.81
+Location,Caste
+AHMEDABAD,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+AMRELI,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+ANAND,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+ARAVALLI,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+BANAS KANTHA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+BHARUCH,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+BHAVNAGAR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+BOTAD,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+CHHOTAUDEPUR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+DEVBHOOMI DWARKA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+DOHAD,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+GANDHINAGAR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+GIR SOMNATH,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+JAMNAGAR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+JUNAGADH,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+KACHCHH,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+KHEDA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+MAHESANA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+MAHISAGAR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+MORBI,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+NARMADA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+NAVSARI,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+PANCH MAHALS,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+PATAN,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+PORBANDAR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+RAJKOT,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+SABAR KANTHA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+SURAT,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+SURENDRANAGAR,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+TAPI,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+THE DANGS,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+VADODARA,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
+VALSAD,"General, General, General, General, General, General, General, General, General, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, OBC, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, Overall, SC, SC, SC, SC, SC, SC, SC, SC, SC, ST, ST, ST, ST, ST, ST, ST, ST, ST"
