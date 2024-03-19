@@ -3,21 +3,21 @@ import React, { useState } from "react";
 export const CategoryDropDown = ({ category, setCategory }) => {
   const [isOpen, setIsOpen] = useState(false);
   const cat = () => {
-    if (category === "O") return "Both";
-    if (category === "B") return "Boys";
-    if (category === "G") return "Girls";
+    if (category === "Overall") return "Both";
+    if (category === "Boys") return "Boys";
+    if (category === "Girls") return "Girls";
   };
   const handleClick = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
   };
   const handleOverallClick = () => {
-    if (category !== "O") setCategory("O");
+    if (category !== "Overall") setCategory("Overall");
   };
   const handleBoysClick = () => {
-    if (category !== "B") setCategory("B");
+    if (category !== "Boys") setCategory("Boys");
   };
   const handleGirlsClick = () => {
-    if (category !== "G") setCategory("G");
+    if (category !== "Girls") setCategory("Girls");
   };
   return (
     <div>
@@ -96,21 +96,21 @@ export const CasteDropDown = ({ caste, setCaste }) => {
 export const StdDropDown = ({ std, setStd }) => {
   const [isOpen, setIsOpen] = useState(false);
   const standard = () => {
-    if (std === 0) return "Primary";
-    if (std === 1) return "Upper Primary";
-    if (std === 2) return "Secondary";
+    if (std === "") return "Primary";
+    if (std === "1") return "Upper Primary";
+    if (std === "2") return "Secondary";
   };
   const handleClick = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
   };
   const handlePClick = () => {
-    if (std !== 0) setStd(0);
+    if (std !== "") setStd("");
   };
   const handleUPClick = () => {
-    if (std !== 1) setStd(1);
+    if (std !== "1") setStd("1");
   };
   const handleSClick = () => {
-    if (std !== 2) setStd(2);
+    if (std !== "2") setStd("2");
   };
   return (
     <div>

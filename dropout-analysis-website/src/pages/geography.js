@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import MapComponent from "@/components/MapComponent";
+import MapComponent2 from "@/components/MapComponent2";
 import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
   CategoryDropDown,
@@ -79,9 +80,9 @@ const ReasonsTab = ({ classes, reasonList }) => {
 };
 
 const Geography = ({ mode }) => {
-  const [category, setCategory] = useState("O");
+  const [category, setCategory] = useState("Overall");
   const [caste, setCaste] = useState("Overall");
-  const [std, setStd] = useState(2);
+  const [std, setStd] = useState("2");
   const [reasonList, setReasonList] = useState(demoReasons);
   const [avgRate, setAvgRate] = useState(-1);
   useEffect(() => {
@@ -105,15 +106,15 @@ const Geography = ({ mode }) => {
 
           const getReasonRate = () => {
             if (avgRate === -1) {
-              if (category === "O") return overall75;
-              if (category === "B") return boys75;
-              if (category === "G") return girls75;
+              if (category === "Overall") return overall75;
+              if (category === "Boys") return boys75;
+              if (category === "Girls") return girls75;
             } else {
-              if (category === "O")
+              if (category === "Overall")
                 return ((overall75 * avgRate) / 100).toFixed(2);
-              if (category === "B")
+              if (category === "Boys")
                 return ((boys75 * avgRate) / 100).toFixed(2);
-              if (category === "G")
+              if (category === "Girls")
                 return ((girls75 * avgRate) / 100).toFixed(2);
             }
           };
@@ -157,7 +158,7 @@ const Geography = ({ mode }) => {
               classes="text-dark w-[40%] mr-4 "
             />
 
-            <MapComponent
+            <MapComponent2
               mode={mode}
               classes="w-[60%] "
               category={category}
