@@ -24,7 +24,7 @@ for i in range(0, len(par)):
         if filename.endswith(".csv"):
 
             params = filename.split('(')[1].split(')')[0].split('_')
-
+            # print(params)
             cat, std, gen = params[0], params[1], params[2]
             if par[i] == cat:
                 file_path = os.path.join(folderPath, filename)
