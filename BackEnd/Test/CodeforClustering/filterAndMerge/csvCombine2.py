@@ -8,6 +8,16 @@ par = ['General', 'OBC', 'Overall', 'SC', 'ST']
 
 combined_output = pd.DataFrame()
 
+
+def stdNum(std):
+    if std == 'prim':
+        return ''
+    if std == 'upPrim':
+        return '.1'
+    if std == 'snr':
+        return '.2'
+
+
 for i in range(0, len(par)):
     combined_data = pd.DataFrame()
     for filename in os.listdir(folderPath):
@@ -24,7 +34,9 @@ for i in range(0, len(par)):
 
                 combined_data['Location'] = df['Location']
                 combined_data['Caste'] = df['Caste']
-                combined_data[params[1]+'_'+params[2]] = df['Cluster']
+                combined_data[gen.capitalize()+stdNum(std)] = df['Cluster']
+                # print(gen.capitalize()+stdNum(std))
+                # print(std)
 
     combined_output = pd.concat(
         [combined_output, combined_data], ignore_index=True)
