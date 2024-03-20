@@ -11,18 +11,21 @@ import { Feature } from "ol";
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import Overlay from "ol/Overlay";
-
 import { Style, Circle as CircleStyle, Stroke, Fill, Text } from "ol/style";
 
-// Custom style function for clusters
+// Function to define custom style for clusters
 const clusterStyle = (feature) => {
+  // Retrieve features from the cluster
   const features = feature.get("features");
+  // Initialize cluster size
   let cs = 2;
+  // Iterate through features to calculate cluster size
   features.forEach((feature) => {
     let c = feature.get("cs");
     cs = c;
   });
 
+  // Define fill color based on cluster size
   let fillColor;
   if (cs == 1) {
     fillColor = "rgba(255, 255, 255, 0.2)";
@@ -39,9 +42,10 @@ const clusterStyle = (feature) => {
   } else {
     fillColor = "rgba(225, 64, 64, 0.68)";
   }
-  // Adjust the cluster radius based on your preference
+  // Adjust the cluster radius based on cluster size
   var clusterRadius = 20 + cs * 5;
 
+  // Return style object for cluster
   return new Style({
     image: new CircleStyle({
       radius: clusterRadius,
@@ -50,7 +54,7 @@ const clusterStyle = (feature) => {
         width: 0.2, // Cluster border width
       }),
       fill: new Fill({
-        color: fillColor, // Cluster fill color based on avgRate
+        color: fillColor, // Cluster fill color based on cluster size
       }),
     }),
     text: new Text({
@@ -62,14 +66,22 @@ const clusterStyle = (feature) => {
   });
 };
 
+// MapComponent2 function
 const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
+  // Refs for map and popup
   const mapRef = useRef(null);
   const popupRef = useRef(null);
 
+  // Function to extract cluster from CSV data
   const extractCluster = (loc, csvData) => {
     let cs;
     const rows = csvData.split("\n");
-    const headers = rows[0].split(",");
+    let rows2 = [];
+    rows.map((r) => {
+      rows2.push(r.split("\r")[0]);
+    });
+
+    const headers = rows2[0].split(",");
     let colName;
     if (std === "") {
       colName = category;
@@ -78,8 +90,9 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
     }
     const columnIndex = headers.indexOf(colName);
     // Loop through CSV rows and create features
-    for (let i = 1; i < rows.length - 2; i++) {
-      const params = rows[i].split(",");
+    for (let i = 1; i < rows2.length - 2; i++) {
+      const params = rows2[i].split(",");
+      if (params[2] !== caste) continue;
       if (params[1] === loc) {
         cs = params[columnIndex];
         break;
@@ -128,9 +141,10 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
             for (let i = 1; i < rows.length - 2; i++) {
               const params = rows[i].split(",");
 
-              if (params[1] !== caste) continue;
               const longitude = params[params.length - 1];
               const latitude = params[params.length - 2];
+
+              if (params[1] !== caste) continue;
 
               const rateOp = () => {
                 return params[columnIndex];
@@ -164,12 +178,14 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
             // Add the cluster layer to the map
             map.addLayer(clusterLayer);
 
+            // Update cluster distance based on map zoom level
             map.getView().on("change:resolution", function (evt) {
               const zoomLevel = map.getView().getZoom();
               const newClusterDistance = 60 / Math.pow(2, zoomLevel - 8.5);
               clusterSource.setDistance(newClusterDistance);
             });
 
+            // Define overlay for displaying cluster information
             const overlay = new Overlay({
               element: popupRef.current,
               positioning: "bottom-center",
