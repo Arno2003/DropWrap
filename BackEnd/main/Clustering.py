@@ -6,7 +6,7 @@ import os
     # merging at the same time while forming, to create a final combined file
 class Clustering:
     # function for combining all the csvs formed
-    def combineCSV(folderPath):
+    def combineCSV(self, folderPath):
         par = ['General', 'OBC', 'Overall', 'SC', 'ST']
 
         combined_output = pd.DataFrame()
@@ -36,7 +36,7 @@ class Clustering:
 
 
     # funtion for forming cluster for each file traversed  
-    def formClusterCasteWise(folderPath):
+    def formClusterCasteWise(self, folderPath):
         for fileName in os.listdir(folderPath):
             if fileName.endswith(".csv"):
                 file_path = os.path.join(folderPath, fileName)
@@ -82,12 +82,11 @@ class Clustering:
                 cluster_df = pd.DataFrame(Z, columns=['Cluster 1', 'Cluster 2', 'Distance', 'Number of Points'])
                 cluster_df.to_csv(f'BackEnd\\Main\\OutputData\\filteredOutputs\\clusterDetails\\{fileName}_details.csv', index=False)
 
-    def formClusterCSV(folderPath):
+    def formClusterCSV(self, folderPath):
         try:
             if os.path.isdir(folderPath):
-                clst = Clustering()
-                clst.formClusterCasteWise(folderPath)
-                clst.combineCSV(folderPath)
+                self.formClusterCasteWise(folderPath)
+                self.combineCSV(folderPath)
         except OSError:
             print("Invalid Directory Path")
             return False
