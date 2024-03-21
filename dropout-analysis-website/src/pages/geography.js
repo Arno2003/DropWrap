@@ -53,9 +53,9 @@ const AnimatedNumbers = ({ value }) => {
 const ReasonsTab = ({ classes, reasonList }) => {
   return (
     <div
-      className={`${classes} bg-secLight bg-opacity-25  dark:bg-secDark rounded-xl  `}
+      className={`${classes} bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
     >
-      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-xl border-solid border-t-2 border-x-2 dark:border-secDark">
+      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-lg border-solid border-t-2 border-x-2 dark:border-secDark">
         Reasons for Dropouts
       </h3>
 
@@ -63,13 +63,15 @@ const ReasonsTab = ({ classes, reasonList }) => {
         return (
           <motion.div
             key={item.id}
-            className="w-[95%] flex flex-row px-5 py-4 border-b-2 border-solid border-secDark dark:border-secLight dark:text-light mx-auto"
+            className={`w-[95%] flex flex-row px-5 py-4 ${
+              reasonList.indexOf(item) !== reasonList.length - 1 && "border-b-2"
+            } border-solid border-secDark dark:border-secLight dark:text-light mx-auto`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
             <div className="w-[80%] text-lg">{item.reason}</div>
             <div className="w-[20%] text-lg font-bold flex items-center justify-center tracking-widest">
-              {item.rate === 0 ? <>0</> : <AnimatedNumbers value={item.rate} />}{" "}
+              {item.rate === 0 ? <>0</> : <AnimatedNumbers value={item.rate} />}
               %
             </div>
           </motion.div>
@@ -117,13 +119,18 @@ const Geography = ({ mode }) => {
               if (category === "Girls")
                 return ((girls75 * avgRate) / 100).toFixed(2);
             }
+            // if (category === "Overall") return overall75;
+            // if (category === "Boys") return boys75;
+            // if (category === "Girls") return girls75;
           };
 
           return { reason, rate: parseFloat(getReasonRate()) };
         });
-        avgRate === -1
-          ? setReasonList(reasons)
-          : setReasonList(reasons.sort((a, b) => b.rate - a.rate).slice(0, 5));
+        // avgRate === -1
+        //   ? setReasonList(reasons)
+        //   : setReasonList(reasons.sort((a, b) => b.rate - a.rate).slice(0, 5));
+        // setReasonList(reasons.sort((a, b) => b.rate - a.rate));
+        setReasonList(reasons);
       } catch (error) {
         console.error("Error fetching reasons:", error);
       }
@@ -145,18 +152,23 @@ const Geography = ({ mode }) => {
             <h2 className="text-acc dark:text-alt text-3xl text-left  font-extrabold ">
               GEOGRAPHICAL DISTRIBUTION
             </h2>
-            <div className="text-light mt-2 w-[30%] flex flex-row  mr-4 justify-between">
-              <CategoryDropDown category={category} setCategory={setCategory} />
-              <CasteDropDown caste={caste} setCaste={setCaste} />
-              <StdDropDown std={std} setStd={setStd} />
-            </div>
           </div>
 
           <div className="w-full h-[650px] mx-auto mb-10 flex flex-row ">
-            <ReasonsTab
-              reasonList={reasonList}
-              classes="text-dark w-[40%] mr-4 "
-            />
+            <div className="w-[40%] mr-4">
+              <div className="text-light mt-2 w-full flex flex-row mr-4 justify-evenly">
+                <CategoryDropDown
+                  category={category}
+                  setCategory={setCategory}
+                />
+                <CasteDropDown caste={caste} setCaste={setCaste} />
+                <StdDropDown std={std} setStd={setStd} />
+              </div>
+              <ReasonsTab
+                reasonList={reasonList}
+                classes="text-dark w-[100%] mr-4 "
+              />
+            </div>
 
             <MapComponent2
               mode={mode}
