@@ -9,7 +9,7 @@ class DataBaseHandler:
     def formConnection(self):
         try:
             conn = psg2.connect(
-                database='postgres',
+                database='dropoutdata',
                 user= 'postgres',
                 host='localhost',
                 password='root',
@@ -40,7 +40,7 @@ class DataBaseHandler:
     def fetchData(self):      # conditions -> List of conditions for data fetching
         try:    
             dbh = DataBaseHandler()
-            command = "select * from test"
+            command = 'select * from public."combined_data2.csv"'
             res = dbh.executeCommand(command) 
             print(res)
         except Exception as error:
@@ -60,7 +60,7 @@ class DataBaseHandler:
             conn, cur = self.formConnection()
             
             # Create SQLAlchemy engine to connect to PostgreSQL
-            engine = create_engine(f'postgresql://postgres:root@localhost:5432/dropoutdata')
+            engine = create_engine('postgresql://postgres:root@localhost:5432/dropoutdata')
             print(table_name)
             # Write the data to PostgreSQL
             df.to_sql(table_name, engine, if_exists='replace', index=False)
