@@ -64,7 +64,7 @@ class DataBaseHandler:
             print(table_name)
             # Write the data to PostgreSQL
             df.to_sql(table_name, engine, if_exists='replace', index=False)
-
+            
             # Close the connection
             conn.close()
 

@@ -55,7 +55,8 @@ class Clustering:
                 locations = df['Location']
                 caste = df['Social Category']
                 data = df[colName].values.reshape(-1, 1)
-
+                print(data)
+                print("Pass 1")
                 # Perform hierarchical clustering
                 Z = linkage(data, 'ward')
                 
@@ -80,19 +81,19 @@ class Clustering:
 
                 # Saving the cluster details in another CSV file
                 cluster_df = pd.DataFrame(Z, columns=['Cluster 1', 'Cluster 2', 'Distance', 'Number of Points'])
-                cluster_df.to_csv(f'BackEnd\\Main\\OutputData\\filteredOutputs\\clusterDetails\\{fileName}_details.csv', index=False)
+                cluster_df.to_csv(f'BackEnd\\main\\OutputData\\filteredOutputs\\clusterDetails\\{fileName}_details.csv', index=False)
 
     def formClusterCSV(self, folderPath):
         try:
             if os.path.isdir(folderPath):
                 self.formClusterCasteWise(folderPath)
                 self.combineCSV(folderPath)
-        except OSError:
-            print("Invalid Directory Path")
+        except Exception as e:
+            print(e)
             return False
         
 
 if __name__ == "__main__":
-    folderPath = "BackEnd\Main\InputData\FilteredData"
+    folderPath = "BackEnd\main\Data\InputData\FilteredData"
     clst = Clustering()
     clst.formClusterCSV(folderPath)
