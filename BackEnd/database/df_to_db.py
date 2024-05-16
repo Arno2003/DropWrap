@@ -1,23 +1,21 @@
 import pymongo
-import os
-from pymongo import MongoClient
 import pandas as pd
+import json
+import os
+from dotenv import load_dotenv, dotenv_values
 
-password = "teLPS2jcDkFU7rbl"
+load_dotenv()
+password = os.getenv("MONGO_PASSWORD")
 
+client = pymongo.MongoClient(
+    f"mongodb+srv://dropwrap:{password}@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat")
 
-def connect_to_mongo(db_name, collection_name, df):
-    url = f"mongodb+srv://dropwrap:{password}@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat"
-    cluster = MongoClient(url)
-    db = cluster[db_name]
-    collection = db[collection_name]
+df = pd.read_csv("BackEnd\\database\\Gujarat.csv")
 
-    data = df.to_dict(orient="records")
-    print(data)
-    # post = {"name": "Hindol", "score": 5}
-    # collection.insert_one(post)
+# print(df.head())
 
+data = df.to_dict(orient="records")
 
-andra = pd.read_csv('BackEnd\database\Andhra Pradesh.csv')
-# print(andra)
-connect_to_mongo("test", "test", andra)
+db = client['Dropout']
+
+db.Dropout_Rates.insert_many(data)
