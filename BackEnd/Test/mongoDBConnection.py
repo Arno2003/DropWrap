@@ -4,7 +4,7 @@ import os
 
 def Connect():
     try:
-        password = os.getenv("PASSWORD")
+        password = os.getenv("MONGO_PASSWORD")
         # Step 1: Connect to MongoDB
         url = f"mongodb+srv://dropwrap:{password}@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat"
         cluster = MongoClient(url)
