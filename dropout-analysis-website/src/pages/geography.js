@@ -119,17 +119,10 @@ const Geography = ({ mode }) => {
               if (category === "Girls")
                 return ((girls75 * avgRate) / 100).toFixed(2);
             }
-            // if (category === "Overall") return overall75;
-            // if (category === "Boys") return boys75;
-            // if (category === "Girls") return girls75;
           };
 
           return { reason, rate: parseFloat(getReasonRate()) };
         });
-        // avgRate === -1
-        //   ? setReasonList(reasons)
-        //   : setReasonList(reasons.sort((a, b) => b.rate - a.rate).slice(0, 5));
-        // setReasonList(reasons.sort((a, b) => b.rate - a.rate));
         setReasonList(reasons);
       } catch (error) {
         console.error("Error fetching reasons:", error);
