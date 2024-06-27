@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
+import axios from "axios";
 import Layout from "@/components/Layout";
-import MapComponent from "@/components/MapComponent";
 import MapComponent2 from "@/components/MapComponent2";
 import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
@@ -82,6 +82,17 @@ const ReasonsTab = ({ classes, reasonList }) => {
 };
 
 const Geography = ({ mode }) => {
+  // .....................................................................
+  const [testData, setTestData] = useState([]);
+  useEffect(() => {
+    axios.get("/api/latlong").then((response) => {
+      setTestData(response.data);
+    });
+  }, []);
+  console.log(testData);
+
+  // ........................................................................
+
   const [category, setCategory] = useState("Overall");
   const [caste, setCaste] = useState("Overall");
   const [std, setStd] = useState("2");
