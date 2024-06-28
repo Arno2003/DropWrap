@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
+import axios from "axios";
 import Layout from "@/components/Layout";
-import MapComponent from "@/components/MapComponent";
 import MapComponent2 from "@/components/MapComponent2";
 import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
@@ -82,6 +82,17 @@ const ReasonsTab = ({ classes, reasonList }) => {
 };
 
 const Geography = ({ mode }) => {
+  // .....................................................................
+  const [testData, setTestData] = useState([]);
+  useEffect(() => {
+    axios.get("/api/latlong").then((response) => {
+      setTestData(response.data);
+    });
+  }, []);
+  console.log(testData);
+
+  // ........................................................................
+
   const [category, setCategory] = useState("Overall");
   const [caste, setCaste] = useState("Overall");
   const [std, setStd] = useState("2");
@@ -119,17 +130,10 @@ const Geography = ({ mode }) => {
               if (category === "Girls")
                 return ((girls75 * avgRate) / 100).toFixed(2);
             }
-            // if (category === "Overall") return overall75;
-            // if (category === "Boys") return boys75;
-            // if (category === "Girls") return girls75;
           };
 
           return { reason, rate: parseFloat(getReasonRate()) };
         });
-        // avgRate === -1
-        //   ? setReasonList(reasons)
-        //   : setReasonList(reasons.sort((a, b) => b.rate - a.rate).slice(0, 5));
-        // setReasonList(reasons.sort((a, b) => b.rate - a.rate));
         setReasonList(reasons);
       } catch (error) {
         console.error("Error fetching reasons:", error);

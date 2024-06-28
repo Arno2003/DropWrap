@@ -5,17 +5,17 @@ import os
 from dotenv import load_dotenv, dotenv_values
 
 load_dotenv()
-password = os.getenv("MONGO_PASSWORD")
+password = os.getenv("NEW_MONGO_PASSWORD")
 
 client = pymongo.MongoClient(
     f"mongodb+srv://dropwrap:{password}@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat")
 
-df = pd.read_csv("BackEnd\\database\\Gujarat.csv")
+df = pd.read_csv("BackEnd\\database\\reasons.csv")
 
 # print(df.head())
 
 data = df.to_dict(orient="records")
 
-db = client['Dropout']
+db = client['Reasons']
 
-db.Dropout_Rates.insert_many(data)
+db.Reasons.insert_many(data)
