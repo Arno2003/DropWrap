@@ -4,7 +4,9 @@ import os
 
 def Connect():
     try:
+        load_dotenv()
         password = os.getenv("MONGO_PASSWORD")
+        print("password : ", password)
         # Step 1: Connect to MongoDB
         url = f"mongodb+srv://dropwrap:{password}@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat"
         cluster = MongoClient(url)
@@ -18,20 +20,18 @@ def Connect():
         print("pass2")
 
         # Step 2: Define the query 
-        # query = {"field_name": "value_to_match"}  
+        query = {"Social Category": {"$eq":"General"}}
 
         # Step 3: Fetch data from MongoDB
-        # cursor = collection.find()
+        cursor = collection.find()
+        print(cursor)
         print("pass3")
-        document = list(collection.find())
-        print(*document)
-        print("pass4")
         # Step 4: Process the fetched data
-        # for document in documents:
-        #     print(document)
-
+        for document in cursor:
+            print("document : ", document)
         # step5: Close the connection
         cluster.close()
+        
     except Exception as e:
         print(e)
         
