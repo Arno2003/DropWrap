@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv, dotenv_values
 
 load_dotenv()
-password = os.getenv("MONGO_PASSWORD")
+password = os.getenv("NEW_MONGO_PASSWORD")
 
 client = pymongo.MongoClient(
     f"mongodb+srv://dropwrap:{password}@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat")
