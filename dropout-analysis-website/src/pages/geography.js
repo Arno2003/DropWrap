@@ -84,11 +84,19 @@ const ReasonsTab = ({ classes, reasonList }) => {
 const Geography = ({ mode }) => {
   // .....................................................................
   const [testData, setTestData] = useState([]);
+
+  const stateName = "Gujarat";
   useEffect(() => {
-    axios.get("/api/latlong").then((response) => {
-      setTestData(response.data);
-    });
-  }, []);
+    axios
+      .get(`/api/latlong?dbName=${stateName}`)
+      .then((response) => {
+        setTestData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [stateName]);
+
   console.log(testData);
 
   // ........................................................................
