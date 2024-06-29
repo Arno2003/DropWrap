@@ -2,9 +2,9 @@
 import { MongoClient } from "mongodb";
 
 const uri =
-  "mongodb+srv://dropwrap:" +
-  process.env.MONGO_PASSWORD +
-  "@gujarat.jwam9ab.mongodb.net/?retryWrites=true&w=majority&appName=Gujarat";
+  "mongodb+srv://hindol_banerjee:" +
+  process.env.MONGO_PASSWORD_NEW +
+  "@cluster0.u5akrs9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const options = {};
 
 let client;
