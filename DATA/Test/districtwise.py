@@ -5,9 +5,9 @@ import csv
 def replace_column_names(df):
     # Specify column replacements for Girls, Boys, and Overall
     all_column_replacements = {
-        'Girls': {'Girls': 'Girls(Primary Dropout)', 'Girls.1': 'Girls(Upper Primary Dropout)', 'Girls.2': 'Girls(Secondary Dropout)'},
-        'Boys': {'Boys': 'Boys(Primary Dropout)', 'Boys.1': 'Boys(Upper Primary Dropout)', 'Boys.2': 'Boys(Secondary Dropout)'},
-        'Overall': {'Overall': 'Overall(Primary Dropout)', 'Overall.1': 'Overall(Upper Primary Dropout)', 'Overall.2': 'Overall(Secondary Dropout)'}
+        'Girls': {'Girls': 'prim_Girls', 'Girls.1': 'upPrim_Girls', 'Girls.2': 'snr_Girls'},
+        'Boys': {'Boys': 'prim_Boys', 'Boys.1': 'upPrim_Boys', 'Boys.2': 'snr_Boys'},
+        'Overall': {'Overall': 'prim_Overall', 'Overall.1': 'upPrim_Overall', 'Overall.2': 'snr_Overall'}
     }
 
     # Use a loop to replace the specified column names for each category
