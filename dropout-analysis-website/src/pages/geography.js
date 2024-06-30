@@ -95,6 +95,14 @@ const Geography = ({ mode }) => {
       .catch((error) => {
         console.log(error);
       });
+      axios
+      .get(`/api/reasons?dbName=${stateName}`)
+      .then((response) => {
+        setTestData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [stateName]);
 
   console.log(testData);
