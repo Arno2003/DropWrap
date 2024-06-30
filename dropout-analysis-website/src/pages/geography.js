@@ -83,29 +83,32 @@ const ReasonsTab = ({ classes, reasonList }) => {
 
 const Geography = ({ mode }) => {
   // .....................................................................
-  const [testData, setTestData] = useState([]);
+  const [latLongData, setLatLongData] = useState([]);
+  const [reasonsData, setReasonsData] = useState([]);
 
   const stateName = "Gujarat";
   useEffect(() => {
     axios
       .get(`/api/latlong?dbName=${stateName}`)
       .then((response) => {
-        setTestData(response.data);
+        setLatLongData(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-      axios
+
+    axios
       .get(`/api/reasons?dbName=${stateName}`)
       .then((response) => {
-        setTestData(response.data);
+        setReasonsData(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [stateName]);
 
-  console.log(testData);
+  console.log(latLongData);
+  console.log(reasonsData);
 
   // ........................................................................
 
@@ -114,6 +117,7 @@ const Geography = ({ mode }) => {
   const [std, setStd] = useState("2");
   const [reasonList, setReasonList] = useState(demoReasons);
   const [avgRate, setAvgRate] = useState(-1);
+
   useEffect(() => {
     // Function to fetch and parse the CSV file
     const fetchReasons = async () => {

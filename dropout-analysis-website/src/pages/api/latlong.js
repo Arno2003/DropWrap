@@ -10,7 +10,6 @@ export default async (req, res) => {
       .collection("latlong")
       .find({})
       .sort({ metacritic: -1 })
-      .limit(10)
       .toArray();
     res.json(result);
   } catch (e) {
@@ -18,5 +17,3 @@ export default async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-
