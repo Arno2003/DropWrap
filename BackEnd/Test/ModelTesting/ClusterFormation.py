@@ -17,7 +17,7 @@ class ClusterFormation:
         slicedData = df[df["Social Category"] == socialCat]
         
         data = slicedData[["Location",colName]]
-        
+        1
         # changing location names to serial numbers to give them a numeric value
         df1 = pd.DataFrame(data)
         df1['serialNumber'] = list(range(1, len(df)+1))
