@@ -127,11 +127,22 @@ const MapComponent2 = ({
     // Create a vector source for the CSV data
     const vectorSource = new VectorSource();
 
-    axios
-      .get(`/api/formatted_cluster_data?dbName=${stateName}`)
-      .then((response) => {
-        console.log(response.data);
-      });
+    axios.get(`/api/latlong?dbName=${stateName}`).then((latLong) => {
+      axios
+        .get(`/api/formatted_cluster_data?dbName=${stateName}`)
+        .then((clusters) => {
+          // console.log(clusters.data);
+          let colName;
+          if (std === "") {
+            colName = "prim_" + category;
+          } else if (std === "1") {
+            colName = "upPrim_" + category;
+          } else {
+            colName = "snr_" + category;
+          }
+          console.log(colName);
+        });
+    });
 
     // Fetch and parse the CSV data
     // fetch("data/latlong.csv")
