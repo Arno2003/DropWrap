@@ -141,6 +141,7 @@ const Geography = ({ mode }) => {
               caste={caste}
               std={std}
               setAvgRate={setAvgRate}
+              stateName={stateName}
             />
           </div>
         </Layout>
