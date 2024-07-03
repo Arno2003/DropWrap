@@ -12,6 +12,7 @@ import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import Overlay from "ol/Overlay";
 import { Style, Circle as CircleStyle, Stroke, Fill, Text } from "ol/style";
+import axios from "axios";
 
 // Function to define custom style for clusters
 const clusterStyle = (feature) => {
@@ -67,34 +68,35 @@ const clusterStyle = (feature) => {
 };
 
 // MapComponent2 function
-const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
+const MapComponent2 = ({
+  category,
+  caste,
+  std,
+  classes,
+  setAvgRate,
+  mode,
+  stateName,
+}) => {
   // Refs for map and popup
   const mapRef = useRef(null);
   const popupRef = useRef(null);
 
   // Function to extract cluster from CSV data
-  const extractCluster = (loc, csvData) => {
+  const extractCluster = (loc, clusters) => {
     let cs;
-    const rows = csvData.split("\n");
-    let rows2 = [];
-    rows.map((r) => {
-      rows2.push(r.split("\r")[0]);
-    });
-
-    const headers = rows2[0].split(",");
     let colName;
     if (std === "") {
-      colName = category;
+      colName = "prim_" + category;
+    } else if (std === "1") {
+      colName = "upPrim_" + category;
     } else {
-      colName = category + "." + std;
+      colName = "snr_" + category;
     }
-    const columnIndex = headers.indexOf(colName);
-    // Loop through CSV rows and create features
-    for (let i = 1; i < rows2.length - 2; i++) {
-      const params = rows2[i].split(",");
-      if (params[2] !== caste) continue;
-      if (params[1] === loc) {
-        cs = params[columnIndex];
+
+    for (let i = 1; i < clusters.data.length; i++) {
+      const element = clusters.data[i];
+      if (element.Location === loc) {
+        cs = element[colName];
         break;
       }
     }
@@ -118,45 +120,43 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
     // Create a vector source for the CSV data
     const vectorSource = new VectorSource();
 
-    // Fetch and parse the CSV data
-    fetch("data/latlong.csv")
-      .then((response) => response.text())
-      .then((csvData) => {
-        fetch("data/formatted_cluster_data.csv")
-          .then((response2) => response2.text())
-          .then((csvData2) => {
-            // Parse CSV data here and create features
-            const rows = csvData.split("\n");
-
-            const headers = rows[0].split(",");
+    axios
+      .get(`/api/latlong?dbName=${stateName}&caste=${caste}`)
+      .then((latLong) => {
+        axios
+          .get(`/api/formatted_cluster_data?dbName=${stateName}&caste=${caste}`)
+          .then((clusters) => {
+            console.log(clusters.data);
             let colName;
             if (std === "") {
-              colName = category;
+              colName = "prim_" + category;
+            } else if (std === "1") {
+              colName = "upPrim_" + category;
             } else {
-              colName = category + "." + std;
+              colName = "snr_" + category;
             }
-            const columnIndex = headers.indexOf(colName);
+            // console.log(colName);
 
-            // Loop through CSV rows and create features
-            for (let i = 1; i < rows.length - 2; i++) {
-              const params = rows[i].split(",");
-
-              const longitude = params[params.length - 1];
-              const latitude = params[params.length - 2];
-
-              if (params[1] !== caste) continue;
+            for (let i = 0; i < latLong.data.length; i++) {
+              const element = latLong.data[i];
+              const longitude = element.longitude;
+              const latitude = element.latitude;
+              // console.log(latitude, longitude);
+              // console.log(element);
 
               const rateOp = () => {
-                return params[columnIndex];
+                return element[colName];
               };
+
+              // console.log(extractCluster(element.Location, clusters));
 
               const feature_obj = {
                 geometry: new Point(
                   fromLonLat([parseFloat(longitude), parseFloat(latitude)])
                 ),
                 rate: parseInt(rateOp()),
-                loc: params[0],
-                cs: extractCluster(params[0], csvData2),
+                loc: element.Location,
+                cs: extractCluster(element.Location, clusters),
               };
 
               const feature = new Feature(feature_obj);
@@ -221,7 +221,6 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
                 setAvgRate(avgRate);
 
                 if (avgRate !== undefined) {
-                  // popupRef.current.innerHTML = `${latitude}, ${longitude}%`;
                   popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
                 }
               } else {
@@ -236,8 +235,6 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       map.setTarget(null);
     };
   }, [category, caste, std, mode]);
-
-  // setRates(rateArray);
 
   const handleMouseOut = () => {
     setAvgRate(-1);

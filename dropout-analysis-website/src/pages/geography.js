@@ -9,20 +9,6 @@ import {
   CasteDropDown,
   StdDropDown,
 } from "@/components/DropDown";
-const demoReasons = [
-  {
-    reason: "Not interested in education",
-    rate: 19.85,
-  },
-  {
-    reason: "Financial constraints",
-    rate: 26.27,
-  },
-  {
-    reason: "Engaged in domestic activities",
-    rate: 4.62,
-  },
-];
 
 const AnimatedNumbers = ({ value }) => {
   const ref = useRef(null);
@@ -82,83 +68,41 @@ const ReasonsTab = ({ classes, reasonList }) => {
 };
 
 const Geography = ({ mode }) => {
-  // .....................................................................
-  const [testData, setTestData] = useState([]);
-
-  const stateName = "Gujarat";
-  useEffect(() => {
-    axios
-      .get(`/api/latlong?dbName=${stateName}`)
-      .then((response) => {
-        setTestData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      axios
-      .get(`/api/reasons?dbName=${stateName}`)
-      .then((response) => {
-        setTestData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [stateName]);
-
-  console.log(testData);
-
-  // ........................................................................
-
+  const [stateName, setStateName] = useState("Gujarat");
   const [category, setCategory] = useState("Overall");
   const [caste, setCaste] = useState("Overall");
   const [std, setStd] = useState("2");
-  const [reasonList, setReasonList] = useState(demoReasons);
+  const [reasonList, setReasonList] = useState([]);
   const [avgRate, setAvgRate] = useState(-1);
-  useEffect(() => {
-    // Function to fetch and parse the CSV file
-    const fetchReasons = async () => {
-      try {
-        const response = await fetch("/data/reasons.csv");
-        const text = await response.text();
-        const rows = text.split("\n").slice(1); // Skip header row
-        // console.log(rates);
-        const reasons = rows.map((row) => {
-          const [
-            reason,
-            boys71,
-            girls71,
-            overall71,
-            boys75,
-            girls75,
-            overall75,
-          ] = row.split(",");
 
+  useEffect(() => {
+    axios
+      .get(`/api/reasons?dbName=${stateName}`)
+      .then((response) => {
+        const reasons = response.data.map((row) => {
           const getReasonRate = () => {
             if (avgRate === -1) {
-              if (category === "Overall") return overall75;
-              if (category === "Boys") return boys75;
-              if (category === "Girls") return girls75;
+              if (category === "Overall") return row.Overall75;
+              if (category === "Boys") return row.Boys75;
+              if (category === "Girls") return row.Girls75;
             } else {
               if (category === "Overall")
-                return ((overall75 * avgRate) / 100).toFixed(2);
+                return ((row.Overall75 * avgRate) / 100).toFixed(2);
               if (category === "Boys")
-                return ((boys75 * avgRate) / 100).toFixed(2);
+                return ((row.Boys75 * avgRate) / 100).toFixed(2);
               if (category === "Girls")
-                return ((girls75 * avgRate) / 100).toFixed(2);
+                return ((row.Girls75 * avgRate) / 100).toFixed(2);
             }
           };
-
-          return { reason, rate: parseFloat(getReasonRate()) };
+          return { reason: row.Reasons, rate: parseFloat(getReasonRate()) };
         });
-        setReasonList(reasons);
-      } catch (error) {
-        console.error("Error fetching reasons:", error);
-      }
-    };
 
-    // Call the fetchReasons function
-    fetchReasons();
-  }, [category, avgRate]);
+        setReasonList(reasons);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [stateName, category, avgRate]);
 
   return (
     <>
@@ -197,7 +141,7 @@ const Geography = ({ mode }) => {
               caste={caste}
               std={std}
               setAvgRate={setAvgRate}
-              // demoReasons={reasons}
+              stateName={stateName}
             />
           </div>
         </Layout>
