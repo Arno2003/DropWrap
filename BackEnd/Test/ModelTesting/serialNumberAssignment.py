@@ -25,15 +25,17 @@ def addKeys():
         file_path = os.path.join(directory_path, file)
         df = pd.read_csv(file_path)
         df1 = df.copy()
-        df = df[df["Social Category"] == "Overall"]
         
         print(f'Read {file} successfully:')
-        
-        df.insert(0, "DNo", range(serialNo+1, serialNo+len(df)+1))
+        df['DNo'] = df.groupby('Location').ngroup() + 1 + serialNo 
+        # df.insert(0, "DNo", range(serialNo+1, serialNo+len(df)+1))
         df = df[["DNo", "Location"]]
-        
+        print(df.head)
         serialNo += 100
         
+        serial_number_column = df.pop('DNo')
+        df.insert(0, 'DNo', serial_number_column)
+        df = df.drop_duplicates()
         df.to_csv(outPath+"\\"+f'{file.replace("_modified", "")}', index=False)
 
 
@@ -66,7 +68,8 @@ def assignKeys():
         # print(f'Read {file} successfully:')
         mergedDF = pd.merge(df, df1, on='Location')
         print(mergedDF)
-        mergedDF.to_csv(outPath+"\\"+f'{file.replace("_modified", "")}.csv', index=False)
+        mergedDF = mergedDF.drop_duplicates()
+        mergedDF.to_csv(outPath+"\\"+f'{file.replace("_modified", "")}', index=False)
 
 
 
@@ -95,7 +98,8 @@ def abbreviationsDist():
     df = combined_df.copy()[["DNo", "Location"]]
 
     # Save the combined dataframe to a new CSV file
-    df.to_csv(outPath+"\\SerialNoListDistricts.csv", index=False)
+    df = df.drop_duplicates()
+    df.to_csv(outPath+"\\SerialNoListDistricts", index=False)
 
 
 
@@ -125,9 +129,10 @@ def abbreviationsState():
     df = combined_df.copy()[["DNo", "Location"]]
 
     # Save the combined dataframe to a new CSV file
-    df.to_csv(outPath+"\\SerialNoListDistricts.csv", index=False)
+    df = df.drop_duplicates()
+    df.to_csv(outPath+"\\SerialNoListDistricts", index=False)
     
-# addKeys()
+addKeys()
 assignKeys()
-# abbreviationsDist()
-# abbreviationsState()
+abbreviationsDist()
+abbreviationsState()
