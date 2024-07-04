@@ -7,7 +7,7 @@ export default async (req, res) => {
     const db = client.db(dbName); //  database name
     const result = await db
       .collection("formatted_cluster_data")
-      .find({})
+      .find({ Caste: req.query.caste })
       .sort({ metacritic: -1 })
       .toArray();
     res.json(result);
