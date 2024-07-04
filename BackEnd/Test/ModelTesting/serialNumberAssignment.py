@@ -130,9 +130,12 @@ def abbreviationsState():
 
     # Save the combined dataframe to a new CSV file
     df = df.drop_duplicates()
-    df.to_csv(outPath+"\\SerialNoListDistricts", index=False)
+    df.to_csv(outPath+"\\SerialNoListDistricts.csv", index=False)
     
-addKeys()
-assignKeys()
-abbreviationsDist()
-abbreviationsState()
+def serialNoAdd():
+    addKeys()
+    assignKeys()
+    abbreviationsDist()
+    abbreviationsState()
+    
+serialNoAdd()

@@ -4,7 +4,7 @@ import seaborn as sns
 import os
 
 try:
-    dirLoc = "DATA\\Test\\Districtwise_filtered_data"
+    dirLoc = "DATA\\Test\\DistrictWiseData"
 
     vars = ["prim_Girls", "prim_Boys", "prim_Overall", "upPrim_Girls", "upPrim_Boys", "upPrim_Overall", "snr_Girls", "snr_Boys", "snr_Overall"]
     cats = ["General", "SC", "ST", "OBC", "Overall"]
@@ -17,7 +17,7 @@ try:
                 for j in range(len(cats)):
                     cat = cats[j]
 
-                    file = state + ".csv"
+                    file = state
                     df = pd.read_csv(file)
 
                     colName = var

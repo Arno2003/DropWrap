@@ -1,4 +1,1 @@
-addKeys()
-assignKeys()
-abbreviationsDist()
-abbreviationsState()
+df["Social Category"] == cat
