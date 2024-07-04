@@ -1,16 +1,16 @@
-Location,Social Category,prim_Girls,prim_Boys,prim_Overall,upPrim_Girls,upPrim_Boys,upPrim_Overall,snr_Girls,snr_Boys,snr_Overall,Unnamed: 11,Unnamed: 12,Unnamed: 13,Unnamed: 14,Unnamed: 15,Unnamed: 16,Unnamed: 17,Unnamed: 18,Unnamed: 19,Unnamed: 20,Unnamed: 21,Unnamed: 22,Unnamed: 23,Unnamed: 24,Unnamed: 25,Unnamed: 26,Unnamed: 27,Unnamed: 28,Unnamed: 29,Unnamed: 30,Unnamed: 31,Unnamed: 32,Unnamed: 33,Unnamed: 34,Unnamed: 35,Unnamed: 36,Unnamed: 37,Unnamed: 38,Unnamed: 39,Unnamed: 40,Unnamed: 41,Unnamed: 42,Unnamed: 43,Unnamed: 44,Unnamed: 45,Unnamed: 46,Unnamed: 47,Unnamed: 48,Unnamed: 49,Unnamed: 50,Unnamed: 51,Unnamed: 52,Unnamed: 53,Unnamed: 54,Unnamed: 55,Unnamed: 56,Unnamed: 57,Unnamed: 58,Unnamed: 59,Unnamed: 60,Unnamed: 61,Unnamed: 62,Unnamed: 63,Unnamed: 64,Unnamed: 65,Unnamed: 66,Unnamed: 67,Unnamed: 68,Unnamed: 69,Unnamed: 70,Unnamed: 71,Unnamed: 72,Unnamed: 73
-DADRA AND NAGAR HAVELI(DIST),General,0.0,0.0,0.0,1.87,0.0,0.24,5.79,8.06,7.04,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DADRA AND NAGAR HAVELI(DIST),OBC,7.58,2.07,4.44,0.0,0.0,0.0,0.0,4.25,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DADRA AND NAGAR HAVELI(DIST),SC,15.6,4.77,10.09,15.31,26.74,21.47,5.49,6.63,6.09,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DADRA AND NAGAR HAVELI(DIST),ST,0.0,0.0,0.0,0.0,0.0,0.0,13.21,13.34,13.28,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DADRA AND NAGAR HAVELI(DIST),Overall,0.0,0.0,0.0,0.32,0.0,0.0,8.48,10.26,9.43,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DAMAN (DIST),General,0.0,0.0,0.0,4.08,3.01,3.52,17.23,20.11,18.79,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DAMAN (DIST),OBC,3.86,4.47,4.19,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DAMAN (DIST),SC,11.83,6.51,8.98,0.0,0.0,0.0,0.0,14.78,3.98,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DAMAN (DIST),ST,0.0,0.0,0.0,0.24,0.44,0.34,4.48,6.34,5.42,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DAMAN (DIST),Overall,0.0,0.0,0.0,1.41,1.32,1.37,9.96,13.05,11.62,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DIU (DIST),General,32.61,25.64,28.91,15.09,0.0,6.9,21.62,21.67,21.65,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DIU (DIST),OBC,0.0,0.0,0.0,0.0,0.0,0.0,4.4,5.37,4.87,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DIU (DIST),SC,4.17,0.0,0.0,0.0,0.0,0.0,3.57,0.0,0.88,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DIU (DIST),ST,50.0,28.57,38.46,0.0,25.0,16.67,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DIU (DIST),Overall,1.09,0.62,0.84,0.0,0.0,0.0,3.87,4.79,4.33,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Location,Social Category,prim_Girls,prim_Boys,prim_Overall,upPrim_Girls,upPrim_Boys,upPrim_Overall,snr_Girls,snr_Boys,snr_Overall
+DADRA AND NAGAR HAVELI(DIST),General,0.0,0.0,0.0,1.87,0.0,0.24,5.79,8.06,7.04
+DADRA AND NAGAR HAVELI(DIST),OBC,7.58,2.07,4.44,0.0,0.0,0.0,0.0,4.25,0.0
+DADRA AND NAGAR HAVELI(DIST),SC,15.6,4.77,10.09,15.31,26.74,21.47,5.49,6.63,6.09
+DADRA AND NAGAR HAVELI(DIST),ST,0.0,0.0,0.0,0.0,0.0,0.0,13.21,13.34,13.28
+DADRA AND NAGAR HAVELI(DIST),Overall,0.0,0.0,0.0,0.32,0.0,0.0,8.48,10.26,9.43
+DAMAN (DIST),General,0.0,0.0,0.0,4.08,3.01,3.52,17.23,20.11,18.79
+DAMAN (DIST),OBC,3.86,4.47,4.19,0.0,0.0,0.0,0.0,0.0,0.0
+DAMAN (DIST),SC,11.83,6.51,8.98,0.0,0.0,0.0,0.0,14.78,3.98
+DAMAN (DIST),ST,0.0,0.0,0.0,0.24,0.44,0.34,4.48,6.34,5.42
+DAMAN (DIST),Overall,0.0,0.0,0.0,1.41,1.32,1.37,9.96,13.05,11.62
+DIU (DIST),General,32.61,25.64,28.91,15.09,0.0,6.9,21.62,21.67,21.65
+DIU (DIST),OBC,0.0,0.0,0.0,0.0,0.0,0.0,4.4,5.37,4.87
+DIU (DIST),SC,4.17,0.0,0.0,0.0,0.0,0.0,3.57,0.0,0.88
+DIU (DIST),ST,50.0,28.57,38.46,0.0,25.0,16.67,0.0,0.0,0.0
+DIU (DIST),Overall,1.09,0.62,0.84,0.0,0.0,0.0,3.87,4.79,4.33
