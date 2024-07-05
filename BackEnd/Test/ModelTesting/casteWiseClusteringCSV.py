@@ -1,11 +1,11 @@
 from sklearn.cluster import AgglomerativeClustering
 import pandas as pd
-import seaborn as sns
+# import seaborn as sns
 import os
 
 def formClusterSeparately():
     try:
-        dirLoc = "DATA\\Test\\DistrictWiseData"
+        dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
 
         vars = ["prim_Girls", "prim_Boys", "prim_Overall", "upPrim_Girls", "upPrim_Boys", "upPrim_Overall", "snr_Girls", "snr_Boys", "snr_Overall"]
         cats = ["General", "SC", "ST", "OBC", "Overall"]
@@ -17,14 +17,15 @@ def formClusterSeparately():
                     for j in range(len(cats)):
                         cat = cats[j]
 
-                        df = pd.read_csv(fileName)
+                        df = pd.read_csv(dirLoc + "//" + fileName)
 
-                        colName = var
-                        locations = df['DNo']
-                        caste = df['Social Category']
+                        # colName = var
+                        # locations = df['DNo']
+                        # caste = df['Social Category']
 
                         genData = df[df["Social Category"] == cat]
-                        data = genData[["Location", var]]
+                        print(genData.head())
+                        data = genData[["DNo", var]]
 
                         df = pd.DataFrame(data)
                         # df['serialNumber'] = list(range(1, len(df)+1))
@@ -34,12 +35,16 @@ def formClusterSeparately():
 
                         # df = pd.DataFrame(newData)
                         clustering = AgglomerativeClustering(n_clusters=3, linkage='ward')
-                        clusters = clustering.fit_predict(df)
+                        clusters = clustering.fit_predict(genData)
                         data['Cluster'] = clusters
 
-                        dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + fileName + "\\" + cat
+                        dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + fileName.replace(".csv", "")
+                        if not os.path.exists(dirPath):
+                            os.mkdir(path=dirPath)
+                        
+                        dirPath += "\\" + cat
 
-                        if  not os.path.exists(dirPath):
+                        if not os.path.exists(dirPath):
                             os.mkdir(path=dirPath)
 
                         filePath = dirPath + "\\"  + var + ".csv"
