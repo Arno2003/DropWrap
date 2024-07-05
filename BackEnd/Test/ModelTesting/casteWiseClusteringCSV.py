@@ -35,7 +35,7 @@ def formClusterSeparately():
 
                         # df = pd.DataFrame(newData)
                         clustering = AgglomerativeClustering(n_clusters=3, linkage='ward')
-                        clusters = clustering.fit_predict(genData)
+                        clusters = clustering.fit_predict(data)
                         data['Cluster'] = clusters
 
                         dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + fileName.replace(".csv", "")
