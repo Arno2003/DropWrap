@@ -20,3 +20,32 @@ export default async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+// export default async (req, res) => {
+//   const stateList = ["Gujarat"];
+//   try {
+//     let fin = [];
+//     // console.log(req.query.dbName);
+//     for (let i = 0; i < stateList.length; i++) {
+//       const dbName = stateList[i];
+//       console.log(dbName);
+//       const client = await clientPromise;
+//       const db = client.db(dbName);
+//       const result = await db
+//         .collection("latlong")
+//         .find({
+//           Social_Category: req.query.caste,
+//         })
+//         .sort({ metacritic: -1 })
+//         .toArray();
+//       console.log(result);
+//       fin.push(result);
+//     }
+//     // console.log(fin);
+//     // console.log(req.query);
+//     res.json({});
+//   } catch (e) {
+//     console.error(e);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// };
