@@ -20,21 +20,35 @@ def preprocessLatLon(df):
 
 
 def mergeDF(latlon, rates, targetPath):
-    # for i, rate in rates.iterrows():
-    #     for j, latlon in latlon.iterrows():
-    #         print(rate['Location'] == latlon['Location'])
     df_merged = pd.merge(latlon, rates, on='Location')
     df_merged.to_csv(targetPath)
 
 
-latlon = pd.read_csv("BackEnd\\DATA\\latlong_dataset\\Andhra Pradesh.csv")
-rates = pd.read_csv(
-    "DATA\Test\DistrictWiseData\Andhra Pradesh.csv")
+latlongDir = "BackEnd\\DATA\\latlong_dataset\\"
+ratesDir = "DATA\\Test\\DistrictWiseData\\"
 
-latlon = preprocessLatLon(df=latlon)
+states1 = []
+states2 = []
 
-directory = "BackEnd\\database\\Andhra Pradesh"
-os.makedirs(directory)
+for filename in os.listdir(latlongDir):
+    states1.append(filename.split('.')[0])
 
-targetPath = directory+"\\Andhra Pradesh.csv"
-mergeDF(latlon=latlon, rates=rates, targetPath=targetPath)
+for filename in os.listdir(ratesDir):
+    states2.append(filename.split('.')[0])
+
+states1.sort()
+states2.sort()
+
+for i in range(0, len(states1)):
+    print(states1[i], '=', states2[i])
+# latlon = pd.read_csv("BackEnd\\DATA\\latlong_dataset\\Andhra Pradesh.csv")
+# rates = pd.read_csv(
+#     "DATA\Test\DistrictWiseData\Andhra Pradesh.csv")
+
+# latlon = preprocessLatLon(df=latlon)
+
+# directory = "BackEnd\\database\\Andhra Pradesh"
+# os.makedirs(directory)
+
+# targetPath = directory+"\\Andhra Pradesh.csv"
+# mergeDF(latlon=latlon, rates=rates, targetPath=targetPath)
