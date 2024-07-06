@@ -1,0 +1,14 @@
+DNo,caste,prim_Boys_Cluster,prim_Girls_Cluster,prim_Overall_Cluster,snr_Boys_Cluster,snr_Girls_Cluster,snr_Overall_Cluster,upPrim_Boys_Cluster,upPrim_Girls_Cluster,upPrim_Overall_Cluster
+10001,SC,2,2,2,1,1,0,2,1,1
+10002,SC,2,2,2,1,0,0,2,1,1
+10003,SC,2,2,2,1,0,0,2,1,1
+10004,SC,1,2,2,1,1,0,2,1,1
+10005,SC,1,1,1,1,1,0,0,1,0
+10006,SC,1,1,1,2,1,0,0,0,0
+10007,SC,1,1,1,2,1,1,0,0,0
+10008,SC,0,1,1,2,0,1,0,0,0
+10009,SC,0,0,0,2,1,0,0,0,0
+10010,SC,0,0,0,0,0,1,1,0,0
+10011,SC,0,0,0,0,2,1,1,2,2
+10012,SC,0,0,0,0,2,2,1,2,2
+10013,SC,0,0,0,2,0,1,1,2,2

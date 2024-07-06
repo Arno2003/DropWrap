@@ -18,7 +18,7 @@ const Header = ({ mode, setMode }) => {
         <Link href="/" className="ml-6 mr-4">
           Home
         </Link>
-        <Link href="/about" className="ml-6 mr-4">
+        <Link href="/" className="ml-6 mr-4">
           About Us
         </Link>
         <Link href="/" className="ml-6 mr-4">
