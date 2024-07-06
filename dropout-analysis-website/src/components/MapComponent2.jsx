@@ -141,8 +141,6 @@ const MapComponent2 = ({
               const element = latLong.data[i];
               const longitude = element.longitude;
               const latitude = element.latitude;
-              // console.log(latitude, longitude);
-              // console.log(element);
 
               const rateOp = () => {
                 return element[colName];

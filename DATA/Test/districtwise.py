@@ -21,6 +21,10 @@ def remove_rows_and_columns(df):
     unnamed_rows = df[df.apply(lambda row: any(str(val).startswith('Unnamed:') for val in row), axis=1)]
     # Drop the identified rows
     df = df.drop(unnamed_rows.index)
+    cols_to_drop = df.filter(regex='^Unnamed:').columns
+
+    # Drop the identified columns
+    df.drop(columns=cols_to_drop, inplace=True)
     return df
 
 def process_file(filepath):
