@@ -24,40 +24,41 @@ def process_subfolder(base_dir, subfolder_name, final_output_dir):
 
     # Loop through each subdirectory in the base directory
     for sub_dir in os.listdir(subfolder_path):
-        sub_dir_path = os.path.join(subfolder_path, sub_dir)
-        
-        # Check if it is a directory
-        if os.path.isdir(sub_dir_path):
-            # Initialize a dictionary to hold dataframes indexed by DNo for each subdirectory
-            dno_data[sub_dir] = {}
+        if(sub_dir!="Merged") :
+            sub_dir_path = os.path.join(subfolder_path, sub_dir)
+            
+            # Check if it is a directory
+            if os.path.isdir(sub_dir_path):
+                # Initialize a dictionary to hold dataframes indexed by DNo for each subdirectory
+                dno_data[sub_dir] = {}
 
-            # Loop through each file in the subdirectory
-            for file_name in os.listdir(sub_dir_path):
-                file_path = os.path.join(sub_dir_path, file_name)
-                
-                # Check if the file is a CSV file and not empty
-                if file_name.endswith(".csv") and os.path.getsize(file_path) > 0:
-                    # Read the CSV file into a dataframe
-                    df = pd.read_csv(file_path)
+                # Loop through each file in the subdirectory
+                for file_name in os.listdir(sub_dir_path):
+                    file_path = os.path.join(sub_dir_path, file_name)
                     
-                    # Add the 'social category' column with the subdirectory name
-                    df['social category'] = sub_dir
-                    
-                    # Filter columns ending with 'Cluster' and keep 'DNo' and 'social category'
-                    cluster_columns = [col for col in df.columns if col.endswith('Cluster')]
-                    columns_to_keep = ['DNo', 'social category'] + cluster_columns
-                    df = df[columns_to_keep]
-                    
-                    # Merge data for each DNo
-                    for _, row in df.iterrows():
-                        dno = row['DNo']
-                        if dno not in dno_data[sub_dir]:
-                            dno_data[sub_dir][dno] = row
-                        else:
-                            # Combine the rows with existing data
-                            for col in cluster_columns:
-                                if col in row and not pd.isna(row[col]):
-                                    dno_data[sub_dir][dno][col] = row[col]
+                    # Check if the file is a CSV file and not empty
+                    if file_name.endswith(".csv") and os.path.getsize(file_path) > 0:
+                        # Read the CSV file into a dataframe
+                        df = pd.read_csv(file_path)
+                        
+                        # Add the 'social category' column with the subdirectory name
+                        df['social category'] = sub_dir
+                        
+                        # Filter columns ending with 'Cluster' and keep 'DNo' and 'social category'
+                        cluster_columns = [col for col in df.columns if col.endswith('Cluster')]
+                        columns_to_keep = ['DNo', 'social category'] + cluster_columns
+                        df = df[columns_to_keep]
+                        
+                        # Merge data for each DNo
+                        for _, row in df.iterrows():
+                            dno = row['DNo']
+                            if dno not in dno_data[sub_dir]:
+                                dno_data[sub_dir][dno] = row
+                            else:
+                                # Combine the rows with existing data
+                                for col in cluster_columns:
+                                    if col in row and not pd.isna(row[col]):
+                                        dno_data[sub_dir][dno][col] = row[col]
 
     # Iterate over each subdirectory's data and save each merged DataFrame separately
     output_dir = os.path.join(subfolder_path, "Merged")
@@ -89,18 +90,20 @@ def process_subfolder(base_dir, subfolder_name, final_output_dir):
             print(f"No valid data found in {sub_dir}. Skipping.")
 
     # Merge all files in the merged directory into a single output file
-    final_output_file = os.path.join(final_output_dir, f"{subfolder_name}_output_file.csv")
+    final_output_file = os.path.join(final_output_dir, f"cluster.csv")
     merge_files_in_folder(output_dir, final_output_file)
     print(f"Success: All merged files combined into {final_output_file}")
 
 # Define the base directory path
-base_dir = r"BackEnd\Test\ModelTesting\output_copy"
-final_output_dir = r"BackEnd\Test\ModelTesting\practice"
+base_dir = r"BackEnd\Test\ModelTesting\outputData"
 
 # Loop through each subfolder in the main directory
 for subfolder in os.listdir(base_dir):
     subfolder_path = os.path.join(base_dir, subfolder)
-    
+    final_output_dir = f"BackEnd\database\{subfolder}"
+
     # Check if it is a directory
     if os.path.isdir(subfolder_path):
         process_subfolder(base_dir, subfolder, final_output_dir)
+        
+
