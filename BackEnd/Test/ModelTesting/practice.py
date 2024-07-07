@@ -91,7 +91,7 @@ def process_subfolder(base_dir, subfolder_name, final_output_dir):
 
     # Merge all files in the merged directory into a single output file
     final_output_file = os.path.join(final_output_dir, f"cluster.csv")
-    merge_files_in_folder(output_dir, final_output_file)
+    merge_files_in_folder(output_dir, final_output_file)    
     print(f"Success: All merged files combined into {final_output_file}")
 
 # Define the base directory path
@@ -107,3 +107,14 @@ for subfolder in os.listdir(base_dir):
         process_subfolder(base_dir, subfolder, final_output_dir)
         
 
+    for file in os.listdir(final_output_dir):
+        if file == "cluster.csv":
+            fp = final_output_dir + "\\" + file
+            
+            df1 = pd.read_csv(fp)
+            df2 = pd.read_csv("DATA\Test\Abbreviations\SerialNoListDistricts.csv")
+            print(df1.head())
+            print(df2.head())
+
+            merged_df = pd.merge(df1, df2, on='DNo', how='inner')
+            merged_df.to_csv(fp)

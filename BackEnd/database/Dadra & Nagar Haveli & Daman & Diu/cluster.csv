@@ -1,16 +1,16 @@
-DNo,social category,prim_Boys,prim_Girls,prim_Overall,snr_Boys,snr_Girls,snr_Overall,upPrim_Boys,upPrim_Girls,upPrim_Overall
-10601,General,0,0,0,1,1,1,0,0,0
-10602,General,0,0,0,0,0,0,1,0,0
-10603,General,1,1,1,0,0,0,0,1,1
-10601,OBC,0,0,0,0,0,0,0,0,0
-10602,OBC,0,0,0,1,0,0,0,0,0
-10603,OBC,1,1,1,0,1,1,1,1,1
-10601,Overall,0,0,0,0,0,0,0,0,0
-10602,Overall,0,0,0,0,0,0,0,0,0
-10603,Overall,1,1,1,1,1,1,1,1,1
-10601,SC,0,0,0,0,0,0,1,1,1
-10602,SC,0,0,0,1,1,0,0,0,0
-10603,SC,1,1,1,0,0,1,0,0,0
-10601,ST,0,0,0,1,1,1,0,0,0
-10602,ST,0,0,0,0,0,0,0,0,0
-10603,ST,1,1,1,0,0,0,1,1,1
+,DNo,social category,prim_Boys,prim_Girls,prim_Overall,snr_Boys,snr_Girls,snr_Overall,upPrim_Boys,upPrim_Girls,upPrim_Overall,Location
+0,10601,General,0,0,0,1,1,1,0,0,0,DADRA AND NAGAR HAVELI(DIST)
+1,10601,OBC,0,0,0,0,0,0,0,0,0,DADRA AND NAGAR HAVELI(DIST)
+2,10601,Overall,0,0,0,0,0,0,0,0,0,DADRA AND NAGAR HAVELI(DIST)
+3,10601,SC,0,0,0,0,0,0,1,1,1,DADRA AND NAGAR HAVELI(DIST)
+4,10601,ST,0,0,0,1,1,1,0,0,0,DADRA AND NAGAR HAVELI(DIST)
+5,10602,General,0,0,0,0,0,0,1,0,0,DAMAN (DIST)
+6,10602,OBC,0,0,0,1,0,0,0,0,0,DAMAN (DIST)
+7,10602,Overall,0,0,0,0,0,0,0,0,0,DAMAN (DIST)
+8,10602,SC,0,0,0,1,1,0,0,0,0,DAMAN (DIST)
+9,10602,ST,0,0,0,0,0,0,0,0,0,DAMAN (DIST)
+10,10603,General,1,1,1,0,0,0,0,1,1,DIU (DIST)
+11,10603,OBC,1,1,1,0,1,1,1,1,1,DIU (DIST)
+12,10603,Overall,1,1,1,1,1,1,1,1,1,DIU (DIST)
+13,10603,SC,1,1,1,0,0,1,0,0,0,DIU (DIST)
+14,10603,ST,1,1,1,0,0,0,1,1,1,DIU (DIST)
