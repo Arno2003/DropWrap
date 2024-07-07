@@ -126,7 +126,6 @@ const MapComponent2 = ({
         axios
           .get(`/api/formatted_cluster_data?dbName=${stateName}&caste=${caste}`)
           .then((clusters) => {
-            console.log(clusters.data);
             let colName;
             if (std === "") {
               colName = "prim_" + category;
@@ -135,14 +134,11 @@ const MapComponent2 = ({
             } else {
               colName = "snr_" + category;
             }
-            // console.log(colName);
 
             for (let i = 0; i < latLong.data.length; i++) {
               const element = latLong.data[i];
               const longitude = element.longitude;
               const latitude = element.latitude;
-
-              // console.log(longitude, latitude);
 
               const rateOp = () => {
                 return element[colName];
@@ -157,7 +153,7 @@ const MapComponent2 = ({
                 cs: extractCluster(element.Location, clusters),
               };
 
-              console.log(feature_obj);
+              // console.log(feature_obj);
 
               const feature = new Feature(feature_obj);
               vectorSource.addFeature(feature);

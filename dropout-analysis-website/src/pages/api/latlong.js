@@ -4,7 +4,39 @@ import clientPromise from "../../../lib/mongodb.js";
 export default async (req, res) => {
   try {
     let fin = [];
-    const stateList = ["Gujarat", "West Bengal"];
+    const stateList = [
+      "Andhra_Pradesh",
+      "Assam",
+      "Bihar",
+      "Chhattisgarh",
+      "Dadra_&_Nagar_Haveli_&_Daman_&_Diu",
+      "Delhi",
+      "Gujarat",
+      "Haryana",
+      "Himachal_Pradesh",
+      "Jammu_&_Kashmir",
+      "Jharkhand",
+      "Karnataka",
+      "Kerala",
+      "Madhya_Pradesh",
+      "Maharashtra",
+      "Manipur",
+      "Meghalaya",
+      "Mizoram",
+      "Nagaland",
+      "Odisha",
+      "Puducherry",
+      "Punjab",
+      "Rajasthan",
+      "Sikkim",
+      "Tamil_Nadu",
+      "Telangana",
+      "Tripura",
+      "Uttarakhand",
+      "Uttar_Pradesh",
+      "West_Bengal",
+    ];
+
     // console.log(req.query.dbName);
     for (let i = 0; i < stateList.length; i++) {
       const dbName = stateList[i];
