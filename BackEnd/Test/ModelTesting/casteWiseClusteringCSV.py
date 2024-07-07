@@ -8,12 +8,12 @@ def formClusterSeparately():
         dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
 
         problemList = ["Arunachal Pradesh.csv", "Chandigarh.csv", "Goa.csv", "Ladakh.csv", "Lakshadweep.csv"]
-        
+
         vars = ["prim_Girls", "prim_Boys", "prim_Overall", "upPrim_Girls", "upPrim_Boys", "upPrim_Overall", "snr_Girls", "snr_Boys", "snr_Overall"]
         cats = ["General", "SC", "ST", "OBC", "Overall"]
 
         if os.path.isdir(dirLoc):
-            for fileName in os.listdir(dirLoc):  
+            for fileName in os.listdir(dirLoc):
                 print("Working with : ", fileName)
                 if fileName not in problemList:
                     for i in range(len(vars)):
@@ -33,7 +33,7 @@ def formClusterSeparately():
                             print(fileName)
                             print(data.head())
                             # df = pd.DataFrame(newData)
-                            
+
                             if len(data) > 10:    
                                 noOfClust = 5
                             elif len(data) < 10 and len(data) > 5:
