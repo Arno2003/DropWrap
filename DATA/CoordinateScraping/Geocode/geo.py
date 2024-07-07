@@ -39,7 +39,6 @@ def convert(input_file, output_file, state):
         try:
             # Construct the location string
             location = row['Location'] + f", {state}, India"
-            # print(location)
 
             # Get latitude and longitude using Geoapify API
             coordinates = get_lat_lng(location)
@@ -56,7 +55,6 @@ def convert(input_file, output_file, state):
     df['latitude'] = latitudes
     df['longitude'] = longitudes
 
-    # print(df.head())
     # Save the updated DataFrame to a new CSV file
     df.to_csv(output_file, index=False)
 
