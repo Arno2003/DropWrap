@@ -1,20 +1,20 @@
 import os
 import pandas as pd
 
-def merge_files_in_folder(folder_path, output_file):
-    header_written = False
-    with open(output_file, 'w') as outfile:
-        for filename in os.listdir(folder_path):
-            file_path = os.path.join(folder_path, filename)
-            if os.path.isfile(file_path):
-                with open(file_path, 'r') as infile:
-                    lines = infile.readlines()
-                    if lines:
-                        if not header_written and lines[0].strip():
-                            outfile.write(lines[0])  # Write header from the first file
-                            header_written = True
-                        if len(lines) > 1:
-                            outfile.writelines(lines[1:])  # Write the rest of the file
+# def merge_files_in_folder(folder_path, output_file):
+#     header_written = False
+#     with open(output_file, 'w') as outfile:
+#         for filename in os.listdir(folder_path):
+#             file_path = os.path.join(folder_path, filename)
+#             if os.path.isfile(file_path):
+#                 with open(file_path, 'r') as infile:
+#                     lines = infile.readlines()
+#                     if lines:
+#                         if not header_written and lines[0].strip():
+#                             outfile.write(lines[0])  # Write header from the first file
+#                             header_written = True
+#                         if len(lines) > 1:
+#                             outfile.writelines(lines[1:])  # Write the rest of the file
 
 def process_subfolder(base_dir, subfolder_name):
     subfolder_path = os.path.join(base_dir, subfolder_name)
@@ -65,32 +65,43 @@ def process_subfolder(base_dir, subfolder_name):
     # Create the output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
 
+    dfList = [] # for storing data frames to be merged
     for sub_dir, data in dno_data.items():
         # Check if there is any data to process
-        if data:
-            # Convert the dictionary to a dataframe
-            merged_df = pd.DataFrame.from_dict(data, orient='index')
+        if sub_dir != "Merged":
+            if data:
+                # Convert the dictionary to a dataframe
+                merged_df = pd.DataFrame.from_dict(data, orient='index')
 
-            # Reset the index to ensure DNo is a column
-            merged_df.reset_index(drop=True, inplace=True)
+                # Reset the index to ensure DNo is a column
+                merged_df.reset_index(drop=True, inplace=True)
 
-            # Drop the prefix based on sub_dir from each column name (if it's a string)
-            prefix_to_remove = f"{sub_dir}_"
-            merged_df.columns = [col.replace(prefix_to_remove, '') if isinstance(col, str) else col for col in merged_df.columns]
-            
-            merged_df.columns = [col.replace('_Cluster', '') for col in merged_df.columns]
+                # Drop the prefix based on sub_dir from each column name (if it's a string)
+                prefix_to_remove = f"{sub_dir}_"
+                merged_df.columns = [col.replace(prefix_to_remove, '') if isinstance(col, str) else col for col in merged_df.columns]
+                
+                merged_df.columns = [col.replace('_Cluster', '') for col in merged_df.columns]
 
-            # Save the merged dataframe to a new CSV file in the output directory
-            output_file = os.path.join(output_dir, f"{sub_dir}_merged.csv")
-            merged_df.to_csv(output_file, index=False)
+                # Save the merged dataframe to a new CSV file in the output directory
+                output_file = os.path.join(output_dir, f"{sub_dir}_merged.csv")
+                merged_df.to_csv(output_file, index=False)
+                
+                dfList.append(merged_df)
 
-            print(f"Files in {sub_dir} merged into {output_file}")
-        else:
-            print(f"No valid data found in {sub_dir}. Skipping.")
+                print(f"Files in {sub_dir} merged into {output_file}")
+            else:
+                print(f"No valid data found in {sub_dir}. Skipping.")
 
     # Merge all files in the merged directory into a single output file
-    output_file_all = os.path.join(output_dir, f"{subfolder_name}_output_file.csv")
-    merge_files_in_folder(output_dir, output_file_all)
+    # output_file_all = os.path.join(output_dir, f"{subfolder_name}_output_file.csv")
+    output_file_all = f"BackEnd\database\{subfolder_name}\cluster.csv"
+    # merge_files_in_folder(output_dir, output_file_all) # function call
+    # merged_df.to_csv(output_file_all)
+    df = pd.concat(dfList)
+    extraCols = ["prim", "snr", "upPrim"]
+    for col in extraCols:
+        df.drop(col)
+    df.to_csv(output_file_all)
     print(f"Success: All merged files combined into {output_file_all}")
 
 # Define the base directory path
