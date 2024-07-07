@@ -23,23 +23,25 @@ def formClusterSeparately():
 
                             df = pd.read_csv(dirLoc + "//" + fileName)
 
-                            # colName = var
-                            # locations = df['DNo']
-                            # caste = df['Social Category']
-
                             genData = df[df["Social Category"] == cat]
                             # print(genData.head())
                             data = genData[["DNo", var]]
 
                             df = pd.DataFrame(data)
-                            # df['serialNumber'] = list(range(1, len(df)+1))
-                            # newData = df[[var, "serialNumber"]]
 
                             # dataLinkage = linkage(newData.values.reshape(-1,1), "ward")
                             print(fileName)
                             print(data.head())
                             # df = pd.DataFrame(newData)
-                            clustering = AgglomerativeClustering(n_clusters=3, linkage='ward')
+                            
+                            if len(data) > 10:    
+                                noOfClust = 5
+                            elif len(data) < 10 and len(data) > 5:
+                                noOfClust = 3
+                            else:
+                                noOfClust = 2
+                                
+                            clustering = AgglomerativeClustering(n_clusters=noOfClust, linkage='ward')
                             clusters = clustering.fit_predict(data)
                             data[cat + "_" +var + "_" +'Cluster'] = clusters
 
