@@ -9,6 +9,26 @@ password = os.getenv("MONGO_PASSWORD_NEW")
 
 client = pymongo.MongoClient(
     f"mongodb+srv://hindol_banerjee:{password}@cluster0.u5akrs9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+path="BackEnd\\database\\States"
+
+problemList = ["Arunachal Pradesh", "Chandigarh", "Goa", "Ladakh", "Lakshadweep"]
+list_state=os.listdir(path)
+print(list_state)
+for file in list_state:
+    if file not in problemList:
+        latlong_path=path+"\\"+file+"\\latlong.csv"
+        cluster_path=path+"\\"+file+"\\cluster.csv"
+        print(latlong_path,cluster_path)
+        df1=pd.read_csv(latlong_path)
+        df2=pd.read_csv(cluster_path)
+        
+        data = df1.to_dict(orient="records")
+        db = client[file]
+        db.latlong.insert_many(data)
+
+        data = df2.to_dict(orient="records")
+        db = client[file]
+        db.cluster.insert_many(data)
 # path="BackEnd\\database\\Gujarat"
 # dir_list=os.listdir(path)
 #print("files in gujarat are")
@@ -34,27 +54,29 @@ client = pymongo.MongoClient(
 
 # db.formatted_cluster_data.insert_many(data)
 
-df = pd.read_csv("BackEnd\\database\\Gujarat\\latlong.csv")
+# df = pd.read_csv("BackEnd\\database\\Gujarat\\latlong.csv")
 
-data = df.to_dict(orient="records")
+# data = df.to_dict(orient="records")
 
-db = client['Gujarat']
+# db = client['Gujarat']
 
-db.latlong.insert_many(data)
+# db.latlong.insert_many(data)
 
-df = pd.read_csv("BackEnd\\database\\Gujarat\\rates.csv")
+# df = pd.read_csv("BackEnd\\database\\Gujarat\\rates.csv")
 
-data = df.to_dict(orient="records")
+# data = df.to_dict(orient="records")
 
-db = client['Gujarat']
+# db = client['Gujarat']
 
-db.rates.insert_many(data)
+# db.rates.insert_many(data)
 
-df = pd.read_csv("BackEnd\\database\\Gujarat\\reasons.csv")
+# df = pd.read_csv("BackEnd\\database\\Gujarat\\reasons.csv")
 
-data = df.to_dict(orient="records")
+# data = df.to_dict(orient="records")
 
-db = client['Gujarat']
+# db = client['Gujarat']
 
-db.reasons.insert_many(data)
+# db.reasons.insert_many(data)
+
+
 
