@@ -8,6 +8,8 @@ API_KEY = '13c00742ef784344aa1dc02d6b403008'
 GEOAPIFY_ENDPOINT = 'https://api.geoapify.com/v1/geocode/autocomplete'
 
 # Function to get latitude and longitude for a given location
+
+
 def get_lat_lng(location):
     params = {
         'text': location,
@@ -20,6 +22,7 @@ def get_lat_lng(location):
         return coordinates[1], coordinates[0]  # Latitude, Longitude
     else:
         return None
+
 
 def convert(input_file, output_file, state):
     # Read the CSV file
@@ -55,6 +58,7 @@ def convert(input_file, output_file, state):
     df.to_csv(output_file, index=False)
 
     print(f"Latitude and longitude data saved to {output_file}")
+
 
 # Specify the path to the folder containing CSV files
 folder_path = 'DATA/dataframes/DistrictWise/2020-2021'
