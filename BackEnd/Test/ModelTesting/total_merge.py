@@ -1,21 +1,6 @@
 import os
 import pandas as pd
 
-# def merge_files_in_folder(folder_path, output_file):
-#     header_written = False
-#     with open(output_file, 'w') as outfile:
-#         for filename in os.listdir(folder_path):
-#             file_path = os.path.join(folder_path, filename)
-#             if os.path.isfile(file_path):
-#                 with open(file_path, 'r') as infile:
-#                     lines = infile.readlines()
-#                     if lines:
-#                         if not header_written and lines[0].strip():
-#                             outfile.write(lines[0])  # Write header from the first file
-#                             header_written = True
-#                         if len(lines) > 1:
-#                             outfile.writelines(lines[1:])  # Write the rest of the file
-
 def process_subfolder(base_dir, subfolder_name):
     subfolder_path = os.path.join(base_dir, subfolder_name)
     
@@ -92,25 +77,28 @@ def process_subfolder(base_dir, subfolder_name):
             else:
                 print(f"No valid data found in {sub_dir}. Skipping.")
 
-    # Merge all files in the merged directory into a single output file
-    # output_file_all = os.path.join(output_dir, f"{subfolder_name}_output_file.csv")
+    # output directory for storing cluster data
     output_file_all = f"BackEnd\database\{subfolder_name}\cluster.csv"
-    # merge_files_in_folder(output_dir, output_file_all) # function call
-    # merged_df.to_csv(output_file_all)
+    
+    # merging all the clusters into a single file
     df = pd.concat(dfList)
-    extraCols = ["prim", "snr", "upPrim"]
+    
+    extraCols = ['prim', 'snr', 'upPrim']
     for col in extraCols:
-        df.drop(col)
+        df.drop(col, axis=1, inplace=True)
+    
     df.to_csv(output_file_all)
     print(f"Success: All merged files combined into {output_file_all}")
 
-# Define the base directory path
-base_dir = r"BackEnd\Test\ModelTesting\outputData"
 
-# Loop through each subfolder in the main directory
-for subfolder in os.listdir(base_dir):
-    subfolder_path = os.path.join(base_dir, subfolder)
-    
-    # Check if it is a directory
-    if os.path.isdir(subfolder_path):
-        process_subfolder(base_dir, subfolder)
+if __name__ == "__main__":
+    # Define the base directory path
+    base_dir = r"BackEnd\Test\ModelTesting\outputData"
+
+    # Loop through each subfolder in the main directory
+    for subfolder in os.listdir(base_dir):
+        subfolder_path = os.path.join(base_dir, subfolder)
+        
+        # Check if it is a directory
+        if os.path.isdir(subfolder_path):
+            process_subfolder(base_dir, subfolder)
