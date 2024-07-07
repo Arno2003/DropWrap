@@ -1,1 +1,3 @@
-export default stateList = ["Gujarat"];
+const stateList = ["Gujarat"];
+
+export default stateList;
