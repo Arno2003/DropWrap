@@ -100,7 +100,7 @@ base_dir = r"BackEnd\Test\ModelTesting\outputData"
 # Loop through each subfolder in the main directory
 for subfolder in os.listdir(base_dir):
     subfolder_path = os.path.join(base_dir, subfolder)
-    final_output_dir = f"BackEnd\database\{subfolder}"
+    final_output_dir = f"BackEnd\database\states\{subfolder}"
 
     # Check if it is a directory
     if os.path.isdir(subfolder_path):
