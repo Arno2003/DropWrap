@@ -11,8 +11,8 @@ client = pymongo.MongoClient(
     f"mongodb+srv://hindol_banerjee:{password}@cluster0.u5akrs9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 # path="BackEnd\\database\\Gujarat"
 # dir_list=os.listdir(path)
-# print("files in gujarat are")
-# print(dir_list)
+#print("files in gujarat are")
+#print(dir_list)
 
 # for file in dir_list:
 #      try:
@@ -26,7 +26,6 @@ client = pymongo.MongoClient(
 #      except Exception as e:
 #          print(e)
 
-''' formatted_cluster_data '''
 # df = pd.read_csv("BackEnd\\database\\Gujarat\\formatted_cluster_data.csv")
 
 # data = df.to_dict(orient="records")
@@ -34,8 +33,6 @@ client = pymongo.MongoClient(
 # db = client['Gujarat']
 
 # db.formatted_cluster_data.insert_many(data)
-
-''' Latlong '''
 
 df = pd.read_csv("BackEnd\\database\\Gujarat\\latlong.csv")
 
@@ -45,22 +42,19 @@ db = client['Gujarat']
 
 db.latlong.insert_many(data)
 
-''' rates '''
+df = pd.read_csv("BackEnd\\database\\Gujarat\\rates.csv")
 
-# df = pd.read_csv("BackEnd\\database\\Gujarat\\rates.csv")
+data = df.to_dict(orient="records")
 
-# data = df.to_dict(orient="records")
+db = client['Gujarat']
 
-# db = client['Gujarat']
+db.rates.insert_many(data)
 
-# db.rates.insert_many(data)
+df = pd.read_csv("BackEnd\\database\\Gujarat\\reasons.csv")
 
-''' reasons '''
+data = df.to_dict(orient="records")
 
-# df = pd.read_csv("BackEnd\\database\\Gujarat\\reasons.csv")
+db = client['Gujarat']
 
-# data = df.to_dict(orient="records")
+db.reasons.insert_many(data)
 
-# db = client['Gujarat']
-
-# db.reasons.insert_many(data)
