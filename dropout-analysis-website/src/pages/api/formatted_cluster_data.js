@@ -1,7 +1,8 @@
 import clientPromise from "../../../lib/mongodb.js";
-import stateList from "./stateList.js";
+// import stateList from "./stateList.js";
 export default async (req, res) => {
   try {
+    const stateList = ["Gujarat", "West Bengal"];
     let fin = [];
     for (let i = 0; i < stateList.length; i++) {
       const dbName = stateList[i];
@@ -9,16 +10,16 @@ export default async (req, res) => {
       const client = await clientPromise;
       const db = client.db(dbName);
       const result = await db
-        .collection("formatted_cluster_data")
+        .collection("cluster")
         .find({
-          Caste: req.query.caste,
+          "social category": req.query.caste,
         })
         .sort({ metacritic: -1 })
         .toArray();
       // console.log(result[0]);
       fin.push(...result);
     }
-
+    // console.log(fin);
     res.json(fin);
   } catch (e) {
     console.error(e);

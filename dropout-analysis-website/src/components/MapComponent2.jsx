@@ -44,7 +44,7 @@ const clusterStyle = (feature) => {
     fillColor = "rgba(225, 64, 64, 0.68)";
   }
   // Adjust the cluster radius based on cluster size
-  var clusterRadius = 20 + cs * 5;
+  var clusterRadius = 30 + cs * 4;
 
   // Return style object for cluster
   return new Style({
@@ -93,7 +93,7 @@ const MapComponent2 = ({
       colName = "snr_" + category;
     }
 
-    for (let i = 1; i < clusters.data.length; i++) {
+    for (let i = 0; i < clusters.data.length; i++) {
       const element = clusters.data[i];
       if (element.Location === loc) {
         cs = element[colName];
@@ -126,7 +126,7 @@ const MapComponent2 = ({
         axios
           .get(`/api/formatted_cluster_data?dbName=${stateName}&caste=${caste}`)
           .then((clusters) => {
-            console.log(latLong.data);
+            console.log(clusters.data);
             let colName;
             if (std === "") {
               colName = "prim_" + category;
@@ -142,11 +142,11 @@ const MapComponent2 = ({
               const longitude = element.longitude;
               const latitude = element.latitude;
 
+              // console.log(longitude, latitude);
+
               const rateOp = () => {
                 return element[colName];
               };
-
-              // console.log(extractCluster(element.Location, clusters));
 
               const feature_obj = {
                 geometry: new Point(
@@ -157,13 +157,15 @@ const MapComponent2 = ({
                 cs: extractCluster(element.Location, clusters),
               };
 
+              console.log(feature_obj);
+
               const feature = new Feature(feature_obj);
               vectorSource.addFeature(feature);
             }
 
             // Create a source for clustering
             const clusterSource = new Cluster({
-              distance: 60 / Math.pow(2, 6.5 - 8.5), // Adjust the cluster distance as needed
+              distance: 60 / Math.pow(2, 0.1), // Adjust the cluster distance as needed
               source: vectorSource,
             });
 
@@ -179,7 +181,7 @@ const MapComponent2 = ({
             // Update cluster distance based on map zoom level
             map.getView().on("change:resolution", function (evt) {
               const zoomLevel = map.getView().getZoom();
-              const newClusterDistance = 60 / Math.pow(2, zoomLevel - 8.5);
+              const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
               clusterSource.setDistance(newClusterDistance);
             });
 
