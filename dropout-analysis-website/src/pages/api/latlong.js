@@ -1,7 +1,8 @@
 import clientPromise from "../../../lib/mongodb.js";
+import stateList from "./stateList.js";
 
 export default async (req, res) => {
-  const stateList = ["Gujarat"];
+  // const stateList = ["Gujarat"];
   try {
     let fin = [];
     // console.log(req.query.dbName);
