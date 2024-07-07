@@ -3,15 +3,16 @@ from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 import matplotlib.pyplot as plt
 import os
+import Utility as util
 
 # merging at the same time while forming, to create a final combined file
 
 
 class Clustering:      
-##########################################################################################################
-################################# Cluster Formation for row, column cobinations ##########################
-##########################################################################################################       
-        
+    ##########################################################################################################
+    ################################# Cluster Formation for row, column cobinations ##########################
+    ##########################################################################################################       
+    
     def formClusterSeparately():
         try:
             dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
@@ -74,10 +75,19 @@ class Clustering:
                                 data.to_csv(filePath)
         except Exception as e:
             print(e)
-
+    
+    ##########################################################################################################
+    ################################# Cluster Formation for row, column cobinations ##########################
+    ##########################################################################################################
+    
+    def formCluster(self):
+        util.serialNoAdd()
+        self.formClusterSeparately()
+        util.merge()
+    
 #########################################################################################################
 
 if __name__ == "__main__":
     folderPath = "BackEnd\Main\InputData\FilteredData"
     clst = Clustering()
-    clst.formClusterCSV(folderPath)
+    clst.formCluster()

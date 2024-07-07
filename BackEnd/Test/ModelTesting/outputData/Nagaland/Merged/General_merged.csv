@@ -1,12 +1,12 @@
 DNo,social category,prim_Boys,prim_Girls,prim_Overall,snr_Boys,snr_Girls,snr_Overall,upPrim_Boys,upPrim_Girls,upPrim_Overall
-12301,General,1,1,1,0,0,0,0,0,0
-12302,General,0,0,0,2,1,1,1,2,1
-12303,General,2,1,1,0,2,2,0,0,0
-12304,General,2,1,1,0,2,2,2,0,2
-12305,General,2,1,1,1,0,0,0,0,0
-12306,General,2,1,1,1,1,1,0,0,0
-12307,General,0,0,0,0,0,0,0,1,0
-12308,General,2,1,1,0,0,0,0,0,0
-12309,General,2,1,1,0,2,2,0,0,0
-12310,General,1,2,2,2,1,1,1,1,1
-12311,General,2,1,1,0,2,2,0,0,0
+12301,General,4,0,4,0,3,1,1,1,1
+12302,General,3,3,3,2,4,0,4,2,4
+12303,General,0,1,0,0,2,2,0,4,0
+12304,General,0,1,0,1,2,2,2,4,2
+12305,General,0,1,0,4,3,3,0,4,0
+12306,General,0,0,0,3,1,4,1,1,1
+12307,General,1,4,1,0,0,1,0,0,1
+12308,General,0,1,0,0,0,1,0,3,0
+12309,General,0,1,0,1,2,2,0,3,0
+12310,General,2,2,2,2,1,0,3,0,3
+12311,General,0,1,0,1,2,2,0,3,0

@@ -134,19 +134,20 @@ class Utility:
         df.to_csv(outPath+"\\SerialNoListDistricts.csv", index=False)
         
     ############################# main calling function for srl no. assignment ##########################
+    
     def serialNoAdd(self):
         self.addKeys()
         self.assignKeys()
         self.abbreviationsDist()
         self.abbreviationsState()
 
-
+    #####################################################################################################
 
 
     #############################################################################################
     ######################## for merging cluster.csv file data ##################################
     #############################################################################################
-    def process_subfolder(base_dir, subfolder_name):
+    def process_subfolder(self, base_dir, subfolder_name):
         subfolder_path = os.path.join(base_dir, subfolder_name)
         
         # Initialize a dictionary to hold dataframes indexed by DNo
@@ -236,6 +237,19 @@ class Utility:
         print(f"Success: All merged files combined into {output_file_all}")
 
         
+    def mergeFiles(self, dirPath):
+        for subfolder in os.listdir(dirPath):
+            subfolder_path = os.path.join(dirPath, subfolder)
+            
+            # Check if it is a directory
+            if os.path.isdir(subfolder_path):
+                self.process_subfolder(dirPath, subfolder)
+    
+    #################################### main calling function ##########################################
+    def merge(self):
+        dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
+        self.mergeFiles(dirPath)
+    
         
 
     
