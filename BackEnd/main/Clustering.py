@@ -3,7 +3,7 @@ from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 import matplotlib.pyplot as plt
 import os
-import Utility as util
+from utility import Utility as util
 
 # merging at the same time while forming, to create a final combined file
 
@@ -82,9 +82,11 @@ class Clustering:
     
     def formCluster(self):
         util.serialNoAdd()
-        self.formClusterSeparately()
+        self.formClusterSeparately(self)
         util.merge()
     
+    def __init__(self):
+        self.util = util()
 #########################################################################################################
 
 if __name__ == "__main__":
