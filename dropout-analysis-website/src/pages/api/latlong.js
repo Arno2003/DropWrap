@@ -1,9 +1,42 @@
 import clientPromise from "../../../lib/mongodb.js";
-import stateList from "./stateList.js";
+// import stateList from "./stateList.js";
 
 export default async (req, res) => {
   try {
     let fin = [];
+    const stateList = [
+      "Andhra_Pradesh",
+      "Assam",
+      "Bihar",
+      "Chhattisgarh",
+      "Dadra_&_Nagar_Haveli_&_Daman_&_Diu",
+      "Delhi",
+      "Gujarat",
+      "Haryana",
+      "Himachal_Pradesh",
+      "Jammu_&_Kashmir",
+      "Jharkhand",
+      "Karnataka",
+      "Kerala",
+      "Madhya_Pradesh",
+      "Maharashtra",
+      "Manipur",
+      "Meghalaya",
+      "Mizoram",
+      "Nagaland",
+      "Odisha",
+      "Puducherry",
+      "Punjab",
+      "Rajasthan",
+      "Sikkim",
+      "Tamil_Nadu",
+      "Telangana",
+      "Tripura",
+      "Uttarakhand",
+      "Uttar_Pradesh",
+      "West_Bengal",
+    ];
+
     // console.log(req.query.dbName);
     for (let i = 0; i < stateList.length; i++) {
       const dbName = stateList[i];
@@ -13,13 +46,14 @@ export default async (req, res) => {
       const result = await db
         .collection("latlong")
         .find({
-          Social_Category: req.query.caste,
+          "Social Category": req.query.caste,
         })
         .sort({ metacritic: -1 })
         .toArray();
       // console.log(result[0]);
       fin.push(...result);
     }
+    // console.log(fin);
     res.json(fin);
   } catch (e) {
     console.error(e);
