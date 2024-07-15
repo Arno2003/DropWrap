@@ -136,10 +136,10 @@ class Utility:
     ############################# main calling function for srl no. assignment ##########################
     
     def serialNoAdd(self):
-        self.addKeys()
-        self.assignKeys()
-        self.abbreviationsDist()
-        self.abbreviationsState()
+        self.addKeys(self)
+        self.assignKeys(self)
+        self.abbreviationsDist(self)
+        self.abbreviationsState(self)
 
     #####################################################################################################
 
