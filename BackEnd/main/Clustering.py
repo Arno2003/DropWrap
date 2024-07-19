@@ -80,9 +80,9 @@ class Clustering:
     ################################# Cluster Formation for row, column cobinations ##########################
     ##########################################################################################################
     
-    def formCluster(self):
+    def formCluster():
         util.serialNoAdd()
-        self.formClusterSeparately(self)
+        Clustering.formClusterSeparately()
         util.merge()
     
     def __init__(self):

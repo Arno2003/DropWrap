@@ -5,7 +5,7 @@ class Utility:
     #############################################################################################
     ######################## Adding key values (DNo) to all districts ###########################
     #############################################################################################
-    def addKeys(self):
+    def addKeys():
         # Specify the directory containing the CSV files
         directory_path = 'DATA\\Test\\Districtwise_filtered_data' # i/p path 
         # directory_path1 = "DATA\\Test\\Abbreviations" # i/p path 
@@ -45,7 +45,7 @@ class Utility:
     #############################################################################################
 
 
-    def assignKeys(self):
+    def assignKeys():
         directory_path = 'DATA\\Test\\Districtwise_filtered_data' # i/p path all files 
         directory_path1 = "DATA\\Test\\Abbreviations\\Districts" # i/p path DNo
         outPath = "DATA\\Test\\DistrictWiseData" # o/p path 
@@ -77,7 +77,7 @@ class Utility:
     #############################################################################################
     ######################## Combining Abbreviations of all districts ###########################
     #############################################################################################      
-    def abbreviationsDist(self):
+    def abbreviationsDist():
         # Specify the directory containing the CSV files
         directory_path = 'DATA\\Test\\DistrictWiseData' # i/p path
         outPath = "DATA\\Test\\Abbreviations" # o/p path
@@ -108,7 +108,7 @@ class Utility:
     ######################## Adding key values (DNo) to all STATES ##############################
     #############################################################################################
 
-    def abbreviationsState(self):
+    def abbreviationsState():
         # Specify the directory containing the CSV files
         directory_path = 'DATA\\Test\\DistrictWiseData' # i/p path
         outPath = "DATA\\Test\\Abbreviations" # o/p path
@@ -135,11 +135,11 @@ class Utility:
         
     ############################# main calling function for srl no. assignment ##########################
     
-    def serialNoAdd(self):
-        self.addKeys(self)
-        self.assignKeys(self)
-        self.abbreviationsDist(self)
-        self.abbreviationsState(self)
+    def serialNoAdd():
+        Utility.addKeys()
+        Utility.assignKeys()
+        Utility.abbreviationsDist()
+        Utility.abbreviationsState()
 
     #####################################################################################################
 
@@ -147,7 +147,7 @@ class Utility:
     #############################################################################################
     ######################## for merging cluster.csv file data ##################################
     #############################################################################################
-    def process_subfolder(self, base_dir, subfolder_name):
+    def process_subfolder(base_dir, subfolder_name):
         subfolder_path = os.path.join(base_dir, subfolder_name)
         
         # Initialize a dictionary to hold dataframes indexed by DNo
@@ -237,7 +237,7 @@ class Utility:
         print(f"Success: All merged files combined into {output_file_all}")
 
         
-    def mergeFiles(self, dirPath):
+    def mergeFiles(dirPath):
         for subfolder in os.listdir(dirPath):
             subfolder_path = os.path.join(dirPath, subfolder)
             
@@ -246,9 +246,9 @@ class Utility:
                 self.process_subfolder(dirPath, subfolder)
     
     #################################### main calling function ##########################################
-    def merge(self):
+    def merge():
         dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
-        self.mergeFiles(dirPath)
+        Utility.mergeFiles(dirPath)
     
         
 
