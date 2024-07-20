@@ -5,16 +5,16 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, SimpleRNN
 from tensorflow.keras.utils import to_categorical
 
-# Generate sample data
+# Generating sample data
 np.random.seed(42)
 data = np.random.randn(100, 5)
 labels = np.random.randint(0, 2, 100)
 df = pd.DataFrame(data, columns=['Factor1', 'Factor2', 'Factor3', 'Factor4', 'Factor5'])
 df['Dropout'] = labels
 
-# Display the first few rows of the dataset
-print(len(df))
-print(df.head())
+# # Display the first few rows of the dataset
+# print(len(df))
+# print(df.head())
 
 # Prepare the data
 X = df.drop('Dropout', axis=1).values
