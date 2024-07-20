@@ -41,22 +41,72 @@ def ppSingleIncome(df):
     return res
 
 
-def ppIncome():
-    folder = "DATA\\RNN Data\\income data"
+def ppIncome(income_folder_path):
     res = []
-    for file in os.listdir(folder):
-        df = pd.read_csv(folder+"\\"+file)
+    for file in os.listdir(income_folder_path):
+        df = pd.read_csv(income_folder_path+"\\"+file)
 
         df = ppSingleIncome(df)
-        state = os.path.splitext(file)[0]
-        df.insert(0, 'State', state)
+        # state = os.path.splitext(file)[0]
+        # df.insert(0, 'State', state)
         res.append(df)
 
     merged_df = pd.concat(res, ignore_index=True)
-    merged_df = addDNO(merged_df)
-
     return merged_df
 
 
-inc = ppIncome()
-print(inc.head())
+#######################################################################################
+######################### PRE-PROCESSING DROPOUT DATA #################################
+#######################################################################################
+
+def ppDropout(dropout_folder_path):
+    res = []
+
+    for file in os.listdir(dropout_folder_path):
+        file_path = dropout_folder_path+"\\"+file
+        # print(file_path)
+        df = pd.read_csv(file_path)
+        res.append(df)
+
+    merged_df = pd.concat(res, ignore_index=True)
+    columns = ['District']
+    merged_df = merged_df.drop(columns=['Location'])
+
+    return merged_df
+
+#######################################################################################
+######################### MERGING FACTORS WITH DROP RATES #############################
+#######################################################################################
+
+
+def mergeWithRates(dropdf, df):
+    df_merged = pd.merge(df, dropdf, on='DNo', how='right')
+    new_order = ['DNo', 'District', 'Social Category', 'Income',
+                 'prim_Girls', 'prim_Boys', 'prim_Overall',
+                 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall',
+                 'snr_Girls', 'snr_Boys', 'snr_Overall']
+
+    # Reorder DataFrame
+    df_merged = df_merged[new_order]
+    df_merged['Income'] = df_merged['Income'].fillna(method='ffill')
+    return df_merged
+
+
+def exportFinal(df, path):
+    df.to_csv(path, index=False)
+
+
+income_folder_path = "DATA\\RNN Data\\income data"
+dropout_folder_path = "DATA\\Test\\DistrictWiseData"
+final_path = "DATA\\RNN Data\\final.csv"
+inc = ppIncome(income_folder_path)
+
+
+inc = addDNO(inc)
+# print(inc)
+
+drop = ppDropout(dropout_folder_path)
+merged = mergeWithRates(drop, inc)
+
+exportFinal(merged, final_path)
+print(merged.head())
