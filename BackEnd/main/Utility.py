@@ -243,7 +243,7 @@ class Utility:
             
             # Check if it is a directory
             if os.path.isdir(subfolder_path):
-                self.process_subfolder(dirPath, subfolder)
+                Utility.process_subfolder(dirPath, subfolder)
     
     #################################### main calling function ##########################################
     def merge():
