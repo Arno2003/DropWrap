@@ -2,6 +2,10 @@ import pandas as pd
 from pprint import pprint
 import os
 
+#######################################################################################
+################### ADDING DNO TO A DATASET [NECESSARY FOR MERGING] ###################
+#######################################################################################
+
 
 def addDNO(df):
     dno = pd.read_csv("DATA\\Test\\Abbreviations\\SerialNoListDistricts.csv")
@@ -45,10 +49,7 @@ def ppIncome(income_folder_path):
     res = []
     for file in os.listdir(income_folder_path):
         df = pd.read_csv(income_folder_path+"\\"+file)
-
         df = ppSingleIncome(df)
-        # state = os.path.splitext(file)[0]
-        # df.insert(0, 'State', state)
         res.append(df)
 
     merged_df = pd.concat(res, ignore_index=True)
@@ -64,7 +65,6 @@ def ppDropout(dropout_folder_path):
 
     for file in os.listdir(dropout_folder_path):
         file_path = dropout_folder_path+"\\"+file
-        # print(file_path)
         df = pd.read_csv(file_path)
         res.append(df)
 
@@ -99,14 +99,18 @@ def exportFinal(df, path):
 income_folder_path = "DATA\\RNN Data\\income data"
 dropout_folder_path = "DATA\\Test\\DistrictWiseData"
 final_path = "DATA\\RNN Data\\final.csv"
+
+# Preprocessing income
 inc = ppIncome(income_folder_path)
 
-
+# Adding dno to income
 inc = addDNO(inc)
-# print(inc)
 
+# preprocessing dropout rates
 drop = ppDropout(dropout_folder_path)
+
+# preparing final dataset
 merged = mergeWithRates(drop, inc)
 
+# exporting final dataset
 exportFinal(merged, final_path)
-print(merged.head())
