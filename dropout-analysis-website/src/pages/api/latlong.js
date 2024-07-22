@@ -1,4 +1,5 @@
-import clientPromise from "../../../lib/mongodb.js";
+// import clientPromise from "../../../lib/mongodb.js";
+import { connectToDatabase1, connectToDatabase2 } from "../../../lib/mongodb";
 // import stateList from "./stateList.js";
 
 export default async (req, res) => {
@@ -41,9 +42,20 @@ export default async (req, res) => {
     for (let i = 0; i < stateList.length; i++) {
       const dbName = stateList[i];
       // console.log(dbName);
-      const client = await clientPromise;
+      const client = await connectToDatabase1();
+      const client2 = await connectToDatabase2();
       const db = client.db(dbName);
+      const db2 = client2.db(dbName);
+
       const result = await db
+        .collection("latlong")
+        .find({
+          "Social Category": req.query.caste,
+        })
+        .sort({ metacritic: -1 })
+        .toArray();
+
+      const result2 = await db2
         .collection("latlong")
         .find({
           "Social Category": req.query.caste,
@@ -52,6 +64,7 @@ export default async (req, res) => {
         .toArray();
       // console.log(result[0]);
       fin.push(...result);
+      fin.push(...result2);
     }
     // console.log(fin);
     res.json(fin);
