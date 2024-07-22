@@ -50,6 +50,7 @@ def ppIncome(income_folder_path):
     for file in os.listdir(income_folder_path):
         df = pd.read_csv(income_folder_path+"\\"+file)
         df = ppSingleIncome(df)
+        print(df.head())
         res.append(df)
 
     merged_df = pd.concat(res, ignore_index=True)
@@ -72,6 +73,23 @@ def ppDropout(dropout_folder_path):
     columns = ['District']
     merged_df = merged_df.drop(columns=['Location'])
 
+    return merged_df
+
+#######################################################################################
+######################### PRE-PROCESSING TOTAL SCHOOL  ################################
+#######################################################################################
+
+
+def ppTotalSchools(total_folder_path):
+    res = []
+    for file in os.listdir(total_folder_path):
+        file_path = total_folder_path+"\\"+file
+        df = pd.read_excel(file_path, skiprows=3)
+        df = df.iloc[:, [0, -1]]
+        df = df.groupby('Location').sum().reset_index()
+        # df = df.drop([0, 1, 2]).reset_index(drop=True)
+        res.append(df)
+    merged_df = pd.concat(res, ignore_index=True)
     return merged_df
 
 #######################################################################################
@@ -98,19 +116,28 @@ def exportFinal(df, path):
 
 income_folder_path = "DATA\\RNN Data\\income data"
 dropout_folder_path = "DATA\\Test\\DistrictWiseData"
+total_folder_path = "DATA\\RNN Data\\Number of schools"
 final_path = "DATA\\RNN Data\\final.csv"
 
 # Preprocessing income
 inc = ppIncome(income_folder_path)
+# print(inc)
+
+# Preprocessing totalschools
+tot = ppTotalSchools(total_folder_path)
+# print(tot)
 
 # Adding dno to income
 inc = addDNO(inc)
 
-# preprocessing dropout rates
-drop = ppDropout(dropout_folder_path)
+tot = addDNO(tot)
+# print(tot)
 
-# preparing final dataset
-merged = mergeWithRates(drop, inc)
+# # preprocessing dropout rates
+# drop = ppDropout(dropout_folder_path)
 
-# exporting final dataset
-exportFinal(merged, final_path)
+# # preparing final dataset
+# merged = mergeWithRates(drop, inc)
+
+# # exporting final dataset
+# exportFinal(merged, final_path)
