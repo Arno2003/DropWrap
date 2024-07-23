@@ -1,5 +1,5 @@
 // import clientPromise from "../../../lib/mongodb.js";
-import { connectToDatabase1, connectToDatabase2 } from "../../../lib/mongodb";
+import { connectToDatabase1, connectToDatabase2 } from "../../../lib/mongodb2";
 // import stateList from "./stateList.js";
 export default async (req, res) => {
   try {
