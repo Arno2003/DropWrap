@@ -4,7 +4,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import numpy as np
 import tensorflow as tf
-import matplotlib.pyplot as plt
 
 def impression(data: pd.DataFrame, colName: str):
     # One-hot encode categorical columns
@@ -14,8 +13,8 @@ def impression(data: pd.DataFrame, colName: str):
 
     # Normalize numerical columns
     scaler = MinMaxScaler()
-    numerical_cols = ['prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
-    normalized_numerical = scaler.fit_transform(data[numerical_cols])
+    # numerical_cols = ['prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
+    normalized_numerical = scaler.fit_transform(data[colName].values.reshape(-1, 1))
 
     # Combine all features
     features = np.hstack([encoded_categorical, normalized_numerical])
@@ -35,7 +34,7 @@ def impression(data: pd.DataFrame, colName: str):
         tf.keras.layers.Input(shape=(X_train.shape[1],)),
         tf.keras.layers.Reshape((X_train.shape[1], 1)),  # Reshape for RNN input
         tf.keras.layers.SimpleRNN(50, activation='relu'),
-        tf.keras.layers.Dense(2, activation='sigmoid')  # Output layer with sigmoid for binary classification
+        tf.keras.layers.Dense(2, activation='sigmoid')  # Output layer with softmax for binary classification
     ])
 
     # Compile the model
@@ -73,15 +72,14 @@ def impression(data: pd.DataFrame, colName: str):
             'Location': data.iloc[i]['District'],
             'Social Category': data.iloc[i]['Social Category'],
             'Income': data.iloc[i]['Income'],
-            # 'dropout': int(predicted_class)  # Add dropout column
+            'dropout': int(predicted_class)  # Add dropout column
         }
-        for col in numerical_cols:
-            if predicted_class == 1:  # Dropout
-                row_data[f'{col}_social_category'] = pred[0] * 100  # Convert to percentage
-                row_data[f'{col}_income'] = pred[1] * 100  # Convert to percentage
-            else:  # Not dropout
-                row_data[f'{col}_social_category'] = 100 - (pred[1] * 100)  # Complementary percentage
-                row_data[f'{col}_income'] = 100 - (pred[0] * 100)  # Complementary percentage
+        if predicted_class == 1:  # Dropout
+            row_data[f'{colName}_social_category'] = pred[0] * 100  # Convert to percentage
+            row_data[f'{colName}_income'] = pred[1] * 100  # Convert to percentage
+        else:  # Not dropout
+            row_data[f'{colName}_social_category'] = 100 - (pred[1] * 100)  # Complementary percentage
+            row_data[f'{colName}_income'] = 100 - (pred[0] * 100)  # Complementary percentage
         impressions_data.append(row_data)
 
     # Create DataFrame from the impressions data
@@ -91,31 +89,8 @@ def impression(data: pd.DataFrame, colName: str):
     output_file = f'DATA\\RNN Data\\outputData\\{colName}_impressions.csv'
     impressions_df.to_csv(output_file, index=False)
 
-    print("\nImpressions (Probability Distributions as Percentages for Dropouts):")
+    print(f"\nImpressions for {colName} (Probability Distributions as Percentages for Dropouts):")
     print(impressions_df)
-
-    # Plot learning curves
-    plt.figure(figsize=(12, 6))
-
-    # Plot training & validation loss values
-    plt.subplot(1, 2, 1)
-    plt.plot(history.history['loss'], label='Training Loss')
-    plt.plot(history.history['val_loss'], label='Validation Loss')
-    plt.title('Model Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-
-    # Plot training & validation accuracy values
-    plt.subplot(1, 2, 2)
-    plt.plot(history.history['accuracy'], label='Training Accuracy')
-    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
-    plt.title('Model Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.legend()
-
-    plt.show()
 
     return impressions_df
 
@@ -123,10 +98,15 @@ def impression(data: pd.DataFrame, colName: str):
 data = pd.read_csv('DATA\\RNN Data\\final.csv')
 cols = ['prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
 
+# List to store DataFrames for each column
 list_of_impressions = []
 
 for colName in cols:
-    list_of_impressions.append(impression(data, colName))
+    # Modify data for each column
+    data_copy = data.copy()
+    data_copy[colName] = data_copy[colName].fillna(0)  # Fill NaN values as needed, adjust if needed
+    impressions_df = impression(data_copy, colName)
+    list_of_impressions.append(impressions_df)
 
 # Concatenate all impressions dataframes
 final_df = pd.concat(list_of_impressions, axis=1)
