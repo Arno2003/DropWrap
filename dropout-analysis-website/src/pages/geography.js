@@ -8,6 +8,7 @@ import {
   CategoryDropDown,
   CasteDropDown,
   StdDropDown,
+  ChooseDistDropDown,
 } from "@/components/DropDown";
 
 const AnimatedNumbers = ({ value }) => {
@@ -67,37 +68,100 @@ const ReasonsTab = ({ classes, reasonList }) => {
   );
 };
 
+const ReasonsTab2 = ({
+  classes,
+  reasonList,
+  dist,
+  setDist,
+  caste,
+  std,
+  category,
+  setCaste,
+}) => {
+  const parseQuery = (fact) => {
+    // console.log(category, std);
+    let a;
+    if (std === "") a = "prim";
+    else if (std === "1") a = "upPrim";
+    else a = "snr";
+    return a + "_" + category + "_" + fact;
+    // console.log(a + "_" + category + "_" + fact);
+  };
+  // parseQuery("socialcat");
+  return (
+    <div
+      className={`${classes} bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
+    >
+      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-lg border-solid border-t-2 border-x-2 dark:border-secDark">
+        Reasons for Dropouts
+      </h3>
+      <div className="flex flex-row  justify-center items-center my-3">
+        <h2 className="text-xl dark:text-light text-dark px-3 py-1">
+          Select District:
+        </h2>
+        <ChooseDistDropDown
+          reasonList={reasonList}
+          dist={dist}
+          setDist={setDist}
+          className="z-0"
+        />
+        {/* <CasteDropDown caste={casteReason} setCaste={setCasteReason} /> */}
+      </div>
+      <div className="flex flex-row text-dark dark:text-light mt-3">
+        <h3 className="w-[50%] text-center border-r-2 border-b-2 border-dark dark:border-light py-4">
+          Due to Caste
+        </h3>
+        <h3 className="w-[50%] text-center border-b-2  py-4 border-dark dark:border-light">
+          Due to Family Income
+        </h3>
+      </div>
+      {reasonList?.map((row) => {
+        let f1 = parseQuery("income");
+        let f2 = parseQuery("socialcat");
+        // console.log(row.Location.toLowerCase(), dist.toLowerCase());
+        if (row.Location.toLowerCase() === dist.toLowerCase()) {
+          // console.log(row[f1], row[f2]);
+          return (
+            <div
+              className="flex flex-row text-dark dark:text-light  text-xl"
+              key="1"
+            >
+              <div className="w-[50%] text-center border-r-2 border-dark dark:border-light py-4 font-bold">
+                {row[f1]}&nbsp;%
+              </div>
+              <div className="w-[50%] text-center py-4 font-bold">
+                {row[f2]}&nbsp;%
+              </div>
+            </div>
+          );
+        }
+
+        // console.log(row[f1], row[f2]);
+      })}
+    </div>
+  );
+};
+
 const Geography = ({ mode }) => {
   const [stateName, setStateName] = useState("Gujarat");
   const [category, setCategory] = useState("Overall");
   const [caste, setCaste] = useState("Overall");
+  const [casteReason, setCasteReason] = useState("Overall");
   const [std, setStd] = useState("2");
   const [reasonList, setReasonList] = useState([]);
   const [avgRate, setAvgRate] = useState(-1);
+  const [dist, setDist] = useState("GUNTUR");
 
   useEffect(() => {
     axios
-      .get(`/api/reasons?dbName=${stateName}`)
+      .get(`/api/reasons?caste=${casteReason}`)
       .then((response) => {
-        const reasons = response.data.map((row) => {
-          const getReasonRate = () => {
-            if (avgRate === -1) {
-              if (category === "Overall") return row.Overall75;
-              if (category === "Boys") return row.Boys75;
-              if (category === "Girls") return row.Girls75;
-            } else {
-              if (category === "Overall")
-                return ((row.Overall75 * avgRate) / 100).toFixed(2);
-              if (category === "Boys")
-                return ((row.Boys75 * avgRate) / 100).toFixed(2);
-              if (category === "Girls")
-                return ((row.Girls75 * avgRate) / 100).toFixed(2);
-            }
-          };
-          return { reason: row.Reasons, rate: parseFloat(getReasonRate()) };
+        let res = [];
+        response.data.map((row) => {
+          if (row?.Location) res.push(row);
         });
-
-        setReasonList(reasons);
+        // console.log(res);
+        setReasonList(res);
       })
       .catch((error) => {
         console.log(error);
@@ -128,8 +192,18 @@ const Geography = ({ mode }) => {
                 <CasteDropDown caste={caste} setCaste={setCaste} />
                 <StdDropDown std={std} setStd={setStd} />
               </div>
-              <ReasonsTab
+              {/* <ReasonsTab
                 reasonList={reasonList}
+                classes="text-dark w-[100%] mr-4 "
+              /> */}
+              <ReasonsTab2
+                reasonList={reasonList}
+                dist={dist}
+                setDist={setDist}
+                caste={caste}
+                setCaste={setCaste}
+                category={category}
+                std={std}
                 classes="text-dark w-[100%] mr-4 "
               />
             </div>
@@ -138,8 +212,8 @@ const Geography = ({ mode }) => {
               mode={mode}
               classes="w-[60%] "
               category={category}
-              caste={caste}
               std={std}
+              caste={caste}
               setAvgRate={setAvgRate}
               stateName={stateName}
             />

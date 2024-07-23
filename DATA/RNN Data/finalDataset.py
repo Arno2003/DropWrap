@@ -37,6 +37,7 @@ def ppSingleIncome(df):
         dis.append(district.split()[0].upper().replace(" ", ""))
 
     df_no_district = df.drop(columns=['District'])
+
     df_no_district['Income'] = df_no_district.idxmax(axis=1)
 
     res = df_no_district[['Income']]
@@ -124,13 +125,13 @@ inc = ppIncome(income_folder_path)
 # print(inc)
 
 # Preprocessing totalschools
-tot = ppTotalSchools(total_folder_path)
+# tot = ppTotalSchools(total_folder_path)
 # print(tot)
 
 # Adding dno to income
-inc = addDNO(inc)
+# inc = addDNO(inc)
 
-tot = addDNO(tot)
+# tot = addDNO(tot)
 # print(tot)
 
 # # preprocessing dropout rates
