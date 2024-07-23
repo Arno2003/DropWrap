@@ -213,6 +213,7 @@ export const ChooseDistDropDown = ({
                 // onClick={handlePClick}
                 className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm"
                 onClick={() => handleClick(distRow.Location)}
+                key={distRow.id}
               >
                 {distRow.Location}
               </button>
