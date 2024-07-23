@@ -76,10 +76,8 @@ const ReasonsTab2 = ({
   caste,
   std,
   category,
-  setCaste,
 }) => {
   const parseQuery = (fact) => {
-    // console.log(category, std);
     let a;
     if (std === "") a = "prim";
     else if (std === "1") a = "upPrim";
@@ -117,26 +115,25 @@ const ReasonsTab2 = ({
       </div>
       {reasonList?.map((row) => {
         let f1 = parseQuery("income");
-        let f2 = parseQuery("socialcat");
+        let f2 = parseQuery("social_category");
         // console.log(row.Location.toLowerCase(), dist.toLowerCase());
+
         if (row.Location.toLowerCase() === dist.toLowerCase()) {
-          // console.log(row[f1], row[f2]);
+          console.log(f1, f2, row);
           return (
             <div
               className="flex flex-row text-dark dark:text-light  text-xl"
-              key="1"
+              key={row.id}
             >
               <div className="w-[50%] text-center border-r-2 border-dark dark:border-light py-4 font-bold">
-                {row[f1]}&nbsp;%
+                {row[f1].toFixed(2)}&nbsp;%
               </div>
               <div className="w-[50%] text-center py-4 font-bold">
-                {row[f2]}&nbsp;%
+                {row[f2].toFixed(2)}&nbsp;%
               </div>
             </div>
           );
         }
-
-        // console.log(row[f1], row[f2]);
       })}
     </div>
   );
@@ -154,7 +151,7 @@ const Geography = ({ mode }) => {
 
   useEffect(() => {
     axios
-      .get(`/api/reasons?caste=${casteReason}`)
+      .get(`/api/reasons?caste=${caste}`)
       .then((response) => {
         let res = [];
         response.data.map((row) => {
@@ -166,7 +163,7 @@ const Geography = ({ mode }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [stateName, category, avgRate]);
+  }, [stateName, category, avgRate, caste, std]);
 
   return (
     <>
