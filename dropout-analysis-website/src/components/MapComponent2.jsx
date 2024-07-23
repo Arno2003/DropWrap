@@ -120,111 +120,109 @@ const MapComponent2 = ({
     // Create a vector source for the CSV data
     const vectorSource = new VectorSource();
 
-    axios
-      .get(`/api/latlong?dbName=${stateName}&caste=${caste}`)
-      .then((latLong) => {
-        axios
-          .get(`/api/formatted_cluster_data?dbName=${stateName}&caste=${caste}`)
-          .then((clusters) => {
-            let colName;
-            if (std === "") {
-              colName = "prim_" + category;
-            } else if (std === "1") {
-              colName = "upPrim_" + category;
-            } else {
-              colName = "snr_" + category;
-            }
+    axios.get(`/api/latlong?caste=${caste}`).then((latLong) => {
+      axios
+        .get(`/api/formatted_cluster_data?caste=${caste}`)
+        .then((clusters) => {
+          let colName;
+          if (std === "") {
+            colName = "prim_" + category;
+          } else if (std === "1") {
+            colName = "upPrim_" + category;
+          } else {
+            colName = "snr_" + category;
+          }
 
-            for (let i = 0; i < latLong.data.length; i++) {
-              const element = latLong.data[i];
-              const longitude = element.longitude;
-              const latitude = element.latitude;
+          for (let i = 0; i < latLong.data.length; i++) {
+            const element = latLong.data[i];
+            const longitude = element.longitude;
+            const latitude = element.latitude;
 
-              const rateOp = () => {
-                return element[colName];
-              };
+            const rateOp = () => {
+              return element[colName];
+            };
 
-              const feature_obj = {
-                geometry: new Point(
-                  fromLonLat([parseFloat(longitude), parseFloat(latitude)])
-                ),
-                rate: parseInt(rateOp()),
-                loc: element.Location,
-                cs: extractCluster(element.Location, clusters),
-              };
+            const feature_obj = {
+              geometry: new Point(
+                fromLonLat([parseFloat(longitude), parseFloat(latitude)])
+              ),
+              rate: parseInt(rateOp()),
+              loc: element.Location,
+              cs: extractCluster(element.Location, clusters),
+            };
 
-              // console.log(feature_obj);
+            // console.log(feature_obj);
 
-              const feature = new Feature(feature_obj);
-              vectorSource.addFeature(feature);
-            }
+            const feature = new Feature(feature_obj);
+            vectorSource.addFeature(feature);
+          }
 
-            // Create a source for clustering
-            const clusterSource = new Cluster({
-              distance: 60 / Math.pow(2, 0.1), // Adjust the cluster distance as needed
-              source: vectorSource,
-            });
-
-            // Create a vector layer for clusters
-            const clusterLayer = new VectorLayer({
-              source: clusterSource,
-              style: clusterStyle,
-            });
-
-            // Add the cluster layer to the map
-            map.addLayer(clusterLayer);
-
-            // Update cluster distance based on map zoom level
-            map.getView().on("change:resolution", function (evt) {
-              const zoomLevel = map.getView().getZoom();
-              const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
-              clusterSource.setDistance(newClusterDistance);
-            });
-
-            // Define overlay for displaying cluster information
-            const overlay = new Overlay({
-              element: popupRef.current,
-              positioning: "bottom-center",
-              offset: [0, -15],
-              stopEvent: false,
-            });
-            map.addOverlay(overlay);
-
-            if (mode === "dark") {
-              map.on("postcompose", function (e) {
-                document.querySelector("canvas").style.filter = "invert(90%)";
-              });
-            }
-            map.on("pointermove", (e) => {
-              const feature = map.forEachFeatureAtPixel(
-                e.pixel,
-                (feature) => feature
-              );
-
-              if (feature) {
-                overlay.setPosition(e.coordinate);
-
-                const dropList = feature.getProperties().features;
-                let sum = 0;
-
-                dropList.forEach((element) => {
-                  sum = sum + element.values_.rate;
-                });
-
-                var avgRate = sum / dropList.length || 0;
-                avgRate = Math.round(avgRate);
-
-                setAvgRate(avgRate);
-
-                if (avgRate !== undefined) {
-                  popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
-                }
-              } else {
-                overlay.setPosition(undefined);
-              }
-            });
+          // Create a source for clustering
+          const clusterSource = new Cluster({
+            distance: 60 / Math.pow(2, 0.1), // Adjust the cluster distance as needed
+            source: vectorSource,
           });
-      });
+
+          // Create a vector layer for clusters
+          const clusterLayer = new VectorLayer({
+            source: clusterSource,
+            style: clusterStyle,
+          });
+
+          // Add the cluster layer to the map
+          map.addLayer(clusterLayer);
+
+          // Update cluster distance based on map zoom level
+          map.getView().on("change:resolution", function (evt) {
+            const zoomLevel = map.getView().getZoom();
+            const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
+            clusterSource.setDistance(newClusterDistance);
+          });
+
+          // Define overlay for displaying cluster information
+          const overlay = new Overlay({
+            element: popupRef.current,
+            positioning: "bottom-center",
+            offset: [0, -15],
+            stopEvent: false,
+          });
+          map.addOverlay(overlay);
+
+          if (mode === "dark") {
+            map.on("postcompose", function (e) {
+              document.querySelector("canvas").style.filter = "invert(90%)";
+            });
+          }
+          map.on("pointermove", (e) => {
+            const feature = map.forEachFeatureAtPixel(
+              e.pixel,
+              (feature) => feature
+            );
+
+            if (feature) {
+              overlay.setPosition(e.coordinate);
+
+              const dropList = feature.getProperties().features;
+              let sum = 0;
+
+              dropList.forEach((element) => {
+                sum = sum + element.values_.rate;
+              });
+
+              var avgRate = sum / dropList.length || 0;
+              avgRate = Math.round(avgRate);
+
+              setAvgRate(avgRate);
+
+              if (avgRate !== undefined) {
+                popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
+              }
+            } else {
+              overlay.setPosition(undefined);
+            }
+          });
+        });
+    });
 
     // Clean up when component unmounts
     return () => {
