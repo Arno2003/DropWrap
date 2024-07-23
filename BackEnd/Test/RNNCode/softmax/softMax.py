@@ -21,7 +21,7 @@ def impression(data: pd.DataFrame, colName: str):
     features = np.hstack([encoded_categorical, normalized_numerical])
 
     # Create target column for dropout (one-hot encoding)
-    data['dropout'] = (data['snr_Overall'] > 0).astype(int)
+    data['dropout'] = (data[colName] > 0).astype(int)
     y = pd.get_dummies(data['dropout']).values  # Convert to one-hot encoded format
 
     # Split data into features and target
