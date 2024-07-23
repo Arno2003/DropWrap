@@ -95,8 +95,10 @@ const ReasonsTab2 = ({
       <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-lg border-solid border-t-2 border-x-2 dark:border-secDark">
         Reasons for Dropouts
       </h3>
-      <div className="flex flex-row ">
-        <h2>Select District</h2>
+      <div className="flex flex-row  justify-center items-center my-3">
+        <h2 className="text-xl dark:text-light text-dark px-3 py-1">
+          Select District:
+        </h2>
         <ChooseDistDropDown
           reasonList={reasonList}
           dist={dist}
@@ -105,11 +107,11 @@ const ReasonsTab2 = ({
         />
         {/* <CasteDropDown caste={casteReason} setCaste={setCasteReason} /> */}
       </div>
-      <div className="flex flex-row text-light mt-3">
-        <h3 className="w-[50%] text-center border-r-2 border-b-2 border-light py-4">
+      <div className="flex flex-row text-dark dark:text-light mt-3">
+        <h3 className="w-[50%] text-center border-r-2 border-b-2 border-dark dark:border-light py-4">
           Due to Caste
         </h3>
-        <h3 className="w-[50%] text-center border-b-2  py-4">
+        <h3 className="w-[50%] text-center border-b-2  py-4 border-dark dark:border-light">
           Due to Family Income
         </h3>
       </div>
@@ -120,8 +122,8 @@ const ReasonsTab2 = ({
         if (row.Location.toLowerCase() === dist.toLowerCase()) {
           console.log(row[f1], row[f2]);
           return (
-            <div className="flex flex-row text-light  text-xl">
-              <div className="w-[50%] text-center border-r-2 border-light py-4 font-bold">
+            <div className="flex flex-row text-dark dark:text-light  text-xl">
+              <div className="w-[50%] text-center border-r-2 border-dark dark:border-light py-4 font-bold">
                 {row[f1]}&nbsp;%
               </div>
               <div className="w-[50%] text-center py-4 font-bold">

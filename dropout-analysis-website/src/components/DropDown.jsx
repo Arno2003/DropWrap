@@ -197,13 +197,13 @@ export const ChooseDistDropDown = ({
       <button
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`border-solid border border-light border-b-dark dark:border-b-alt dark:border-dark mr-3 mb-0 py-3 px-3 text-dark font-bold bg-alt dark:text-alt dark:bg-dark bg-opacity-0 w-[170px]  z-10 relative ${className}`}
+        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
       >
         {dist}
       </button>
       {isOpen && (
         <div
-          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[160px] h-[300px] z-10 shadow-xl overflow-y-auto overflow-x-hidden"
+          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[170px] h-[300px] z-10 shadow-xl overflow-y-auto overflow-x-hidden"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
