@@ -18,24 +18,31 @@ let clientPromise, clientPromise2;
 
 async function connectToDatabase1() {
   if (!client1) {
-    client1 = new MongoClient(uri1, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    await client1.connect();
+    if (!global._mongoClientPromise) {
+      client1 = new MongoClient(uri1, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      global._mongoClientPromise = await client1.connect();
+      // await client1.connect();
+    }
+    clientPromise = global._mongoClientPromise;
   }
-  return client1;
+  return clientPromise;
 }
 
 async function connectToDatabase2() {
   if (!client2) {
-    client2 = new MongoClient(uri2, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    await client2.connect();
+    if (!global._mongoClientPromise) {
+      client2 = new MongoClient(uri2, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      global._mongoClientPromise = await client2.connect();
+    }
+    clientPromise = global._mongoClientPromise;
   }
-  return client2;
+  return clientPromise;
 }
 
 export { connectToDatabase1, connectToDatabase2 };
