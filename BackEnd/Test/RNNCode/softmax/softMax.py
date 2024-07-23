@@ -6,7 +6,6 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
-
 def impression(data: pd.DataFrame, colName: str):
     # One-hot encode categorical columns
     encoder = OneHotEncoder(sparse=False, drop='first')  # Drop first to avoid multicollinearity
@@ -22,7 +21,7 @@ def impression(data: pd.DataFrame, colName: str):
     features = np.hstack([encoded_categorical, normalized_numerical])
 
     # Create target column for dropout (one-hot encoding)
-    data['dropout'] = (data[colName] > 0).astype(int)
+    data['dropout'] = (data['snr_Overall'] > 0).astype(int)
     y = pd.get_dummies(data['dropout']).values  # Convert to one-hot encoded format
 
     # Split data into features and target
@@ -65,20 +64,32 @@ def impression(data: pd.DataFrame, colName: str):
     print(f'Accuracy (manual): {accuracy_percentage_manual:.2f}%')
     print(f'Error Rate (manual): {error_rate_manual:.2f}%')
 
-    # Prepare data for impressions.csv (only for dropouts)
+    # Prepare data for impressions.csv
     impressions_data = []
 
     for i, (true_label, pred, predicted_class) in enumerate(zip(y_test_labels, predictions, predicted_classes)):
-        if predicted_class == 1:  # Only include dropout predictions
-            pred_percentages = pred * 100  # Convert probabilities to percentages
-            dno = data.iloc[i]['DNo']
-            location = data.iloc[i]['District']
-            caste = data.iloc[i]['Social Category']
-            income = data.iloc[i]['Income']
-            impressions_data.append([dno, location, caste, income, pred_percentages[0], pred_percentages[1]])
+        row_data = {
+            'DNo': data.iloc[i]['DNo'],
+            'Location': data.iloc[i]['District'],
+            'Social Category': data.iloc[i]['Social Category'],
+            'Income': data.iloc[i]['Income'],
+            # 'dropout': int(predicted_class)  # Add dropout column
+        }
+        for col in numerical_cols:
+            if predicted_class == 1:  # Dropout
+                row_data[f'{col}_social_category'] = pred[0] * 100  # Convert to percentage
+                row_data[f'{col}_income'] = pred[1] * 100  # Convert to percentage
+            else:  # Not dropout
+                row_data[f'{col}_social_category'] = 100 - (pred[1] * 100)  # Complementary percentage
+                row_data[f'{col}_income'] = 100 - (pred[0] * 100)  # Complementary percentage
+        impressions_data.append(row_data)
 
-    impressions_df = pd.DataFrame(impressions_data, columns=['DNo', 'Location', 'Social Category', 'Income', f'{colName}_socialcat', f'{colName}_income'])
-    impressions_df.to_csv(f'DATA\\RNN Data\\outputData\\{colName}impressions.csv', index=False)
+    # Create DataFrame from the impressions data
+    impressions_df = pd.DataFrame(impressions_data)
+
+    # Save to CSV
+    output_file = f'DATA\\RNN Data\\outputData\\{colName}_impressions.csv'
+    impressions_df.to_csv(output_file, index=False)
 
     print("\nImpressions (Probability Distributions as Percentages for Dropouts):")
     print(impressions_df)
@@ -108,20 +119,20 @@ def impression(data: pd.DataFrame, colName: str):
 
     return impressions_df
 
+# Load the data
 data = pd.read_csv('DATA\\RNN Data\\final.csv')
 cols = ['prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
-
 
 list_of_impressions = []
 
 for colName in cols:
-    # impression(data, colName)
     list_of_impressions.append(impression(data, colName))
-    
+
+# Concatenate all impressions dataframes
 final_df = pd.concat(list_of_impressions, axis=1)
 
-# print(final_df.head())
+# Remove duplicate columns by keeping the first occurrence
 final_df = final_df.loc[:, ~final_df.columns.duplicated()]
 
+# Save the final concatenated dataframe
 final_df.to_csv('DATA\\RNN Data\\outputData\\final_impressions.csv', index=False)
-    
