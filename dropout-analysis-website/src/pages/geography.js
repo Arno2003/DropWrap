@@ -118,11 +118,14 @@ const ReasonsTab2 = ({
       {reasonList?.map((row) => {
         let f1 = parseQuery("income");
         let f2 = parseQuery("socialcat");
-        console.log(row.Location.toLowerCase(), dist.toLowerCase());
+        // console.log(row.Location.toLowerCase(), dist.toLowerCase());
         if (row.Location.toLowerCase() === dist.toLowerCase()) {
           // console.log(row[f1], row[f2]);
           return (
-            <div className="flex flex-row text-dark dark:text-light  text-xl">
+            <div
+              className="flex flex-row text-dark dark:text-light  text-xl"
+              key="1"
+            >
               <div className="w-[50%] text-center border-r-2 border-dark dark:border-light py-4 font-bold">
                 {row[f1]}&nbsp;%
               </div>
