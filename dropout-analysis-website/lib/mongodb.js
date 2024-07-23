@@ -40,9 +40,9 @@ async function connectToDatabase2() {
       });
       global._mongoClientPromise = await client2.connect();
     }
-    clientPromise = global._mongoClientPromise;
+    clientPromise2 = global._mongoClientPromise;
   }
-  return clientPromise;
+  return clientPromise2;
 }
 
 export { connectToDatabase1, connectToDatabase2 };
