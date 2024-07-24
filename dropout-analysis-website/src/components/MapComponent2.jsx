@@ -121,10 +121,10 @@ const MapComponent2 = ({
     const vectorSource = new VectorSource();
 
     axios
-      .get(`/api/latlong?dbName=${stateName}&caste=${caste}`)
+      .get(`/api/latlong?caste=${caste}`, { timeout: 10000 })
       .then((latLong) => {
         axios
-          .get(`/api/formatted_cluster_data?dbName=${stateName}&caste=${caste}`)
+          .get(`/api/formatted_cluster_data?caste=${caste}`, { timeout: 10000 })
           .then((clusters) => {
             let colName;
             if (std === "") {

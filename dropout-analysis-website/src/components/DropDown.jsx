@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const CategoryDropDown = ({ category, setCategory }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -158,6 +158,67 @@ export const StdDropDown = ({ std, setStd }) => {
           >
             Secondary
           </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const ChooseDistDropDown = ({
+  dist,
+  setDist,
+  reasonList,
+  className,
+}) => {
+  const [districts, setDistricts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const distList = () => {
+      let uniqueLocations = [];
+      const uniqueReasonList = reasonList.filter((row) => {
+        if (!uniqueLocations.includes(row.Location)) {
+          uniqueLocations.push(row.Location);
+          return true;
+        }
+        return false;
+      });
+      setDistricts(uniqueReasonList);
+    };
+    distList();
+  }, [reasonList]);
+
+  const handleClick = (loc) => {
+    setDist(loc);
+  };
+  // console.log(dist);
+  return (
+    <div className="z-0">
+      {/* <h3 className="text-dark">Standard:</h3> */}
+      <button
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
+      >
+        {dist}
+      </button>
+      {isOpen && (
+        <div
+          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[170px] h-[300px] z-10 shadow-xl overflow-y-auto overflow-x-hidden"
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+        >
+          {districts?.map((distRow) => {
+            return (
+              <button
+                // onClick={handlePClick}
+                className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm"
+                onClick={() => handleClick(distRow.Location)}
+                key={distRow.id}
+              >
+                {distRow.Location}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

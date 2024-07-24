@@ -1,4 +1,5 @@
-import clientPromise from "../../../lib/mongodb.js";
+// import clientPromise from "../../../lib/mongodb.js";
+import { connectToDatabase1, connectToDatabase2 } from "../../../lib/mongodb2";
 // import stateList from "./stateList.js";
 export default async (req, res) => {
   try {
@@ -39,19 +40,34 @@ export default async (req, res) => {
     for (let i = 0; i < stateList.length; i++) {
       const dbName = stateList[i];
       // console.log(dbName);
-      const client = await clientPromise;
-      const db = client.db(dbName);
-      const result = await db
-        .collection("cluster")
-        .find({
-          "social category": req.query.caste,
-        })
-        .sort({ metacritic: -1 })
-        .toArray();
-      // console.log(result[0]);
-      fin.push(...result);
+      if (i < 15) {
+        const client = await connectToDatabase1();
+        const db = client.db(dbName);
+        const result = await db
+          .collection("cluster")
+          .find({
+            "social category": req.query.caste,
+          })
+          .sort({ metacritic: -1 })
+          .toArray();
+        fin.push(...result);
+      } else {
+        const client2 = await connectToDatabase2();
+        const db2 = client2.db(dbName);
+
+        const result2 = await db2
+          .collection("cluster")
+          .find({
+            "social category": req.query.caste,
+          })
+          .sort({ metacritic: -1 })
+          .toArray();
+        // console.log(result[0]);
+
+        fin.push(...result2);
+      }
     }
-    console.log(fin);
+    // console.log(fin);
     res.json(fin);
   } catch (e) {
     console.error(e);
