@@ -23,7 +23,7 @@ for filename in files:
 
         data.append([state_name, starting_dno, ending_dno])
         
-abbreDF = pd.DataFrame(data, columns=['state', 'startingDNO', 'endingDNO'])
+abbreDF = pd.DataFrame(data, columns=['state', 'startingDNo', 'endingDNo'])
 
 abbreDF.to_csv('DATA\\Test\\Abbreviations\\stateDNoMapping.csv', index=False)  
 
