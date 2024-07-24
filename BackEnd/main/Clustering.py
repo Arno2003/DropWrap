@@ -27,7 +27,8 @@ class Clustering:
             if os.path.isdir(dirLoc):
                 for fileName in os.listdir(dirLoc):
                     print("Working with : ", fileName)
-                    if fileName not in problemList:
+                    # if fileName not in problemList:
+                    if fileName == "IndiaDistricts.csv":
                         for i in range(len(vars)):
                             var = vars[i]
                             for j in range(len(cats)):
@@ -84,6 +85,8 @@ class Clustering:
         util.serialNoAdd()
         Clustering.formClusterSeparately()
         util.merge()
+        
+    
     
     def __init__(self):
         self.util = util()
@@ -93,3 +96,4 @@ if __name__ == "__main__":
     folderPath = "BackEnd\Main\InputData\FilteredData"
     clst = Clustering()
     clst.formCluster()
+    clst.formClusterWhole()
