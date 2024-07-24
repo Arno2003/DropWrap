@@ -74,6 +74,17 @@ class Clustering:
                                     os.remove(filePath)
                                     # newData.to_csv(filePath)
                                 data.to_csv(filePath)
+                                
+                                
+                                # Dendrogram
+                                plt.figure(figsize=(50, 20))  # Adjust figsize to improve readability, might need tweaking
+                                plt.title("Dendrogram for " + var)
+                                dend = dendrogram(linkage(data.values, method="ward"), leaf_rotation=90)  # Rotate labels for better readability
+                                plt.xlabel("Districts")
+                                plt.ylabel("Distance")
+                                plt.tight_layout()  # Adjust layout to make room for the rotated x-axis labels
+                                plt.savefig(dirPath + "\\" + var + "_Dendrogram.png", dpi=600)
+                                plt.close() 
         except Exception as e:
             print(e)
     
