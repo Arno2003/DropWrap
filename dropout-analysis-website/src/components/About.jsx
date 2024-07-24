@@ -27,7 +27,7 @@ const About = () => {
         </section>
       </main>
       <footer className="bg-dark text-light py-6 text-center">
-        <p>&copy; 2024 Dropwrap. All rights reserved.</p>
+        <p>&copy; </p>
       </footer>
     </div>
   );
