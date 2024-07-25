@@ -68,15 +68,7 @@ const clusterStyle = (feature) => {
 };
 
 // MapComponent2 function
-const MapComponent2 = ({
-  category,
-  caste,
-  std,
-  classes,
-  setAvgRate,
-  mode,
-  stateName,
-}) => {
+const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
   // Refs for map and popup
   const mapRef = useRef(null);
   const popupRef = useRef(null);

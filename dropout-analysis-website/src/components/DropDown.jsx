@@ -29,7 +29,7 @@ export const CategoryDropDown = ({ category, setCategory }) => {
       </button>
       {isOpen && (
         <div
-          className="text-light absolute flex flex-col text-md bg-dark dark:text-dark dark:bg-light   dark:bg-opacity-70 bg-opacity-70 dark:font-bold  rounded-md backdrop-blur-sm w-[130px] z-10 "
+          className="text-light absolute flex flex-col text-md bg-dark dark:text-dark dark:bg-light   dark:bg-opacity-70 bg-opacity-70 dark:font-bold  rounded-md backdrop-blur-sm w-[130px] z-50 "
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
@@ -82,7 +82,7 @@ export const CasteDropDown = ({ caste, setCaste }) => {
       </button>
       {isOpen && (
         <div
-          className="text-light absolute flex flex-col text-md bg-dark dark:text-dark dark:bg-light  dark:bg-opacity-70 bg-opacity-70 dark:font-bold  rounded-md backdrop-blur-sm w-[140px] z-10"
+          className="text-light absolute flex flex-col text-md bg-dark dark:text-dark dark:bg-light  dark:bg-opacity-70 bg-opacity-70 dark:font-bold  rounded-md backdrop-blur-sm w-[140px] z-50"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
@@ -136,7 +136,7 @@ export const StdDropDown = ({ std, setStd }) => {
       </button>
       {isOpen && (
         <div
-          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[160px] z-10 shadow-xl"
+          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[160px] z-50 shadow-xl"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
@@ -165,28 +165,27 @@ export const StdDropDown = ({ std, setStd }) => {
 };
 
 export const ChooseDistDropDown = ({
-  dist,
-  setDist,
-  reasonList,
+  prop,
+  setProp,
   dropDownList,
-  dropLabel,
   className,
+  q,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (loc) => {
-    setDist(loc);
+    setProp(loc);
   };
   // console.log(dist);
   return (
-    <div className="z-0">
+    <div className="">
       {/* <h3 className="text-dark">Standard:</h3> */}
       <button
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-0 relative ${className}`}
+        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
       >
-        {dist}
+        {prop}
       </button>
       {isOpen && (
         <div
@@ -199,10 +198,10 @@ export const ChooseDistDropDown = ({
               <button
                 // onClick={handlePClick}
                 className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm z-50"
-                onClick={() => handleClick(row.Location)}
+                onClick={() => handleClick(row[q])}
                 key={row.id}
               >
-                {dropLabel === "State" ? row.State : row.Location}
+                {row[q]}
               </button>
             );
           })}
