@@ -49,27 +49,27 @@ if (process.env.NODE_ENV === "development") {
 
 async function connectToDatabase1() {
   if (!clientPromise1) {
-    console.log("Initializing MongoClient for Cluster0");
+    // console.log("Initializing MongoClient for Cluster0");
     client1 = new MongoClient(uri1, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     clientPromise1 = client1.connect();
   }
-  console.log("Returning clientPromise1 for Cluster0");
+  // console.log("Returning clientPromise1 for Cluster0");
   return clientPromise1;
 }
 
 async function connectToDatabase2() {
   if (!clientPromise2) {
-    console.log("Initializing MongoClient for Cluster1");
+    // console.log("Initializing MongoClient for Cluster1");
     client2 = new MongoClient(uri2, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     clientPromise2 = client2.connect();
   }
-  console.log("Returning clientPromise2 for Cluster1");
+  // console.log("Returning clientPromise2 for Cluster1");
   return clientPromise2;
 }
 
