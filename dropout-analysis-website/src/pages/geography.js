@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import axios from "axios";
 import Layout from "@/components/Layout";
-import MapComponent2 from "@/components/MapComponent2";
+import MapComponent2 from "@/components/MapComponent3";
 import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
   CategoryDropDown,
@@ -205,7 +205,7 @@ const Geography = ({ mode }) => {
               />
             </div>
 
-            <MapComponent2
+            <MapComponent3
               mode={mode}
               classes="w-[60%] "
               category={category}
