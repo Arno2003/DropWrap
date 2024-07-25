@@ -10,7 +10,8 @@ if __name__ == "__main__":
     print("This is the main execution block")
     # dirLoc = "DATA\\Test\\DistrictWiseData"
     dirLoc = "DATA\\Test\\StateWiseData"
-    clst.formCluster(dirLoc)
+    clst.formClusterWhole("DATA\Test\stateWiseData\states.csv", "states.csv")
+    # clst.formCluster(dirLoc)
     # clst.prepareStateData()
     # clst.formClusterStateWise()
     # clst.formClusterStateWise()

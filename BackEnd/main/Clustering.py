@@ -210,80 +210,56 @@ class Clustering:
         Clustering.prepareStateData()
         util.merge()
     
-    def formClusterWhole():
-        try:
-            dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
+    def formClusterWhole(filePath, fileName):
+        df = pd.read_csv(filePath)
+        problemList = ["Arunachal Pradesh.csv", "Chandigarh.csv", "Goa.csv",
+                           "Ladakh.csv", "Lakshadweep.csv"]
 
-            vars = ["prim_Girls", "prim_Boys", "prim_Overall", "upPrim_Girls", 
-                    "upPrim_Boys", "upPrim_Overall", "snr_Girls", "snr_Boys", "snr_Overall"]
-            cats = ["General", "SC", "ST", "OBC", "Overall"]
+        vars = ["prim_Girls", "prim_Boys", "prim_Overall", "upPrim_Girls", 
+                "upPrim_Boys", "upPrim_Overall", "snr_Girls", "snr_Boys", "snr_Overall"]
+        
+        cats = ["General", "SC", "ST", "OBC", "Overall"]
+        
+        for var in vars:
+            for cat in cats:
+                # Filter the data for Social Category = Overall
+                df_filtered = df[df['Social Category'] == cat]
 
-            if os.path.isdir(dirLoc):
-                for fileName in os.listdir(dirLoc):
-                    print("Working with : ", fileName)
-                    # if fileName not in problemList:
-                    if fileName == "IndiaDistricts.csv":
-                        for i in range(len(vars)):
-                            var = vars[i]
-                            for j in range(len(cats)):
-                                cat = cats[j]
+                data = df_filtered[['DNo', var]]
 
-                                df = pd.read_csv(dirLoc + "//" + fileName)
+                # Perform hierarchical/agglomerative clustering
+                linked = linkage(data, method='ward')
+                
+                if len(data) > 10:    
+                    noOfClust = 5
+                elif len(data) < 10 and len(data) > 5:
+                    noOfClust = 3
+                else:
+                    noOfClust = 2
+                    
+                clustering = AgglomerativeClustering(n_clusters=noOfClust, linkage='ward')
+                clusters = clustering.fit_predict(data)
+                
+                data[cat + "_" +var + "_" +'Cluster'] = clusters
+                
+                dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + fileName.replace(".csv", "")
+                if not os.path.exists(dirPath):
+                    os.mkdir(path=dirPath)
+                
+                dirPath += "\\" + cat
 
-                                genData = df[df["Social Category"] == cat]
-                                # print(genData.head())
-                                data = genData[["DNo", var]]
+                if not os.path.exists(dirPath):
+                    os.mkdir(path=dirPath)
 
-                                df = pd.DataFrame(data)
+                filePath = dirPath + "\\"  + var + ".csv"
 
-                                # dataLinkage = linkage(newData.values.reshape(-1,1), "ward")
-                                print(fileName)
-                                print(data.head())
-                                # df = pd.DataFrame(newData)
 
-                                if len(data) > 10:
-                                    noOfClust = 5
-                                elif len(data) < 10 and len(data) > 5:
-                                    noOfClust = 3
-                                else:
-                                    noOfClust = 2
+                if os.path.exists(filePath):
+                    os.remove(filePath)
+                    # newData.to_csv(filePath)
+                data.to_csv(filePath)
 
-                                clustering = AgglomerativeClustering(
-                                    n_clusters=noOfClust, linkage='ward')
-                                clusters = clustering.fit_predict(data)
-                                data[cat + "_" + var + "_" +
-                                     'Cluster'] = clusters
-
-                                dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + \
-                                    fileName.replace(".csv", "")
-                                if not os.path.exists(dirPath):
-                                    os.mkdir(path=dirPath)
-
-                                dirPath += "\\" + cat
-
-                                if not os.path.exists(dirPath):
-                                    os.mkdir(path=dirPath)
-
-                                filePath = dirPath + "\\" + var + ".csv"
-
-                                if os.path.exists(filePath):
-                                    os.remove(filePath)
-                                    # newData.to_csv(filePath)
-                                data.to_csv(filePath)
-                                
-                                
-                                # # Dendrogram
-                                # plt.figure(figsize=(50, 20))  # Adjust figsize to improve readability, might need tweaking
-                                # plt.title("Dendrogram for " + var)
-                                # dend = dendrogram(linkage(data.values, method="ward"), leaf_rotation=90)  # Rotate labels for better readability
-                                # plt.xlabel("Districts")
-                                # plt.ylabel("Distance")
-                                # plt.tight_layout()  # Adjust layout to make room for the rotated x-axis labels
-                                # plt.savefig(dirPath + "\\" + var + "_Dendrogram.png", dpi=600)
-                                # plt.close() 
-            util.mergeFilesWhole()
-        except Exception as e:
-            print(e)
+        util.merge("BackEnd\Test\ModelTesting\outputData\states")
     
     def __init__(self):
         self.util = util()

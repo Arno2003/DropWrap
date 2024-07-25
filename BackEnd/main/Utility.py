@@ -256,8 +256,8 @@ class Utility:
                 Utility.process_subfolder(dirPath, subfolder)
     
     #################################### main calling function ##########################################
-    def merge():
-        dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
+    def merge(dirPath="BackEnd\\Test\\ModelTesting\\outputData"):
+        # dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
         Utility.mergeFiles(dirPath)
     
         
