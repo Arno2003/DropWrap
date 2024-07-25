@@ -8,7 +8,7 @@ from Utility import Utility as util
 # merging at the same time while forming, to create a final combined file
 
 
-class Clustering:      
+class Clustering:
     ##########################################################################################################
     ################################# Cluster Formation for row, column cobinations ##########################
     ##########################################################################################################       
@@ -18,7 +18,7 @@ class Clustering:
             # dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
 
             problemList = ["Arunachal Pradesh.csv", "Chandigarh.csv", "Goa.csv",
-                            "Ladakh.csv", "Lakshadweep.csv"]
+                           "Ladakh.csv", "Lakshadweep.csv"]
 
             vars = ["prim_Girls", "prim_Boys", "prim_Overall", "upPrim_Girls", 
                     "upPrim_Boys", "upPrim_Overall", "snr_Girls", "snr_Boys", "snr_Overall"]
@@ -241,28 +241,30 @@ class Clustering:
                                 print(data.head())
                                 # df = pd.DataFrame(newData)
 
-                                if len(data) > 10:    
+                                if len(data) > 10:
                                     noOfClust = 5
                                 elif len(data) < 10 and len(data) > 5:
                                     noOfClust = 3
                                 else:
                                     noOfClust = 2
-                                    
-                                clustering = AgglomerativeClustering(n_clusters=noOfClust, linkage='ward')
-                                clusters = clustering.fit_predict(data)
-                                data[cat + "_" +var + "_" +'Cluster'] = clusters
 
-                                dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + fileName.replace(".csv", "")
+                                clustering = AgglomerativeClustering(
+                                    n_clusters=noOfClust, linkage='ward')
+                                clusters = clustering.fit_predict(data)
+                                data[cat + "_" + var + "_" +
+                                     'Cluster'] = clusters
+
+                                dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\" + \
+                                    fileName.replace(".csv", "")
                                 if not os.path.exists(dirPath):
                                     os.mkdir(path=dirPath)
-                                
+
                                 dirPath += "\\" + cat
 
                                 if not os.path.exists(dirPath):
                                     os.mkdir(path=dirPath)
 
-                                filePath = dirPath + "\\"  + var + ".csv"
-
+                                filePath = dirPath + "\\" + var + ".csv"
 
                                 if os.path.exists(filePath):
                                     os.remove(filePath)
