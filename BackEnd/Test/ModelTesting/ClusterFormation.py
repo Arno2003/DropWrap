@@ -13,7 +13,7 @@ class ClusterFormation:
         socialCat = parameters[0]
         colName = parameters[1]
         
-        # slicing data based on the social category
+        # slicing data based on the Social Category
         slicedData = df[df["Social Category"] == socialCat]
         
         data = slicedData[["Location",colName]]

@@ -41,12 +41,12 @@ def process_subfolder(base_dir, subfolder_name, final_output_dir):
                         # Read the CSV file into a dataframe
                         df = pd.read_csv(file_path)
                         
-                        # Add the 'social category' column with the subdirectory name
-                        df['social category'] = sub_dir
+                        # Add the 'Social Category' column with the subdirectory name
+                        df['Social Category'] = sub_dir
                         
-                        # Filter columns ending with 'Cluster' and keep 'DNo' and 'social category'
+                        # Filter columns ending with 'Cluster' and keep 'DNo' and 'Social Category'
                         cluster_columns = [col for col in df.columns if col.endswith('Cluster')]
-                        columns_to_keep = ['DNo', 'social category'] + cluster_columns
+                        columns_to_keep = ['DNo', 'Social Category'] + cluster_columns
                         df = df[columns_to_keep]
                         
                         # Merge data for each DNo

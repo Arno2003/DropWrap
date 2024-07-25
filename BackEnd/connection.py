@@ -16,7 +16,7 @@ collection = db['cluster']
 
 # Fetch all documents in the collection
 #documents = collection.find()
-filter = {'social category': 'SC'}
+filter = {'Social Category': 'SC'}
 
 # Fetch all documents matching the filter
 documents = collection.find(filter)
