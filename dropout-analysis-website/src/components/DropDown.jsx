@@ -168,24 +168,11 @@ export const ChooseDistDropDown = ({
   dist,
   setDist,
   reasonList,
+  dropDownList,
+  dropLabel,
   className,
 }) => {
-  const [districts, setDistricts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {
-    const distList = () => {
-      let uniqueLocations = [];
-      const uniqueReasonList = reasonList.filter((row) => {
-        if (!uniqueLocations.includes(row.Location)) {
-          uniqueLocations.push(row.Location);
-          return true;
-        }
-        return false;
-      });
-      setDistricts(uniqueReasonList);
-    };
-    distList();
-  }, [reasonList]);
 
   const handleClick = (loc) => {
     setDist(loc);
@@ -197,25 +184,25 @@ export const ChooseDistDropDown = ({
       <button
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
+        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-0 relative ${className}`}
       >
         {dist}
       </button>
       {isOpen && (
         <div
-          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[170px] h-[300px] z-10 shadow-xl overflow-y-auto overflow-x-hidden"
+          className="text-light dark:text-dark dark:bg-light absolute flex flex-col text-md bg-dark dark:bg-opacity-70 bg-opacity-70 dark:font-bold rounded-md backdrop-blur-sm w-[170px] h-[300px] z-50 shadow-xl overflow-y-auto overflow-x-hidden"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
-          {districts?.map((distRow) => {
+          {dropDownList?.map((row) => {
             return (
               <button
                 // onClick={handlePClick}
-                className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm"
-                onClick={() => handleClick(distRow.Location)}
-                key={distRow.id}
+                className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm z-50"
+                onClick={() => handleClick(row.Location)}
+                key={row.id}
               >
-                {distRow.Location}
+                {dropLabel === "State" ? row.State : row.Location}
               </button>
             );
           })}

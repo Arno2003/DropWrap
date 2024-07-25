@@ -126,8 +126,8 @@ const MapComponent2 = ({
         axios
           .get(`/api/formatted_cluster_data?caste=${caste}`, { timeout: 10000 })
           .then((clusters) => {
-            console.log(latLong.data);
-            console.log(clusters.data);
+            // console.log(latLong.data);
+            // console.log(clusters.data);
             let colName;
             if (std === "") {
               colName = "prim_" + category;

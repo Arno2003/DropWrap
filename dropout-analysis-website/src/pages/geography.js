@@ -70,12 +70,14 @@ const ReasonsTab = ({ classes, reasonList }) => {
 
 const ReasonsTab2 = ({
   classes,
+  dropDownList,
   reasonList,
   dist,
   setDist,
   caste,
   std,
   category,
+  dropLabel,
 }) => {
   const parseQuery = (fact) => {
     let a;
@@ -83,9 +85,9 @@ const ReasonsTab2 = ({
     else if (std === "1") a = "upPrim";
     else a = "snr";
     return a + "_" + category + "_" + fact;
-    // console.log(a + "_" + category + "_" + fact);
   };
   // parseQuery("socialcat");
+  console.log(dropLabel, dropDownList);
   return (
     <div
       className={`${classes} bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
@@ -95,10 +97,12 @@ const ReasonsTab2 = ({
       </h3>
       <div className="flex flex-row  justify-center items-center my-3">
         <h2 className="text-xl dark:text-light text-dark px-3 py-1">
-          Select District:
+          Select {dropLabel}:
         </h2>
         <ChooseDistDropDown
+          dropLabel={dropLabel}
           reasonList={reasonList}
+          dropDownList={dropDownList}
           dist={dist}
           setDist={setDist}
           className="z-0"
@@ -165,6 +169,34 @@ const Geography = ({ mode }) => {
       });
   }, [stateName, category, avgRate, caste, std]);
 
+  const [stateList, setStateList] = useState([]);
+  const [districtList, setDistrictList] = useState([]);
+
+  useEffect(() => {
+    const distList = () => {
+      let uniqueStates = [];
+      let uniqueDistricts = [];
+      const uniqueDistrictList = reasonList.filter((row) => {
+        if (!uniqueDistricts.includes(row.Location)) {
+          uniqueDistricts.push(row.Location);
+          return true;
+        }
+        return false;
+      });
+      const uniqueStateList = reasonList.filter((row) => {
+        if (!uniqueStates.includes(row.State)) {
+          uniqueStates.push(row.State);
+          return true;
+        }
+
+        return false;
+      });
+      setStateList(uniqueStateList);
+      setDistrictList(uniqueDistrictList);
+    };
+    distList();
+  }, [reasonList]);
+
   return (
     <>
       <Head>
@@ -194,6 +226,20 @@ const Geography = ({ mode }) => {
                 classes="text-dark w-[100%] mr-4 "
               /> */}
               <ReasonsTab2
+                dropLabel="State"
+                dropDownList={stateList}
+                reasonList={reasonList}
+                dist={dist}
+                setDist={setDist}
+                caste={caste}
+                setCaste={setCaste}
+                category={category}
+                std={std}
+                classes="text-dark w-[100%] mr-4 "
+              />
+              <ReasonsTab2
+                dropLabel="District"
+                dropDownList={districtList}
                 reasonList={reasonList}
                 dist={dist}
                 setDist={setDist}
