@@ -171,12 +171,12 @@ class Utility:
                         # Read the CSV file into a dataframe
                         df = pd.read_csv(file_path)
                         
-                        # Add the 'social category' column with the subdirectory name
-                        df['social category'] = sub_dir
+                        # Add the 'Social Category' column with the subdirectory name
+                        df['Social Category'] = sub_dir
                         
-                        # Filter columns ending with 'Cluster' and keep 'DNo' and 'social category'
+                        # Filter columns ending with 'Cluster' and keep 'DNo' and 'Social Category'
                         cluster_columns = [col for col in df.columns if col.endswith('Cluster')]
-                        columns_to_keep = ['DNo', 'social category'] + cluster_columns
+                        columns_to_keep = ['DNo', 'Social Category'] + cluster_columns
                         df = df[columns_to_keep]
                         
                         # Merge data for each DNo
@@ -225,7 +225,7 @@ class Utility:
 
         # output directory for storing cluster data
         # output_file_all = f"BackEnd\database\{subfolder_name}\cluster.csv"
-        output_file_all = f"BackEnd\\Test\\ModelTesting\\outputData\\IndiaAllDistricts_cluster.csv"
+        output_file_all = f"BackEnd\\Test\\ModelTesting\\outputData\\{subfolder_name}.csv"
         
         # merging all the clusters into a single file
         df = pd.concat(dfList)
@@ -246,9 +246,18 @@ class Utility:
             if os.path.isdir(subfolder_path):
                 Utility.process_subfolder(dirPath, subfolder)
     
+    def mergeFilesWhole():
+        dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\IndiaDistricts"
+        for subfolder in os.listdir(dirPath):
+            subfolder_path = os.path.join(dirPath, subfolder)
+            
+            # Check if it is a directory
+            if os.path.isdir(subfolder_path):
+                Utility.process_subfolder(dirPath, subfolder)
+    
     #################################### main calling function ##########################################
-    def merge():
-        dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
+    def merge(dirPath="BackEnd\\Test\\ModelTesting\\outputData"):
+        # dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
         Utility.mergeFiles(dirPath)
     
         

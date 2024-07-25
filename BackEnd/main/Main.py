@@ -1,4 +1,4 @@
-from clustering import Clustering as clst
+from Clustering import Clustering as clst
 
 class Main:
     print("This is main class")
@@ -8,5 +8,11 @@ class Main:
     
 if __name__ == "__main__":
     print("This is the main execution block")
-    clst.formCluster()
+    # dirLoc = "DATA\\Test\\DistrictWiseData"
+    dirLoc = "DATA\\Test\\StateWiseData"
+    clst.formClusterWhole("DATA\Test\stateWiseData\states.csv", "states.csv")
+    # clst.formCluster(dirLoc)
+    # clst.prepareStateData()
+    # clst.formClusterStateWise()
+    # clst.formClusterStateWise()
     # clst.formClusterWhole()
