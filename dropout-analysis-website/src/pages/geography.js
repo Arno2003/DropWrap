@@ -119,7 +119,7 @@ const ReasonsTab2 = ({
         // console.log(row.Location.toLowerCase(), dist.toLowerCase());
 
         if (row.Location.toLowerCase() === dist.toLowerCase()) {
-          console.log(f1, f2, row);
+          // console.log(f1, f2, row);
           return (
             <div
               className="flex flex-row text-dark dark:text-light  text-xl"
