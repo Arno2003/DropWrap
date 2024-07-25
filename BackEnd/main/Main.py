@@ -9,3 +9,4 @@ class Main:
 if __name__ == "__main__":
     print("This is the main execution block")
     clst.formCluster()
+    # clst.formClusterWhole()
