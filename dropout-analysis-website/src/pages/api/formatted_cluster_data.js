@@ -59,7 +59,7 @@ export default async (req, res) => {
         const result2 = await db2
           .collection("cluster")
           .find({
-            "Social Category": req.query.caste,
+            "social category": req.query.caste,
           })
           .sort({ metacritic: -1 })
           .toArray();
