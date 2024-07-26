@@ -50,7 +50,6 @@ export default async (req, res) => {
           })
           .sort({ metacritic: -1 })
           .toArray();
-        console.log(result);
         fin.push(...result);
       } else {
         const client2 = await connectToDatabase2();

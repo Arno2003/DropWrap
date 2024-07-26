@@ -86,10 +86,10 @@ export const CasteDropDown = ({ caste, setCaste }) => {
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
-          {casteList.map((item) => {
+          {casteList.map((item, i) => {
             return (
               <button
-                key={item.id}
+                key={i}
                 onClick={() => handleCasteClick(item)}
                 className={`py-4 px-3 ${
                   item !== "Overall" && "border-b-2"
@@ -183,7 +183,7 @@ export const ChooseDistDropDown = ({
       <button
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
+        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-1 px-3 font-bold  text-light !text-sm dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
       >
         {prop}
       </button>
@@ -199,7 +199,7 @@ export const ChooseDistDropDown = ({
                 // onClick={handlePClick}
                 className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm z-50"
                 onClick={() => handleClick(row[q])}
-                key={row.id}
+                key={row._id}
               >
                 {row[q]}
               </button>
