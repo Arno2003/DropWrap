@@ -46,10 +46,11 @@ export default async (req, res) => {
         const result = await db
           .collection("cluster")
           .find({
-            "Social Category": req.query.caste,
+            "social category": req.query.caste,
           })
           .sort({ metacritic: -1 })
           .toArray();
+        console.log(result);
         fin.push(...result);
       } else {
         const client2 = await connectToDatabase2();
@@ -58,7 +59,7 @@ export default async (req, res) => {
         const result2 = await db2
           .collection("cluster")
           .find({
-            "Social Category": req.query.caste,
+            "social category": req.query.caste,
           })
           .sort({ metacritic: -1 })
           .toArray();

@@ -68,7 +68,15 @@ const clusterStyle = (feature) => {
 };
 
 // MapComponent2 function
-const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
+const MapComponent2 = ({
+  category,
+  caste,
+  std,
+  classes,
+  setAvgRate,
+  mode,
+  stateName,
+}) => {
   // Refs for map and popup
   const mapRef = useRef(null);
   const popupRef = useRef(null);
@@ -118,8 +126,6 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
         axios
           .get(`/api/formatted_cluster_data?caste=${caste}`, { timeout: 10000 })
           .then((clusters) => {
-            // console.log(latLong.data);
-            // console.log(clusters.data);
             let colName;
             if (std === "") {
               colName = "prim_" + category;

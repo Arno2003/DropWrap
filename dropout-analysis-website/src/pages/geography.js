@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import axios from "axios";
 import Layout from "@/components/Layout";
-import MapComponent2 from "@/components/MapComponent2";
+import MapComponent2 from "@/components/MapComponent3";
 import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
   CategoryDropDown,
@@ -37,55 +37,62 @@ const AnimatedNumbers = ({ value }) => {
   return <span ref={ref}></span>;
 };
 
-const ReasonsTab = ({ classes, reasonList }) => {
-  return (
-    <div
-      className={`${classes} bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
-    >
-      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-lg border-solid border-t-2 border-x-2 dark:border-secDark">
-        Reasons for Dropouts
-      </h3>
-
-      {reasonList.map((item) => {
-        return (
-          <motion.div
-            key={item.id}
-            className={`w-[95%] flex flex-row px-5 py-4 ${
-              reasonList.indexOf(item) !== reasonList.length - 1 && "border-b-2"
-            } border-solid border-secDark dark:border-secLight dark:text-light mx-auto`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <div className="w-[80%] text-lg">{item.reason}</div>
-            <div className="w-[20%] text-lg font-bold flex items-center justify-center tracking-widest">
-              {item.rate === 0 ? <>0</> : <AnimatedNumbers value={item.rate} />}
-              %
-            </div>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
-};
-
 const ReasonsTab2 = ({
   classes,
+  dropDownList,
   reasonList,
-  dist,
-  setDist,
+  prop,
+  setProp,
   caste,
   std,
   category,
+  dropLabel,
 }) => {
+  const [val, setVal] = useState([0, 0]);
   const parseQuery = (fact) => {
     let a;
     if (std === "") a = "prim";
     else if (std === "1") a = "upPrim";
     else a = "snr";
     return a + "_" + category + "_" + fact;
-    // console.log(a + "_" + category + "_" + fact);
   };
+
+  function roundToNDecimals(value, n) {
+    const multiplier = Math.pow(10, n);
+    return Math.round(value * multiplier) / multiplier;
+  }
+  const q = dropLabel === "State" ? "State" : "Location";
   // parseQuery("socialcat");
+  // console.log(dropLabel, dropDownList);
+  useEffect(() => {
+    let temp1 = 0;
+    let temp2 = 0;
+    let k = 0;
+    reasonList?.map((row) => {
+      let f1 = parseQuery("income");
+      let f2 = parseQuery("social_category");
+      // console.log(row.Location.toLowerCase(), dist.toLowerCase());
+
+      if (row[q].toLowerCase() === prop.toLowerCase()) {
+        if (dropLabel === "District") {
+          temp1 = row[f1].toFixed(2);
+          temp2 = row[f2].toFixed(2);
+          // setVal([, row[f2].toFixed(2)]);
+        }
+        if (dropLabel === "State") {
+          (temp1 = temp1 + parseFloat(row[f1])), 2;
+          (temp2 = temp2 + parseFloat(row[f2])), 2;
+          k++;
+        }
+        // console.log(f1, f2, row);
+      }
+    });
+    if (k !== 0) {
+      temp1 = roundToNDecimals(temp1 / k, 2);
+      temp2 = roundToNDecimals(temp2 / k, 2);
+    }
+    setVal([temp1, temp2]);
+  }, [reasonList, prop]);
   return (
     <div
       className={`${classes} bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
@@ -95,12 +102,13 @@ const ReasonsTab2 = ({
       </h3>
       <div className="flex flex-row  justify-center items-center my-3">
         <h2 className="text-xl dark:text-light text-dark px-3 py-1">
-          Select District:
+          Select {dropLabel}:
         </h2>
         <ChooseDistDropDown
-          reasonList={reasonList}
-          dist={dist}
-          setDist={setDist}
+          dropDownList={dropDownList}
+          prop={prop}
+          setProp={setProp}
+          q={q}
           className="z-0"
         />
         {/* <CasteDropDown caste={casteReason} setCaste={setCasteReason} /> */}
@@ -113,42 +121,29 @@ const ReasonsTab2 = ({
           Due to Family Income
         </h3>
       </div>
-      {reasonList?.map((row) => {
-        let f1 = parseQuery("income");
-        let f2 = parseQuery("social_category");
-        // console.log(row.Location.toLowerCase(), dist.toLowerCase());
-
-        if (row.Location.toLowerCase() === dist.toLowerCase()) {
-          console.log(f1, f2, row);
-          return (
-            <div
-              className="flex flex-row text-dark dark:text-light  text-xl"
-              key={row.id}
-            >
-              <div className="w-[50%] text-center border-r-2 border-dark dark:border-light py-4 font-bold">
-                {row[f1].toFixed(2)}&nbsp;%
-              </div>
-              <div className="w-[50%] text-center py-4 font-bold">
-                {row[f2].toFixed(2)}&nbsp;%
-              </div>
-            </div>
-          );
-        }
-      })}
+      <div className="flex flex-row text-dark dark:text-light  text-xl">
+        <div className="w-[50%] text-center border-r-2 border-dark dark:border-light py-4 font-bold">
+          {val[0]}&nbsp;%
+        </div>
+        <div className="w-[50%] text-center py-4 font-bold">
+          {val[1]}&nbsp;%
+        </div>
+      </div>
     </div>
   );
 };
 
 const Geography = ({ mode }) => {
-  const [stateName, setStateName] = useState("Gujarat");
   const [category, setCategory] = useState("Overall");
   const [caste, setCaste] = useState("Overall");
   const [casteReason, setCasteReason] = useState("Overall");
   const [std, setStd] = useState("2");
   const [reasonList, setReasonList] = useState([]);
   const [avgRate, setAvgRate] = useState(-1);
-  const [dist, setDist] = useState("GUNTUR");
-
+  const [dist, setDist] = useState("ANANTAPUR");
+  const [state, setState] = useState("GUJARAT");
+  const [stateList, setStateList] = useState([]);
+  const [districtList, setDistrictList] = useState([]);
   useEffect(() => {
     axios
       .get(`/api/reasons?caste=${caste}`)
@@ -163,7 +158,32 @@ const Geography = ({ mode }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [stateName, category, avgRate, caste, std]);
+  }, [category, avgRate, caste, std]);
+
+  useEffect(() => {
+    const distList = () => {
+      let uniqueStates = [];
+      let uniqueDistricts = [];
+      const uniqueDistrictList = reasonList.filter((row) => {
+        if (!uniqueDistricts.includes(row.Location)) {
+          uniqueDistricts.push(row.Location);
+          return true;
+        }
+        return false;
+      });
+      const uniqueStateList = reasonList.filter((row) => {
+        if (!uniqueStates.includes(row.State)) {
+          uniqueStates.push(row.State);
+          return true;
+        }
+
+        return false;
+      });
+      setStateList(uniqueStateList);
+      setDistrictList(uniqueDistrictList);
+    };
+    distList();
+  }, [reasonList]);
 
   return (
     <>
@@ -194,9 +214,23 @@ const Geography = ({ mode }) => {
                 classes="text-dark w-[100%] mr-4 "
               /> */}
               <ReasonsTab2
+                dropLabel="State"
+                dropDownList={stateList}
                 reasonList={reasonList}
-                dist={dist}
-                setDist={setDist}
+                prop={state}
+                setProp={setState}
+                caste={caste}
+                setCaste={setCaste}
+                category={category}
+                std={std}
+                classes="text-dark w-[100%] mr-4 "
+              />
+              <ReasonsTab2
+                dropLabel="District"
+                dropDownList={districtList}
+                reasonList={reasonList}
+                prop={dist}
+                setProp={setDist}
                 caste={caste}
                 setCaste={setCaste}
                 category={category}
@@ -205,7 +239,7 @@ const Geography = ({ mode }) => {
               />
             </div>
 
-            <MapComponent2
+            {/* <MapComponent3
               mode={mode}
               classes="w-[60%] "
               category={category}
@@ -213,7 +247,7 @@ const Geography = ({ mode }) => {
               caste={caste}
               setAvgRate={setAvgRate}
               stateName={stateName}
-            />
+            /> */}
           </div>
         </Layout>
       </div>
