@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.cluster import AgglomerativeClustering
+from sklearn.preprocessing import StandardScaler
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 import matplotlib.pyplot as plt
 import os
@@ -15,7 +16,7 @@ class Clustering:
     
     def formClusterSeparately(dirLoc):
         try:
-            # dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
+            dirLoc = "DATA\\Test\\DistrictWiseData" # i/p file location
 
             problemList = ["Arunachal Pradesh.csv", "Chandigarh.csv", "Goa.csv",
                            "Ladakh.csv", "Lakshadweep.csv"]
@@ -142,7 +143,7 @@ class Clustering:
     ##########################################################################################################
     
     def formCluster(dirLoc):
-        util.serialNoAdd()
+        # util.serialNoAdd()
         Clustering.formClusterSeparately(dirLoc)
         util.merge()
         
@@ -151,17 +152,18 @@ class Clustering:
 
         # Directory containing your CSV files
         csv_dir = "DATA\\Test\\DistrictWiseData"
-
         # Get a list of all CSV files in the directory
         csv_files = glob.glob(os.path.join(csv_dir, "*.csv"))
 
         # Initialize an empty list to store each processed DataFrame
         dataframes = []
-
+        problemList = ["Arunachal Pradesh.csv", "Chandigarh.csv", "Goa.csv",
+                           "Ladakh.csv", "Lakshadweep.csv"]
+    
         # Check if there are any CSV files found
         if not csv_files:
             print("No CSV files found in the specified directory.")
-        else:
+        else:                 
             # Iterate through each CSV file
             for file in csv_files:
                 print(f"Processing file: {file}")
@@ -186,8 +188,10 @@ class Clustering:
                 grouped_df = df.groupby('Social Category').mean().reset_index()
 
                 # Add the state name as a new column
-                grouped_df['State'] = state_name
-
+                grouped_df['Location'] = state_name
+                
+                grouped_df.drop(columns=['DNo'], inplace=True)
+                            
                 # Append the grouped DataFrame to the list
                 dataframes.append(grouped_df)
 
@@ -196,20 +200,27 @@ class Clustering:
                 final_df = pd.concat(dataframes, ignore_index=True)
 
                 # Rearrange columns to have 'State' and 'Social Category' as the first columns
-                cols = ['State', 'Social Category'] + [col for col in final_df.columns if col not in ['State', 'Social Category']]
+                cols = ['Location', 'Social Category'] + [col for col in final_df.columns if col not in ['Location', 'Social Category']]
                 final_df = final_df[cols]
 
                 # Save the final DataFrame to a new CSV file
+                mapped_df = pd.read_csv("DATA\\Test\\Abbreviations\\stateDNoMapping.csv")
+                mapped_df['startingDNo'] = mapped_df['startingDNo'].apply(lambda x: int(str(x)[:3]))
+
+                merged_df = pd.merge(final_df, mapped_df[['Location', 'startingDNo']], on='Location', how='left')
+
+                
+                final_df["DNo"] = merged_df["startingDNo"]
+                
+                final_df = final_df[final_df["DNo"].notnull()]
+
+                
                 final_df.to_csv('DATA\\Test\\stateWiseData\\stateWiseData.csv', index=False)
                 print("Final CSV file with Social Category created successfully.")
             else:
                 print("No valid dataframes were created from the CSV files.")
 
 
-    def formClusterStateWise():
-        Clustering.prepareStateData()
-        util.merge()
-    
     def formClusterWhole(filePath, fileName):
         df = pd.read_csv(filePath)
         problemList = ["Arunachal Pradesh.csv", "Chandigarh.csv", "Goa.csv",
@@ -259,9 +270,36 @@ class Clustering:
                     # newData.to_csv(filePath)
                 data.to_csv(filePath)
 
-        def formClusterStateWise():
-            # Clustering.prepareStateData()
-            util.mergeStateFiles()
+
+    def formClusterStateWise():
+        # Directory containing the CSV files
+        directory = 'BackEnd\Test\ModelTesting\outputData\states\Merged'
+
+        # List of CSV files
+        # files = ['General_merged.csv', 'OBC_merged.csv', 'Overall_merged.csv', 'SC_merged.csv', 'ST_merged.csv']
+        files = os.listdir(directory)
+        
+        # Initialize an empty DataFrame for the merge
+        merged_df = None
+
+        # Iterate over the list of files and merge them on 'DNo'
+        for file in files:
+            file_path = os.path.join(directory, file)
+            df = pd.read_csv(file_path)
+            if merged_df is None:
+                merged_df = df
+            else:
+                # merged_df = pd.merge(merged_df, df, on='DNo', how='outer')
+                df = df.drop(columns=['DNo'])
+                merged_df = pd.concat([merged_df, df], axis=1)
+
+        # Save the merged DataFrame to a new CSV file
+        output_file_path = 'BackEnd\Test\ModelTesting\outputData\states.csv'
+        # merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+        merged_df.to_csv(output_file_path, index=False)
+
+        print("Files merged successfully.")
+
     
     def __init__(self):
         self.util = util()
