@@ -183,7 +183,7 @@ export const ChooseDistDropDown = ({
       <button
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-3 px-3 font-bold  text-light dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
+        className={`border-solid border-2 dark:border-light border-light  rounded-md  mr-3 mb-0 py-1 px-3 font-bold  text-light !text-sm dark:!bg-dark !bg-secDark  bg-opacity-0 w-[170px]  z-10 relative ${className}`}
       >
         {prop}
       </button>

@@ -43,10 +43,10 @@ const ReasonsTab2 = ({
   reasonList,
   prop,
   setProp,
-  caste,
   std,
   category,
   dropLabel,
+  head,
 }) => {
   const [val, setVal] = useState([0, 0]);
   const parseQuery = (fact) => {
@@ -80,11 +80,16 @@ const ReasonsTab2 = ({
           // setVal([, row[f2].toFixed(2)]);
         }
         if (dropLabel === "State") {
-          (temp1 = temp1 + parseFloat(row[f1])), 2;
-          (temp2 = temp2 + parseFloat(row[f2])), 2;
+          temp1 = temp1 + parseFloat(row[f1]);
+          temp2 = temp2 + parseFloat(row[f2]);
           k++;
         }
         // console.log(f1, f2, row);
+      }
+      if (dropLabel === "Total") {
+        temp1 = temp1 + parseFloat(row[f1]);
+        temp2 = temp2 + parseFloat(row[f2]);
+        k++;
       }
     });
     if (k !== 0) {
@@ -95,29 +100,37 @@ const ReasonsTab2 = ({
   }, [reasonList, prop]);
   return (
     <div
-      className={`${classes} bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
+      className={`${classes}  bg-secLight bg-opacity-25 mt-5 dark:bg-secDark rounded-lg  `}
     >
-      <h3 className="w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-lg border-solid border-t-2 border-x-2 dark:border-secDark">
+      <h3
+        className={`w-full text-center py-4 text-xl tracking-wider uppercase text-light font-bold bg-secDark dark:bg-dark   rounded-t-lg border-solid border-t-2 border-x-2 dark:border-secDark ${head}`}
+      >
         Reasons for Dropouts
       </h3>
-      <div className="flex flex-row  justify-center items-center my-3">
-        <h2 className="text-xl dark:text-light text-dark px-3 py-1">
-          Select {dropLabel}:
+      {dropLabel !== "Total" ? (
+        <div className={`flex flex-row  justify-center items-center`}>
+          <h2 className="text-xl dark:text-light text-dark px-3 py-1 my-2">
+            Select {dropLabel}:
+          </h2>
+          <ChooseDistDropDown
+            dropDownList={dropDownList}
+            prop={prop}
+            setProp={setProp}
+            q={q}
+            className="z-0"
+          />
+        </div>
+      ) : (
+        <h2 className="text-xl font-bold dark:text-light text-dark px-3 pt-2  w-full text-center">
+          All over India
         </h2>
-        <ChooseDistDropDown
-          dropDownList={dropDownList}
-          prop={prop}
-          setProp={setProp}
-          q={q}
-          className="z-0"
-        />
-        {/* <CasteDropDown caste={casteReason} setCaste={setCasteReason} /> */}
-      </div>
-      <div className="flex flex-row text-dark dark:text-light mt-3">
-        <h3 className="w-[50%] text-center border-r-2 border-b-2 border-dark dark:border-light py-4">
+      )}
+
+      <div className="flex flex-row text-dark dark:text-light mt-1">
+        <h3 className="w-[50%] text-center border-r-2 border-b-2 border-dark dark:border-light py-2">
           Due to Caste
         </h3>
-        <h3 className="w-[50%] text-center border-b-2  py-4 border-dark dark:border-light">
+        <h3 className="w-[50%] text-center border-b-2  pt-2 pb-3 border-dark dark:border-light">
           Due to Family Income
         </h3>
       </div>
@@ -226,6 +239,7 @@ const Geography = ({ mode }) => {
                 classes="text-dark w-[100%] mr-4 "
               />
               <ReasonsTab2
+                head="hidden"
                 dropLabel="District"
                 dropDownList={districtList}
                 reasonList={reasonList}
@@ -237,17 +251,26 @@ const Geography = ({ mode }) => {
                 std={std}
                 classes="text-dark w-[100%] mr-4 "
               />
+              <ReasonsTab2
+                head="hidden"
+                prop="State"
+                dropLabel="Total"
+                dropDownList={districtList}
+                reasonList={reasonList}
+                category={category}
+                std={std}
+                classes="text-dark w-[100%] mr-4 "
+              />
             </div>
 
-            {/* <MapComponent3
+            <MapComponent2
               mode={mode}
               classes="w-[60%] "
               category={category}
               std={std}
               caste={caste}
               setAvgRate={setAvgRate}
-              stateName={stateName}
-            /> */}
+            />
           </div>
         </Layout>
       </div>
