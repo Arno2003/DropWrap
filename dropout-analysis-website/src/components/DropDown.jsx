@@ -89,7 +89,7 @@ export const CasteDropDown = ({ caste, setCaste }) => {
           {casteList.map((item) => {
             return (
               <button
-                key={item.id}
+                key={item._id}
                 onClick={() => handleCasteClick(item)}
                 className={`py-4 px-3 ${
                   item !== "Overall" && "border-b-2"
@@ -199,7 +199,7 @@ export const ChooseDistDropDown = ({
                 // onClick={handlePClick}
                 className="py-3 px-3 border-b-2 border-solid border-light hover:bg-acc hover:dark:bg-alt hover:bg-opacity-90 rounded-t-md text-sm z-50"
                 onClick={() => handleClick(row[q])}
-                key={row.id}
+                key={row._id}
               >
                 {row[q]}
               </button>
