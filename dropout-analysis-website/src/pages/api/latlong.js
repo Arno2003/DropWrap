@@ -66,12 +66,9 @@ export default async (req, res) => {
           })
           .sort({ metacritic: -1 })
           .toArray();
-        // console.log(result[0]);
-
         fin.push(...result2);
       }
     }
-    // console.log(fin);
     res.json(fin);
   } catch (e) {
     console.error(e);
