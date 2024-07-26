@@ -86,10 +86,10 @@ export const CasteDropDown = ({ caste, setCaste }) => {
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
-          {casteList.map((item) => {
+          {casteList.map((item, i) => {
             return (
               <button
-                key={item._id}
+                key={i}
                 onClick={() => handleCasteClick(item)}
                 className={`py-4 px-3 ${
                   item !== "Overall" && "border-b-2"
