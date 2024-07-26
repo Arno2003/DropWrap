@@ -259,7 +259,9 @@ class Clustering:
                     # newData.to_csv(filePath)
                 data.to_csv(filePath)
 
-        util.merge("BackEnd\Test\ModelTesting\outputData\states")
+        def formClusterStateWise():
+            # Clustering.prepareStateData()
+            util.mergeStateFiles()
     
     def __init__(self):
         self.util = util()
