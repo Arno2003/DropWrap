@@ -269,6 +269,7 @@ const Geography = ({ mode }) => {
               classes="w-[60%] "
               category={category}
               std={std}
+              setStd={setStd}
               caste={caste}
               setAvgRate={setAvgRate}
             />

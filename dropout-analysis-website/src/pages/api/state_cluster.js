@@ -1,10 +1,8 @@
 // import clientPromise from "../../../lib/mongodb.js";
 import { connectToDatabase1, connectToDatabase2 } from "../../../lib/mongodb2";
 // import stateList from "./stateList.js";
-
 export default async (req, res) => {
   try {
-    let fin = [];
     const stateList = [
       "Andhra_Pradesh",
       "Assam",
@@ -38,7 +36,7 @@ export default async (req, res) => {
       "West_Bengal",
     ];
 
-    // console.log(req.query.dbName);
+    let fin = [];
     for (let i = 0; i < stateList.length; i++) {
       const dbName = stateList[i];
       // console.log(dbName);
@@ -46,54 +44,33 @@ export default async (req, res) => {
         const client = await connectToDatabase1();
         const db = client.db(dbName);
         const result = await db
-          .collection("latlong")
+          .collection("state_cluster")
           .find({
             "Social Category": req.query.caste,
           })
           .sort({ metacritic: -1 })
           .toArray();
-
         fin.push(...result);
       } else {
         const client2 = await connectToDatabase2();
-
         const db2 = client2.db(dbName);
 
         const result2 = await db2
-          .collection("latlong")
+          .collection("state_cluster")
           .find({
             "Social Category": req.query.caste,
           })
           .sort({ metacritic: -1 })
           .toArray();
+        // console.log(result[0]);
+
         fin.push(...result2);
       }
     }
-
+    // console.log(fin);
     res.json(fin);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-// export default async (req, res) => {
-//   try {
-//     console.log(req.query.dbName);
-//     const dbName = req.query.dbName || "Gujarat";
-//     // console.log(req.query);
-//     const client = await clientPromise;
-//     const db = client.db(dbName);
-//     const result = await db
-//       .collection("latlong")
-//       .find({
-//         Social_Category: req.query.caste,
-//       })
-//       .sort({ metacritic: -1 })
-//       .toArray();
-//     res.json(result);
-//   } catch (e) {
-//     console.error(e);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
