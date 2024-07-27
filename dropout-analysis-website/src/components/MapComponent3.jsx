@@ -16,17 +16,13 @@ import axios from "axios";
 
 // Function to define custom style for clusters
 const clusterStyle = (feature) => {
-  // Retrieve features from the cluster
   const features = feature.get("features");
-  // Initialize cluster size
   let cs = 2;
-  // Iterate through features to calculate cluster size
   features.forEach((feature) => {
     let c = feature.get("cs");
     cs = c;
   });
 
-  // Define fill color based on cluster size
   let fillColor;
   if (cs == 1) {
     fillColor = "rgba(255, 255, 255, 0.2)";
@@ -43,31 +39,38 @@ const clusterStyle = (feature) => {
   } else {
     fillColor = "rgba(225, 64, 64, 0.68)";
   }
-  // Adjust the cluster radius based on cluster size
   var clusterRadius = 30 + cs * 4;
 
-  // Return style object for cluster
   return new Style({
     image: new CircleStyle({
       radius: clusterRadius,
       stroke: new Stroke({
-        color: "black", // Cluster border color
-        width: 0.2, // Cluster border width
+        color: "black",
+        width: 0.2,
       }),
       fill: new Fill({
-        color: fillColor, // Cluster fill color based on cluster size
+        color: fillColor,
       }),
     }),
     text: new Text({
       text: cs?.toString(),
       fill: new Fill({
-        color: "#fff", // Text color
+        color: "#fff",
       }),
     }),
   });
 };
 
-// MapComponent2 function
+const fetchLatLongData = async (caste) => {
+  const response = await axios.get(`/api/latlong?caste=${caste}`, { timeout: 10000 });
+  return response.data;
+};
+
+const fetchClusterData = async (caste) => {
+  const response = await axios.get(`/api/formatted_cluster_data?caste=${caste}`, { timeout: 10000 });
+  return response.data;
+};
+
 const MapComponent2 = ({
   category,
   caste,
@@ -77,11 +80,12 @@ const MapComponent2 = ({
   mode,
   stateName,
 }) => {
-  // Refs for map and popup
   const mapRef = useRef(null);
   const popupRef = useRef(null);
 
-  // Function to extract cluster from CSV data
+  const [latLongData, setLatLongData] = useState(null);
+  const [clusterData, setClusterData] = useState(null);
+
   const extractCluster = (loc, clusters) => {
     let cs;
     let colName;
@@ -93,8 +97,8 @@ const MapComponent2 = ({
       colName = "snr_" + category;
     }
 
-    for (let i = 0; i < clusters.data.length; i++) {
-      const element = clusters.data[i];
+    for (let i = 0; i < clusters.length; i++) {
+      const element = clusters[i];
       if (element.Location === loc) {
         cs = element[colName];
         break;
@@ -104,131 +108,131 @@ const MapComponent2 = ({
   };
 
   useEffect(() => {
-    // Initialize the map
-    const map = new Map({
-      target: mapRef.current,
-      layers: [
-        new TileLayer({
-          source: new OSM(),
+    const initMap = async () => {
+      const map = new Map({
+        target: mapRef.current,
+        layers: [
+          new TileLayer({
+            source: new OSM(),
+          }),
+        ],
+        view: new View({
+          center: fromLonLat([79.5724, 20.6708]),
+          zoom: 5,
         }),
-      ],
-      view: new View({
-        center: fromLonLat([79.5724, 20.6708]),
-        zoom: 5,
-      }),
-    });
-    // Create a vector source for the CSV data
-    const vectorSource = new VectorSource();
-
-    axios
-      .get(`/api/latlong?caste=${caste}`, { timeout: 10000 })
-      .then((latLong) => {
-        axios
-          .get(`/api/formatted_cluster_data?caste=${caste}`, { timeout: 10000 })
-          .then((clusters) => {
-            let colName;
-            if (std === "") {
-              colName = "prim_" + category;
-            } else if (std === "1") {
-              colName = "upPrim_" + category;
-            } else {
-              colName = "snr_" + category;
-            }
-
-            for (let i = 0; i < latLong.data.length; i++) {
-              const element = latLong.data[i];
-              const longitude = element.longitude;
-              const latitude = element.latitude;
-
-              const rateOp = () => {
-                return element[colName];
-              };
-
-              const feature_obj = {
-                geometry: new Point(
-                  fromLonLat([parseFloat(longitude), parseFloat(latitude)])
-                ),
-                rate: parseInt(rateOp()),
-                loc: element.Location,
-                cs: extractCluster(element.Location, clusters),
-              };
-
-              // console.log(feature_obj);
-
-              const feature = new Feature(feature_obj);
-              vectorSource.addFeature(feature);
-            }
-
-            // Create a source for clustering
-            const clusterSource = new Cluster({
-              distance: 60 / Math.pow(2, 0.1), // Adjust the cluster distance as needed
-              source: vectorSource,
-            });
-
-            // Create a vector layer for clusters
-            const clusterLayer = new VectorLayer({
-              source: clusterSource,
-              style: clusterStyle,
-            });
-
-            // Add the cluster layer to the map
-            map.addLayer(clusterLayer);
-
-            // Update cluster distance based on map zoom level
-            map.getView().on("change:resolution", function (evt) {
-              const zoomLevel = map.getView().getZoom();
-              const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
-              clusterSource.setDistance(newClusterDistance);
-            });
-
-            // Define overlay for displaying cluster information
-            const overlay = new Overlay({
-              element: popupRef.current,
-              positioning: "bottom-center",
-              offset: [0, -15],
-              stopEvent: false,
-            });
-            map.addOverlay(overlay);
-
-            if (mode === "dark") {
-              map.on("postcompose", function (e) {
-                document.querySelector("canvas").style.filter = "invert(90%)";
-              });
-            }
-            map.on("pointermove", (e) => {
-              const feature = map.forEachFeatureAtPixel(
-                e.pixel,
-                (feature) => feature
-              );
-
-              if (feature) {
-                overlay.setPosition(e.coordinate);
-
-                const dropList = feature.getProperties().features;
-                let sum = 0;
-
-                dropList.forEach((element) => {
-                  sum = sum + element.values_.rate;
-                });
-
-                var avgRate = sum / dropList.length || 0;
-                avgRate = Math.round(avgRate);
-
-                setAvgRate(avgRate);
-
-                if (avgRate !== undefined) {
-                  popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
-                }
-              } else {
-                overlay.setPosition(undefined);
-              }
-            });
-          });
       });
 
-    // Clean up when component unmounts
+      const vectorSource = new VectorSource();
+
+      try {
+        const [latLong, clusters] = await Promise.all([
+          fetchLatLongData(caste),
+          fetchClusterData(caste),
+        ]);
+
+        setLatLongData(latLong);
+        setClusterData(clusters);
+
+        let colName;
+        if (std === "") {
+          colName = "prim_" + category;
+        } else if (std === "1") {
+          colName = "upPrim_" + category;
+        } else {
+          colName = "snr_" + category;
+        }
+
+        for (let i = 0; i < latLong.length; i++) {
+          const element = latLong[i];
+          const longitude = element.longitude;
+          const latitude = element.latitude;
+
+          const rateOp = () => {
+            return element[colName];
+          };
+
+          const feature_obj = {
+            geometry: new Point(
+              fromLonLat([parseFloat(longitude), parseFloat(latitude)])
+            ),
+            rate: parseInt(rateOp()),
+            loc: element.Location,
+            cs: extractCluster(element.Location, clusters),
+          };
+
+          const feature = new Feature(feature_obj);
+          vectorSource.addFeature(feature);
+        }
+
+        const clusterSource = new Cluster({
+          distance: 60 / Math.pow(2, 0.1),
+          source: vectorSource,
+        });
+
+        const clusterLayer = new VectorLayer({
+          source: clusterSource,
+          style: clusterStyle,
+        });
+
+        map.addLayer(clusterLayer);
+
+        map.getView().on("change:resolution", function (evt) {
+          const zoomLevel = map.getView().getZoom();
+          const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
+          clusterSource.setDistance(newClusterDistance);
+        });
+
+        const overlay = new Overlay({
+          element: popupRef.current,
+          positioning: "bottom-center",
+          offset: [0, -15],
+          stopEvent: false,
+        });
+        map.addOverlay(overlay);
+
+        if (mode === "dark") {
+          map.on("postcompose", function (e) {
+            document.querySelector("canvas").style.filter = "invert(90%)";
+          });
+        }
+
+        map.on("pointermove", (e) => {
+          const feature = map.forEachFeatureAtPixel(
+            e.pixel,
+            (feature) => feature
+          );
+
+          if (feature) {
+            overlay.setPosition(e.coordinate);
+
+            const dropList = feature.getProperties().features;
+            let sum = 0;
+
+            dropList.forEach((element) => {
+              sum = sum + element.values_.rate;
+            });
+
+            var avgRate = sum / dropList.length || 0;
+            avgRate = Math.round(avgRate);
+
+            setAvgRate(avgRate);
+
+            if (avgRate !== undefined) {
+              popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
+            }
+          } else {
+            overlay.setPosition(undefined);
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    initMap();
+
     return () => {
-      map.setTarget(null);
+      mapRef.current && mapRef.current.setTarget(null);
     };
   }, [category, caste, std, mode]);
 
