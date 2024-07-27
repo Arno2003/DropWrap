@@ -263,7 +263,7 @@ const Geography = ({ mode }) => {
               />
             </div>
 
-            <MapComponent2
+            <MapComponent3
               mode={mode}
               classes="w-[60%] "
               category={category}
