@@ -1,5 +1,5 @@
-Location,Social Category,prim_Girls,prim_Boys,prim_Overall,upPrim_Girls,upPrim_Boys,upPrim_Overall,snr_Girls,snr_Boys,snr_Overall,DNo,latitude,longitude
-Arunachal Pradesh,General,6.78,6.48,6.63,6.37,3.64,5.02,22.98,19.28,21.21,10101,28.0937702,94.5921326
-Arunachal Pradesh,SC,0.0,0.07,0.0,11.77,0.0,3.6,6.28,5.88,6.07,10101,28.0937702,94.5921326
-Arunachal Pradesh,ST,11.0,10.8,10.9,9.05,5.58,7.39,9.34,8.72,9.04,10101,28.0937702,94.5921326
-Arunachal Pradesh,OBC,0.0,0.0,0.0,5.61,0.92,3.29,10.54,23.33,17.6,10101,28.0937702,94.5921326
+Location,Social Category,prim_Girls,prim_Boys,prim_Overall,upPrim_Girls,upPrim_Boys,upPrim_Overall,snr_Girls,snr_Boys,snr_Overall,DNo,latitude,longitude,state_latitude,state_longitude
+Arunachal Pradesh,General,6.78,6.48,6.63,6.37,3.64,5.02,22.98,19.28,21.21,10101,28.0937702,94.5921326,28.0937702,94.5921326
+Arunachal Pradesh,SC,0.0,0.07,0.0,11.77,0.0,3.6,6.28,5.88,6.07,10101,28.0937702,94.5921326,28.0937702,94.5921326
+Arunachal Pradesh,ST,11.0,10.8,10.9,9.05,5.58,7.39,9.34,8.72,9.04,10101,28.0937702,94.5921326,28.0937702,94.5921326
+Arunachal Pradesh,OBC,0.0,0.0,0.0,5.61,0.92,3.29,10.54,23.33,17.6,10101,28.0937702,94.5921326,28.0937702,94.5921326

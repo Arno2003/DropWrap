@@ -144,7 +144,7 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
                 ),
                 rate: parseInt(rateOp()),
                 loc: element.Location,
-                cs: extractCluster(element.Location, clusters),
+                cs: extractCluster(element.Location, clusters) + 1,
               };
 
               // console.log(feature_obj);
