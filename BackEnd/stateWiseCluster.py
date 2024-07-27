@@ -118,3 +118,85 @@
 # plt.savefig('dendrogram_States.png', dpi=600)  # Save with DPI
 # plt.show()
 
+# import os
+# import pandas as pd
+
+# # Define the main folder and subfolders
+# main_folder = 'BackEnd\Test\ModelTesting\outputData\states'
+# subfolders = ['General', 'OBC', 'Overall', 'SC', 'ST']
+
+# # Initialize an empty DataFrame for the final result
+# final_df = pd.DataFrame()
+
+# # Iterate through each subfolder
+# for subfolder in subfolders:
+#     subfolder_path = os.path.join(main_folder, subfolder)
+#     # Initialize an empty DataFrame for the subfolder
+#     subfolder_df = pd.DataFrame()
+    
+#     # Iterate through each CSV file in the subfolder
+#     for filename in os.listdir(subfolder_path):
+#         if filename.endswith('.csv'):
+#             file_path = os.path.join(subfolder_path, filename)
+#             # Read the CSV file
+#             df = pd.read_csv(file_path)
+#             # Keep only the common columns and concatenate the unique columns
+#             common_columns = df[['DNo']]
+#             unique_columns = df.drop(columns=['DNo'])
+#             concatenated_df = pd.concat([common_columns, unique_columns], axis=1)
+#             # Append the concatenated DataFrame to the subfolder DataFrame
+#             subfolder_df = pd.concat([subfolder_df, concatenated_df], ignore_index=True)
+    
+#     # Add the 'Social Category' column to the subfolder DataFrame
+#     subfolder_df['Social Category'] = subfolder
+#     # Append the subfolder DataFrame to the final DataFrame
+#     final_df = pd.concat([final_df, subfolder_df], ignore_index=True)
+
+# # Save the final concatenated DataFrame to a new CSV file
+# final_df.to_csv('BackEnd\Test\ModelTesting\outputData\states.csv', index=False)
+
+# print("Concatenation complete. The final file 'states.csv' has been created.")
+
+
+import os
+import pandas as pd
+
+# Define the main folder and subfolders
+main_folder = 'BackEnd\Test\ModelTesting\outputData\states'
+subfolders = ['General', 'OBC', 'Overall', 'SC', 'ST']
+
+# Initialize an empty DataFrame for the final result
+final_df = pd.DataFrame()
+
+# Function to filter columns
+def filter_columns(df):
+    # Keep only 'DNo' and columns ending with '_Cluster'
+    columns_to_keep = ['DNo'] + [col for col in df.columns if col.endswith('_Cluster')]
+    return df[columns_to_keep]
+
+# Iterate through each subfolder
+for subfolder in subfolders:
+    subfolder_path = os.path.join(main_folder, subfolder)
+    subfolder_df = pd.DataFrame()
+    
+    # Iterate through each CSV file in the subfolder
+    for filename in os.listdir(subfolder_path):
+        if filename.endswith('.csv'):
+            file_path = os.path.join(subfolder_path, filename)
+            # Read the CSV file
+            df = pd.read_csv(file_path)
+            # Filter the columns
+            df = filter_columns(df)
+            # Append the filtered DataFrame to the subfolder DataFrame
+            subfolder_df = pd.concat([subfolder_df, df], ignore_index=True)
+    
+    # Add the 'Social Category' column to the subfolder DataFrame
+    subfolder_df['Social Category'] = subfolder
+    # Append the subfolder DataFrame to the final DataFrame
+    final_df = pd.concat([final_df, subfolder_df], ignore_index=True)
+
+# Save the final concatenated DataFrame to a new CSV file
+final_df.to_csv('BackEnd\Test\ModelTesting\outputData\states.csv', index=False)
+
+print("Concatenation complete. The final file 'sides.csv' has been created.")
+

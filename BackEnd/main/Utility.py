@@ -260,6 +260,9 @@ class Utility:
         # dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
         Utility.mergeFiles(dirPath)
     
+    def mergeStateFiles():
+        Utility.mergeFiles("BackEnd\Test\ModelTesting\outputData\states")
+        
         
 
     
