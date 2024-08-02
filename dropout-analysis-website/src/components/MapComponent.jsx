@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
@@ -11,128 +11,138 @@ import { Feature } from "ol";
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import Overlay from "ol/Overlay";
-// import "./Map.scss";
 import { Style, Circle as CircleStyle, Stroke, Fill, Text } from "ol/style";
+import axios from "axios";
 
-// Custom style function for clusters
-// Custom style function for clusters
+// Function to define custom style for clusters
 const clusterStyle = (feature) => {
   const features = feature.get("features");
-
-  const clusterSize = features.length;
-
-  // Calculate the average rate for the cluster
-  let sum = 0;
+  let cs = 2;
   features.forEach((feature) => {
-    sum += feature.get("rate");
+    let c = feature.get("cs");
+    cs = c;
   });
-  const avgRate = sum / clusterSize || 0;
 
-  // Determine cluster color based on avgRate
   let fillColor;
-  let cs;
-  if (avgRate < 5) {
+  if (cs == 1) {
+    fillColor = "rgba(255, 255, 255, 0.2)";
+  } else if (cs == 2) {
     fillColor = "rgba(255, 107, 107, 0.27)";
-    cs = 1;
-  } else if (avgRate < 10) {
+  } else if (cs == 3) {
     fillColor = "rgba(91, 192, 235, 0.24)";
-    cs = 2;
-  } else if (avgRate < 15) {
+  } else if (cs == 4) {
     fillColor = "rgba(75, 144, 51, 0.20)";
-    cs = 3;
-  } else if (avgRate < 20) {
+  } else if (cs == 5) {
     fillColor = "rgba(181, 161, 57, 0.28)";
-    cs = 4;
-  } else if (avgRate < 25) {
+  } else if (cs == 6) {
     fillColor = "rgba(225, 122, 64, 0.68)";
-    cs = 5;
   } else {
     fillColor = "rgba(225, 64, 64, 0.68)";
-    cs = 6;
   }
-
-  // Adjust the cluster radius based on your preference
-  var clusterRadius = 20 + cs * 5;
-  // var clusterRadius = 20 + clusterSize * 5;
-  // if (clusterRadius > 100) clusterRadius = 100;
+  var clusterRadius = 30 + cs * 4;
 
   return new Style({
     image: new CircleStyle({
       radius: clusterRadius,
       stroke: new Stroke({
-        color: "black", // Cluster border color
-        width: 0.2, // Cluster border width
+        color: "black",
+        width: 0.2,
       }),
       fill: new Fill({
-        color: fillColor, // Cluster fill color based on avgRate
+        color: fillColor,
       }),
     }),
     text: new Text({
-      text: cs.toString(),
+      text: cs?.toString(),
       fill: new Fill({
-        color: "#fff", // Text color
+        color: "#fff",
       }),
     }),
   });
 };
 
+const fetchLatLongData = async (caste) => {
+  const response = await axios.get(`/api/latlong?caste=${caste}`, {
+    timeout: 10000,
+  });
+  return response.data;
+};
+
+const fetchClusterData = async (caste) => {
+  const response = await axios.get(
+    `/api/formatted_cluster_data?caste=${caste}`,
+    { timeout: 10000 }
+  );
+  return response.data;
+};
+
 const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
   const mapRef = useRef(null);
   const popupRef = useRef(null);
+  const mapInstance = useRef(null);
+
+  const extractCluster = (loc, clusters) => {
+    let cs;
+    let colName;
+    if (std === "") {
+      colName = "prim_" + category;
+    } else if (std === "1") {
+      colName = "upPrim_" + category;
+    } else {
+      colName = "snr_" + category;
+    }
+
+    for (let i = 0; i < clusters.length; i++) {
+      const element = clusters[i];
+      if (element.Location === loc) {
+        cs = element[colName];
+        break;
+      }
+    }
+    return cs;
+  };
+
   useEffect(() => {
-    // Initialize the map
-    const map = new Map({
-      target: mapRef.current,
-      layers: [
-        new TileLayer({
-          source: new OSM(),
+    const initMap = async () => {
+      const map = new Map({
+        target: mapRef.current,
+        layers: [
+          new TileLayer({
+            source: new OSM(),
+          }),
+        ],
+        view: new View({
+          center: fromLonLat([79.5724, 20.6708]),
+          zoom: 5,
         }),
-      ],
-      view: new View({
-        center: fromLonLat([79.5724, 20.6708]),
-        zoom: 5,
-      }),
-    });
-    // Create a vector source for the CSV data
-    const vectorSource = new VectorSource();
+      });
 
-    // Fetch and parse the CSV data
-    fetch("data/latlong.csv")
-      .then((response) => response.text())
-      .then((csvData) => {
-        // Parse CSV data here and create features
-        const rows = csvData.split("\n");
+      const vectorSource = new VectorSource();
 
-        // Loop through CSV rows and create features
-        for (let i = 1; i < rows.length - 1; i++) {
-          const [
-            loc,
-            soc_cat,
-            girls,
-            boys,
-            ovl,
-            girls_1,
-            boys_1,
-            ovl_1,
-            girls_2,
-            boys_2,
-            ovl_2,
-            latitude,
-            longitude,
-          ] = rows[i].split(",");
+      try {
+        const [latLong, clusters] = await Promise.all([
+          fetchLatLongData(caste),
+          fetchClusterData(caste),
+        ]);
 
-          if (soc_cat !== caste) continue;
+        let colName;
+        if (std === "") {
+          colName = "prim_" + category;
+        } else if (std === "1") {
+          colName = "upPrim_" + category;
+        } else {
+          colName = "snr_" + category;
+        }
+
+        for (let i = 0; i < latLong.length; i++) {
+          const element = latLong[i];
+          const longitude = element.longitude;
+          const latitude = element.latitude;
+
+          console.log(latitude, longitude);
 
           const rateOp = () => {
-            if (category === "G" && std === 0) return girls;
-            if (category === "G" && std === 1) return girls_1;
-            if (category === "G" && std === 2) return girls_2;
-            if (category === "B" && std === 0) return boys;
-            if (category === "B" && std === 1) return boys_1;
-            if (category === "B" && std === 2) return boys_2;
-            if (category === "O" && std === 0) return ovl;
-            if (category === "O" && std === 1) return ovl_1;
-            if (category === "O" && std === 2) return ovl_2;
+            return element[colName];
           };
 
           const feature_obj = {
@@ -140,31 +150,29 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
               fromLonLat([parseFloat(longitude), parseFloat(latitude)])
             ),
             rate: parseInt(rateOp()),
+            loc: element.Location,
+            cs: extractCluster(element.Location, clusters),
           };
 
           const feature = new Feature(feature_obj);
           vectorSource.addFeature(feature);
         }
 
-        // Create a source for clustering
-        // Create a cluster source
         const clusterSource = new Cluster({
-          distance: 60 / Math.pow(2, 6.5 - 8.5), // Adjust the cluster distance as needed
+          distance: 60 / Math.pow(2, 0.1),
           source: vectorSource,
         });
 
-        // Create a vector layer for clusters
         const clusterLayer = new VectorLayer({
           source: clusterSource,
           style: clusterStyle,
         });
 
-        // Add the cluster layer to the map
         map.addLayer(clusterLayer);
 
         map.getView().on("change:resolution", function (evt) {
           const zoomLevel = map.getView().getZoom();
-          const newClusterDistance = 60 / Math.pow(2, zoomLevel - 8.5);
+          const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
           clusterSource.setDistance(newClusterDistance);
         });
 
@@ -181,6 +189,7 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
             document.querySelector("canvas").style.filter = "invert(90%)";
           });
         }
+
         map.on("pointermove", (e) => {
           const feature = map.forEachFeatureAtPixel(
             e.pixel,
@@ -203,22 +212,28 @@ const MapComponent = ({ category, caste, std, classes, setAvgRate, mode }) => {
             setAvgRate(avgRate);
 
             if (avgRate !== undefined) {
-              // popupRef.current.innerHTML = `${latitude}, ${longitude}%`;
               popupRef.current.innerHTML = `Dropout Rate: ${avgRate}%`;
             }
           } else {
             overlay.setPosition(undefined);
           }
         });
-      });
 
-    // Clean up when component unmounts
+        return map;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    initMap();
+
     return () => {
-      map.setTarget(null);
+      if (mapInstance.current) {
+        mapInstance.current.setTarget(null);
+        mapInstance.current = null;
+      }
     };
   }, [category, caste, std, mode]);
-
-  // setRates(rateArray);
 
   const handleMouseOut = () => {
     setAvgRate(-1);
