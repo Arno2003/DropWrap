@@ -77,6 +77,7 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
   const [clusters, setClusters] = useState([]);
   const [stateClusters, setStateClusters] = useState([]);
   const [cdHeaders, setCdHeaders] = useState([]);
+  const [view, setView] = useState("state");
 
   // Function to extract cluster from CSV data
   const extractCluster = (loc, clusters) => {
@@ -90,8 +91,8 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       colName = "snr_" + category;
     }
 
-    for (let i = 0; i < clusters.data.length; i++) {
-      const element = clusters.data[i];
+    for (let i = 0; i < clusters.length; i++) {
+      const element = clusters[i];
       if (element.Location === loc) {
         cs = element[colName];
         break;
@@ -133,11 +134,34 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       fetchClusterData(),
       fetchStateClusterData(),
     ]).then(([latLongData, clusterData, stateClusterData]) => {
-      setLatLong(latLongData);
-      setClusters(clusterData);
-      setStateClusters(stateClusterData);
+      if (view === "state") {
+        console.log(latLongData.data);
+        let temp = [];
+
+        for (let i = 0; i < latLongData.data.length - 1; i++) {
+          if (Math.floor(latLongData.data[i].DNo / 100) === 105) {
+            console.log(
+              latLongData.data[i].DNo,
+              i,
+              latLongData.data[i].state_latitude,
+              latLongData.data[i].state_longitude
+            );
+            // console.log();
+          }
+        }
+
+        setClusters(stateClusterData.data);
+      } else if (view === "district") {
+        setLatLong(latLongData.data);
+        setClusters(clusterData.data);
+      }
+      // setStateClusters(stateClusterData);
+      // setClusters(clusterData);
     });
   }, [caste, category, std]);
+
+  // console.log(clusters.data);
+  // console.log(latLong.data);
 
   useEffect(() => {
     // Initialize the map
@@ -166,19 +190,8 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       colName = "snr_" + category;
     }
 
-    // var cd_head;
-    // map.getView().on("change:resolution", function (evt) {
-    //   const zoomNum = map.getView().getZoom();
-    //   if (zoomNum >= 5 && zoomNum < 6) {
-    //     cd_head = ["state_longitude", "state_latitude"];
-    //   } else {
-    //     cd_head = ["longitude", "latitude"];
-    //   }
-    // });
-    // console.log(cd_head);
-
-    for (let i = 0; i < latLong?.data?.length; i++) {
-      const element = latLong.data[i];
+    for (let i = 0; i < latLong?.length; i++) {
+      const element = latLong[i];
 
       // const longitude = element[cdHeaders[0]];
       // const latitude = element[cdHeaders[1]];

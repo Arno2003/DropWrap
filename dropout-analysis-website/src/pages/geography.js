@@ -77,7 +77,7 @@ const ReasonsTab2 = ({
       let f2 = parseQuery("social_category");
       // console.log(row.Location.toLowerCase(), dist.toLowerCase());
 
-      if (row[q].toLowerCase() === prop.toLowerCase()) {
+      if (row[q].toLowerCase() === prop?.toLowerCase()) {
         if (dropLabel === "District") {
           temp1 = row[f1].toFixed(2);
           temp2 = row[f2].toFixed(2);
