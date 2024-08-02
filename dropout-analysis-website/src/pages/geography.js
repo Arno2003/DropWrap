@@ -48,6 +48,7 @@ const ReasonsTab2 = ({
   dropLabel,
   head,
 }) => {
+ /* console.log( dropDownList); */
   const [val, setVal] = useState([0, 0]);
   const parseQuery = (fact) => {
     let a;
@@ -177,6 +178,7 @@ const Geography = ({ mode }) => {
     const distList = () => {
       let uniqueStates = [];
       let uniqueDistricts = [];
+
       const uniqueDistrictList = reasonList.filter((row) => {
         if (!uniqueDistricts.includes(row.Location)) {
           uniqueDistricts.push(row.Location);
@@ -184,19 +186,46 @@ const Geography = ({ mode }) => {
         }
         return false;
       });
+
       const uniqueStateList = reasonList.filter((row) => {
         if (!uniqueStates.includes(row.State)) {
           uniqueStates.push(row.State);
           return true;
         }
-
         return false;
       });
+
       setStateList(uniqueStateList);
-      setDistrictList(uniqueDistrictList);
+      if (uniqueStateList.length > 0) {
+        setState(uniqueStateList[0].State);
+        uniqueDistricts = reasonList
+          .filter((row) => row.State === uniqueStateList[0].State)
+          .map((row) => row.Location);
+        setDistrictList(uniqueDistricts);
+      }
     };
     distList();
   }, [reasonList]);
+
+  
+  useEffect(() => {
+    const updateDistrictList = () => {
+      if (state) {
+        const uniqueDistricts = reasonList
+          .filter((row) => row.State === state)
+          .map(row => row.Location)
+          .filter((value, index, self) => self.indexOf(value) === index); // Removing duplicates
+        setDistrictList(uniqueDistricts);
+      }
+    };
+    updateDistrictList();
+  }, [state, reasonList]);
+
+  
+
+  const handleStateChange = (event) => {
+    setState(event.target.value);
+  };
 
   return (
     <>
@@ -226,6 +255,7 @@ const Geography = ({ mode }) => {
                 reasonList={reasonList}
                 classes="text-dark w-[100%] mr-4 "
               /> */}
+
               <ReasonsTab2
                 dropLabel="State"
                 dropDownList={stateList}
@@ -271,6 +301,26 @@ const Geography = ({ mode }) => {
               caste={caste}
               setAvgRate={setAvgRate}
             />
+          </div>
+
+          <div>
+            <select onChange={handleStateChange} value={state}>
+              <option value="">Select State</option>
+              {stateList.map((state) => (
+                <option key={state.State} value={state.State}>
+                  {state.State}
+                </option>
+              ))}
+            </select>
+            <select>
+              <option value="">Select District</option>
+              {districtList.map((district) => (
+                <option key={district} value={district}>
+                  {district}
+                </option>
+              ))}
+            </select>
+              
           </div>
         </Layout>
       </div>
