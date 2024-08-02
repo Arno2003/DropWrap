@@ -32,6 +32,9 @@ def convert(input_file, output_file, state):
     latitudes = []
     longitudes = []
 
+    latitudesSt = []
+    longitudesSt = []
+
     # print(df.head())
 
     # Iterate through each row and get location data
@@ -42,18 +45,28 @@ def convert(input_file, output_file, state):
 
             # Get latitude and longitude using Geoapify API
             coordinates = get_lat_lng(location)
+            stCoordinates = get_lat_lng(f"{state}, India")
             print(row['Location'], coordinates)
             if coordinates:
                 latitudes.append(coordinates[0])
                 longitudes.append(coordinates[1])
+
+                latitudesSt.append(stCoordinates[0])
+                longitudesSt.append(stCoordinates[1])
             else:
                 latitudes.append(None)
                 longitudes.append(None)
+
+                latitudesSt.append(None)
+                longitudesSt.append(None)
         except:
             print("Exception")
             # Add latitude and longitude columns to the DataFrame
     df['latitude'] = latitudes
     df['longitude'] = longitudes
+
+    df['state_latitude'] = latitudes
+    df['state_longitude'] = longitudes
 
     # Save the updated DataFrame to a new CSV file
     df.to_csv(output_file, index=False)
@@ -70,19 +83,22 @@ folder_path = 'DATA\\Test\\DistrictWiseData'
 for filename in os.listdir(folder_path):
     if filename.endswith('.csv'):
         state = filename.split('.')[0]
-        # print(state)
-        # input_file = os.path.join(folder_path, filename)
-        input_file = os.path.join(folder_path, filename)
-        op_dir = f"BackEnd\\database\\{state}"
+        if state not in ['IndiaDistricts', 'stateWiseData']:
+            input_file = os.path.join(folder_path, filename)
+            input_file = os.path.join(folder_path, filename)
 
-        if not os.path.isdir(op_dir):
-            os.makedirs(op_dir)
+            stateName = "_".join(state.split())
 
-        output_file = op_dir+'\\latlong.csv'
-        # print(output_file)
-        convert(input_file, output_file, state)
+            op_dir = f"BackEnd\\database\\States\\{stateName}"
 
-        print(f"#################COMPLETED {state}####################")
+            if not os.path.isdir(op_dir):
+                os.makedirs(op_dir)
+
+            output_file = op_dir+'\\latlong.csv'
+            # print(output_file)
+            convert(input_file, output_file, state)
+
+            print(f"#################COMPLETED {state}####################")
 
 # # Open and read the CSV file
 # with open(file_path, 'r') as csv_file:

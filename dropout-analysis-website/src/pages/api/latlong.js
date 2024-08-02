@@ -69,6 +69,7 @@ export default async (req, res) => {
         fin.push(...result2);
       }
     }
+
     res.json(fin);
   } catch (e) {
     console.error(e);
