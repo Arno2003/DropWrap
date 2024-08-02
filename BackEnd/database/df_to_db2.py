@@ -30,8 +30,8 @@ for file in list_state:
         df2 = pd.read_csv(cluster_path)
         df3 = pd.read_csv(state_cluster_path)
 
-        # client.drop_database(file)
-        # client2.drop_database(file)
+        client.drop_database(file)
+        client2.drop_database(file)
 
         if count < 15:
             db = client[file]

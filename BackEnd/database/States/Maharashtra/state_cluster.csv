@@ -1,6 +1,6 @@
 ,Location,DNo,Social Category,prim_Boys,prim_Girls,prim_Overall,snr_Boys,snr_Girls,snr_Overall,upPrim_Boys,upPrim_Girls,upPrim_Overall
-70,Maharashtra,119,ST,4,3,2.0,2,0,2.0,0,3,0.0
-71,Maharashtra,119,SC,0,3,1.0,4,0,3.0,0,0,0.0
-72,Maharashtra,119,Overall,2,2,,1,1,,4,0,
-73,Maharashtra,119,General,0,1,0.0,1,0,0.0,1,3,0.0
-74,Maharashtra,119,OBC,1,3,1.0,0,1,0.0,0,0,0.0
+70,Maharashtra,119,ST,4,3,2,2,0,2,0,3,0
+71,Maharashtra,119,SC,0,3,1,4,0,3,0,0,0
+72,Maharashtra,119,Overall,2,2,2,1,1,4,4,0,0
+73,Maharashtra,119,General,0,1,0,1,0,0,1,3,0
+74,Maharashtra,119,OBC,1,3,1,0,1,0,0,0,0

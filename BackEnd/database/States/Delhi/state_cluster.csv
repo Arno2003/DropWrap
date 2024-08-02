@@ -1,6 +1,6 @@
 ,Location,DNo,Social Category,prim_Boys,prim_Girls,prim_Overall,snr_Boys,snr_Girls,snr_Overall,upPrim_Boys,upPrim_Girls,upPrim_Overall
-25,Delhi,107,SC,1,1,0.0,2,4,4.0,0,0,0.0
-26,Delhi,107,Overall,1,0,,4,4,,1,0,
-27,Delhi,107,OBC,3,0,0.0,3,4,0.0,0,1,4.0
-28,Delhi,107,General,0,1,0.0,1,4,3.0,4,4,0.0
-29,Delhi,107,ST,1,1,3.0,0,3,4.0,1,0,1.0
+25,Delhi,107,SC,1,1,0,2,4,4,0,0,0
+26,Delhi,107,Overall,1,0,1,4,4,1,1,0,0
+27,Delhi,107,OBC,3,0,0,3,4,0,0,1,4
+28,Delhi,107,General,0,1,0,1,4,3,4,4,0
+29,Delhi,107,ST,1,1,3,0,3,4,1,0,1

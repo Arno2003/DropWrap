@@ -1,10 +1,13 @@
 import pandas as pd
 import os
 
-dno_path = "DATA\\Test\\Abbreviations\\stateDNoMapping.csv"
+# base_dir = os.path.dirname(os.path.abspath(__file__))
+dno_path = "BackEnd\\database\\stateDNoMapping.csv"
 stateCluster_path = "BackEnd\\database\\stateWiseData.csv"
 
 dnoDf = pd.read_csv(dno_path)
+
+# print(dnoDf)
 ls = []
 for item in dnoDf['startingDNo']:
     ls.append(item//100)
@@ -21,7 +24,10 @@ clusterDf['DNo'] = ls
 # print(clusterDf.head())
 
 merged = pd.merge(dnoDf, clusterDf, on='DNo', how='right')
-merged.drop(columns=['startingDNo', 'endingDNo', 'Unnamed: 0'], inplace=True)
+
+# print(merged.columns)
+
+merged.drop(columns=['startingDNo', 'endingDNo'], inplace=True)
 
 merged = merged.sort_values(by='Location', ignore_index=True)
 # merged.to_csv("BackEnd\database\stateWiseDataMerged.csv")
@@ -48,4 +54,4 @@ for state in stateList:
     state_cluster_df.to_csv(op_dir+"\\state_cluster.csv")
     state_cluster = []
 
-# print(stateList)
+print(stateList)
