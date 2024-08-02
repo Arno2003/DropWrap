@@ -1,4 +1,5 @@
 from Clustering import Clustering as clst
+from Utility import Utility as util
 
 class Main:
     print("This is main class")
@@ -11,23 +12,5 @@ if __name__ == "__main__":
     # dirLoc = "DATA\\Test\\DistrictWiseData"
     dirLoc = "DATA\\Test\\StateWiseData"
     
-    clst.formCluster(dirLoc)
-    
-    # clst.formClusterWhole("DATA\Test\stateWiseData\states.csv", "states.csv")
-    
-    
-    # clst.formClusterStateWise()
-    
-    # clst.prepareStateData()
-    
     # clst.formCluster(dirLoc)
-    # clst.prepareStateData()
-    
-    # clst.formClusterStateWise()
-    
-    # clst.formClusterStateWiseSeparately()
-    
-    # clst.formClusterSeparately("DATA\Test\stateWiseData\stateWiseData.csv")
-    
-    # clst.formClusterStateWise()
-    # clst.formClusterWhole()
+    util.saveDendrogram()

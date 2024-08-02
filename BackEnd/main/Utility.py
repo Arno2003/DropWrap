@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram, linkage
 import pandas as pd
 import os
 
@@ -262,6 +264,43 @@ class Utility:
     
     def mergeStateFiles():
         Utility.mergeFiles("BackEnd\Test\ModelTesting\outputData\states")
+        
+    #############################################################################################
+    ################################ for saving dendrograms #####################################
+    #############################################################################################
+    
+    def saveDendrogram():
+        files = os.listdir("BackEnd\\Test\\ModelTesting\\outputData")
+        for file in files:         
+            # Load the CSV file
+            if ".csv" not in file:
+                file += ".csv"
+            file_path = f'DATA\\Test\\DistrictWiseData\\{file}'  # Update this path as needed
+            data = pd.read_csv(file_path)
+
+            # Filter data where Social Category is "Overall"
+            filtered_data = data[data['Social Category'] == 'Overall']
+
+            # Extract relevant columns
+            data_subset = filtered_data[['DNo', 'snr_Overall']].dropna()
+
+            # Perform agglomerative hierarchical clustering using Ward linkage
+            Z = linkage(data_subset, method='ward')
+
+            # Plot and save the dendrogram
+            plt.figure(figsize=(12, 8))
+            dendrogram(Z, labels=filtered_data['Location'].values, leaf_rotation=90)
+            plt.title('Hierarchical Clustering Dendrogram')
+            plt.xlabel('Location')
+            plt.ylabel('Distance')
+            
+            # Adjust x-axis labels to be vertical
+            plt.xticks(rotation=90)
+            plt.tight_layout()
+            plt.savefig(f'BackEnd\main\Images\{file.replace(".csv", "")}.png', dpi=600)  # Update this path as needed
+            plt.show()
+            
+    
         
         
 
