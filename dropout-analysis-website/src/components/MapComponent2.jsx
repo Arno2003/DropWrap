@@ -187,7 +187,7 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       longitude = element["longitude"];
       latitude = element["latitude"];
 
-      console.log(latitude, longitude);
+      // console.log(latitude, longitude);
 
       const rateOp = () => {
         return element[colName];

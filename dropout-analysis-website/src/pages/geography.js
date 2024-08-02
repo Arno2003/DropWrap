@@ -49,7 +49,7 @@ const ReasonsTab2 = ({
   dropLabel,
   head,
 }) => {
- /* console.log( dropDownList); */
+  // console.log(dropDownList);
   const [val, setVal] = useState([0, 0]);
   const parseQuery = (fact) => {
     let a;
@@ -71,6 +71,8 @@ const ReasonsTab2 = ({
     let temp2 = 0;
     let k = 0;
     reasonList?.map((row) => {
+      // console.log(row);
+
       let f1 = parseQuery("income");
       let f2 = parseQuery("social_category");
       // console.log(row.Location.toLowerCase(), dist.toLowerCase());
@@ -179,9 +181,10 @@ const Geography = ({ mode }) => {
     const distList = () => {
       let uniqueStates = [];
       let uniqueDistricts = [];
+      // console.log(reasonList, state);
 
       const uniqueDistrictList = reasonList.filter((row) => {
-        if (!uniqueDistricts.includes(row.Location)) {
+        if (row.State === state && !uniqueDistricts.includes(row.Location)) {
           uniqueDistricts.push(row.Location);
           return true;
         }
@@ -197,36 +200,45 @@ const Geography = ({ mode }) => {
       });
 
       setStateList(uniqueStateList);
-      if (uniqueStateList.length > 0) {
-        setState(uniqueStateList[0].State);
-        uniqueDistricts = reasonList
-          .filter((row) => row.State === uniqueStateList[0].State)
-          .map((row) => row.Location);
-        setDistrictList(uniqueDistricts);
-      }
+      setDistrictList(uniqueDistrictList);
+
+      // if (uniqueStateList.length > 0) {
+      //   setState(uniqueStateList[0].State);
+      //   uniqueDistricts = reasonList
+      //     .filter((row) => row.State === uniqueStateList[0].State)
+      //     .map((row) => row.Location);
+      //   setDistrictList(uniqueDistricts);
+      // }
     };
     distList();
-  }, [reasonList]);
+  }, [reasonList, state]);
 
-  
   useEffect(() => {
-    const updateDistrictList = () => {
-      if (state) {
-        const uniqueDistricts = reasonList
-          .filter((row) => row.State === state)
-          .map(row => row.Location)
-          .filter((value, index, self) => self.indexOf(value) === index); // Removing duplicates
-        setDistrictList(uniqueDistricts);
-      }
-    };
-    updateDistrictList();
-  }, [state, reasonList]);
+    setDist(districtList[0]?.Location);
+    // console.log(districtList[0]?.Location);
+  }, [state, districtList]);
 
-  
+  // console.log(dist);
 
-  const handleStateChange = (event) => {
-    setState(event.target.value);
-  };
+  // useEffect(() => {
+  //   const updateDistrictList = () => {
+  //     if (state) {
+  //       const uniqueDistricts = reasonList
+  //         .filter((row) => row.State === state)
+  //         .map((row) => row.Location)
+  //         .filter((value, index, self) => self.indexOf(value) === index); // Removing duplicates
+  //       setDistrictList(uniqueDistricts);
+  //     }
+  //   };
+  //   updateDistrictList();
+  // }, [state, reasonList]);
+
+  // console.log(state);
+  // console.log(districtList);
+
+  // const handleStateChange = (event) => {
+  //   setState(event.target.value);
+  // };
 
   return (
     <>
@@ -305,7 +317,7 @@ const Geography = ({ mode }) => {
             />
           </div>
 
-          <div>
+          {/* <div>
             <select onChange={handleStateChange} value={state}>
               <option value="">Select State</option>
               {stateList.map((state) => (
@@ -322,8 +334,7 @@ const Geography = ({ mode }) => {
                 </option>
               ))}
             </select>
-              
-          </div>
+          </div> */}
         </Layout>
       </div>
     </>

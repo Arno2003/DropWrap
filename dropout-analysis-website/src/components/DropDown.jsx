@@ -171,6 +171,8 @@ export const ChooseDistDropDown = ({
   className,
   q,
 }) => {
+  // console.log(dropDownList);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (loc) => {
@@ -194,7 +196,8 @@ export const ChooseDistDropDown = ({
           onMouseLeave={() => setIsOpen(false)}
         >
           {dropDownList?.map((row) => {
-            console.log(row);
+            // console.log(prop, row);
+
             return (
               <button
                 // onClick={handlePClick}
