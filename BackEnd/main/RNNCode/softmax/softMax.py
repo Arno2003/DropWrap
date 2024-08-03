@@ -104,7 +104,7 @@ def train_and_evaluate(features, y, data, colName, model_dir):
     return accuracy_percentage, impressions_df
 
 # Create directory for models if it doesn't exist
-model_dir = 'BackEnd//rnnModels//sigmoid//'
+model_dir = 'BackEnd//rnnModels//softmax//'
 os.makedirs(model_dir, exist_ok=True)
 
 # Load the data
