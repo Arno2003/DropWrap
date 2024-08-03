@@ -5,6 +5,7 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping
+import os
 
 def preprocess_data(data: pd.DataFrame, colName: str):
     # One-hot encode categorical columns
@@ -36,7 +37,7 @@ def build_model(input_shape):
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     return model
 
-def train_and_evaluate(features, y, data, colName):
+def train_and_evaluate(features, y, data, colName, model_dir):
     # Split data into features and target
     X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=0.2, random_state=42)
 
@@ -53,9 +54,9 @@ def train_and_evaluate(features, y, data, colName):
     loss, accuracy = model.evaluate(X_test, y_test)
     accuracy_percentage = accuracy * 100  # Convert to percentage
     error_rate = (1 - accuracy) * 100  # Convert to percentage
-    print(f'Loss: {loss:.4f}')
-    print(f'Accuracy: {accuracy_percentage:.2f}%')
-    print(f'Error Rate: {error_rate:.2f}%')
+    print(f'Loss for {colName}: {loss:.4f}')
+    print(f'Accuracy for {colName}: {accuracy_percentage:.2f}%')
+    print(f'Error Rate for {colName}: {error_rate:.2f}%')
 
     # Predict on the entire dataset
     predictions = model.predict(features)
@@ -66,8 +67,13 @@ def train_and_evaluate(features, y, data, colName):
     accuracy = accuracy_score(y_labels, predicted_classes)
     accuracy_percentage_manual = accuracy * 100  # Convert to percentage
     error_rate_manual = (1 - accuracy) * 100  # Convert to percentage
-    print(f'Accuracy (manual): {accuracy_percentage_manual:.2f}%')
-    print(f'Error Rate (manual): {error_rate_manual:.2f}%')
+    print(f'Accuracy (manual) for {colName}: {accuracy_percentage_manual:.2f}%')
+    print(f'Error Rate (manual) for {colName}: {error_rate_manual:.2f}%')
+
+    # Save the model
+    model_file = os.path.join(model_dir, f'{colName}_softmax.h5')
+    model.save(model_file)
+    print(f'Model for {colName} saved to {model_file}')
 
     # Prepare data for impressions.csv
     impressions_data = []
@@ -95,10 +101,11 @@ def train_and_evaluate(features, y, data, colName):
     output_file = f'DATA/RNN Data/outputData/{colName}_impressions.csv'
     impressions_df.to_csv(output_file, index=False)
 
-    print(f"\nImpressions for {colName} (Probability Distributions as Percentages for Dropouts):")
-    print(impressions_df)
+    return accuracy_percentage, impressions_df
 
-    return impressions_df
+# Create directory for models if it doesn't exist
+model_dir = 'BackEnd//rnnModels//sigmoid//'
+os.makedirs(model_dir, exist_ok=True)
 
 # Load the data
 try:
@@ -108,16 +115,23 @@ except FileNotFoundError:
 
 cols = ['prim_Girls', 'prim_Boys', 'prim_Overall', 'upPrim_Girls', 'upPrim_Boys', 'upPrim_Overall', 'snr_Girls', 'snr_Boys', 'snr_Overall']
 
-# List to store DataFrames for each column
+# List to store DataFrames for each column and their accuracies
 list_of_impressions = []
+accuracies = {}
 
 for colName in cols:
     # Modify data for each column
     data_copy = data.copy()
     data_copy[colName] = data_copy[colName].fillna(0)  # Fill NaN values as needed
     features, y, data_preprocessed = preprocess_data(data_copy, colName)
-    impressions_df = train_and_evaluate(features, y, data_preprocessed, colName)
+    accuracy, impressions_df = train_and_evaluate(features, y, data_preprocessed, colName, model_dir)
     list_of_impressions.append(impressions_df)
+    accuracies[colName] = accuracy
+
+# Find the best model based on accuracy
+best_col = max(accuracies, key=accuracies.get)
+best_accuracy = accuracies[best_col]
+print(f'Best performing model is for column {best_col} with accuracy {best_accuracy:.2f}%')
 
 # Concatenate all impressions dataframes
 final_df = pd.concat(list_of_impressions, axis=1)
