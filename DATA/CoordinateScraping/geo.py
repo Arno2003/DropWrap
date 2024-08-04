@@ -8,6 +8,8 @@ API_KEY = '13c00742ef784344aa1dc02d6b403008'
 GEOAPIFY_ENDPOINT = 'https://api.geoapify.com/v1/geocode/autocomplete'
 
 # Function to get latitude and longitude for a given location
+problemList = ["Arunachal_Pradesh",
+               "Chandigarh", "Goa", "Ladakh", "Lakshadweep"]
 
 
 def get_lat_lng(location):
@@ -61,12 +63,29 @@ def convert(input_file, output_file, state):
                 longitudesSt.append(None)
         except:
             print("Exception")
-            # Add latitude and longitude columns to the DataFrame
+            latitudes.append(None)
+            longitudes.append(None)
+            latitudesSt.append(None)
+            longitudesSt.append(None)
+
+    # Check lengths of the lists and DataFrame
+    if len(latitudes) != len(df):
+        print(
+            f"Length mismatch: DataFrame({len(df)}), Latitudes({len(latitudes)})")
+        # Adjust lengths if needed
+        min_length = min(len(df), len(latitudes))
+        df = df.iloc[:min_length]
+        latitudes = latitudes[:min_length]
+        longitudes = longitudes[:min_length]
+        latitudesSt = latitudesSt[:min_length]
+        longitudesSt = longitudesSt[:min_length]
+
+    # Add latitude and longitude columns to the DataFrame
     df['latitude'] = latitudes
     df['longitude'] = longitudes
 
-    df['state_latitude'] = latitudes
-    df['state_longitude'] = longitudes
+    df['state_latitude'] = latitudesSt
+    df['state_longitude'] = longitudesSt
 
     # Save the updated DataFrame to a new CSV file
     df.to_csv(output_file, index=False)
@@ -79,6 +98,7 @@ folder_path = 'DATA\\Test\\DistrictWiseData'
 # output_file = 'DATA\CoordinateScraping\Geocode\latlongNew.csv'
 # convert(folder_path, output_file, 'Lakshadweep')
 
+
 # Iterate through all files in the folder
 for filename in os.listdir(folder_path):
     if filename.endswith('.csv'):
@@ -89,21 +109,15 @@ for filename in os.listdir(folder_path):
 
             stateName = "_".join(state.split())
 
-            op_dir = f"BackEnd\\database\\States\\{stateName}"
+            if stateName not in problemList:
+                op_dir = f"BackEnd\\database\\States\\{stateName}"
 
-            if not os.path.isdir(op_dir):
-                os.makedirs(op_dir)
+                if not os.path.isdir(op_dir):
+                    os.makedirs(op_dir)
 
-            output_file = op_dir+'\\latlong.csv'
-            # print(output_file)
-            convert(input_file, output_file, state)
+                output_file = op_dir+'\\latlong.csv'
+                print(output_file)
+                convert(input_file, output_file, state)
 
-            print(f"#################COMPLETED {state}####################")
-
-# # Open and read the CSV file
-# with open(file_path, 'r') as csv_file:
-#     reader = csv.reader(csv_file)
-#
-#     # Process the data as needed
-#     for row in reader:
-#         print(row)  # Replace this with your desired processing logic
+                print(
+                    f"#################COMPLETED {state}####################")
