@@ -135,23 +135,31 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       fetchStateClusterData(),
     ]).then(([latLongData, clusterData, stateClusterData]) => {
       if (view === "state") {
-        console.log(latLongData.data);
+        // console.log(latLongData.data);
         let temp = [];
+        let st_dno = 100;
+        while (st_dno <= 105) {
+          for (let i = 0; i < latLongData.data.length - 1; i++) {
+            if (Math.floor(latLongData.data[i].DNo / 100) === st_dno) {
+              // console.log(
+              //   latLongData.data[i].DNo,
+              //   i,
+              //   latLongData.data[i].state_latitude,
+              //   latLongData.data[i].state_longitude
+              // );
 
-        for (let i = 0; i < latLongData.data.length - 1; i++) {
-          if (Math.floor(latLongData.data[i].DNo / 100) === 105) {
-            console.log(
-              latLongData.data[i].DNo,
-              i,
-              latLongData.data[i].state_latitude,
-              latLongData.data[i].state_longitude
-            );
-            // console.log();
+              console.log(latLongData.data[i]);
+            }
           }
+          console.log("....................................");
+          st_dno++;
         }
 
         setClusters(stateClusterData.data);
       } else if (view === "district") {
+        // console.log(latLongData.data);
+        // console.log(clusterData.data);
+
         setLatLong(latLongData.data);
         setClusters(clusterData.data);
       }

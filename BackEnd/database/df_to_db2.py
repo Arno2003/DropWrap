@@ -24,11 +24,13 @@ count = 0
 for file in list_state:
     if file not in problemList:
         latlong_path = path+"\\"+file+"\\latlong.csv"
+        state_latlong_path = path+"\\"+file+"\\state_latlong.csv"
         cluster_path = path+"\\"+file+"\\cluster.csv"
         state_cluster_path = path+"\\"+file+"\\state_cluster.csv"
         df1 = pd.read_csv(latlong_path)
         df2 = pd.read_csv(cluster_path)
         df3 = pd.read_csv(state_cluster_path)
+        df4 = pd.read_csv(state_latlong_path)
 
         client.drop_database(file)
         client2.drop_database(file)
@@ -45,6 +47,9 @@ for file in list_state:
             data = df3.to_dict(orient="records")
             db.state_cluster.insert_many(data)
 
+            data = df4.to_dict(orient="records")
+            db.state_latlong.insert_many(data)
+
         else:
             db = client2[file]
 
@@ -56,5 +61,8 @@ for file in list_state:
 
             data = df3.to_dict(orient="records")
             db.state_cluster.insert_many(data)
+
+            data = df4.to_dict(orient="records")
+            db.state_latlong.insert_many(data)
 
         count += 1
