@@ -46,7 +46,7 @@ export default async (req, res) => {
         const client = await connectToDatabase1();
         const db = client.db(dbName);
         const result = await db
-          .collection("latlong")
+          .collection("state_latlong")
           .find({
             "Social Category": req.query.caste,
           })
@@ -60,7 +60,7 @@ export default async (req, res) => {
         const db2 = client2.db(dbName);
 
         const result2 = await db2
-          .collection("latlong")
+          .collection("state_latlong")
           .find({
             "Social Category": req.query.caste,
           })

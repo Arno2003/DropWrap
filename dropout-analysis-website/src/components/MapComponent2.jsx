@@ -77,7 +77,7 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
   const [clusters, setClusters] = useState([]);
   const [stateClusters, setStateClusters] = useState([]);
   const [cdHeaders, setCdHeaders] = useState([]);
-  const [view, setView] = useState("state");
+  const [view, setView] = useState("district");
 
   // Function to extract cluster from CSV data
   const extractCluster = (loc, clusters) => {
@@ -111,6 +111,15 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       }
     };
 
+    const fetchStateLatlongData = async () => {
+      try {
+        const response = await axios.get(`/api/state_latlong?caste=${caste}`);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     const fetchClusterData = async () => {
       try {
         const response = await axios.get(`/api/cluster?caste=${caste}`);
@@ -133,43 +142,20 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       fetchLatlongData(),
       fetchClusterData(),
       fetchStateClusterData(),
-    ]).then(([latLongData, clusterData, stateClusterData]) => {
-      if (view === "state") {
-        // console.log(latLongData.data);
-        let temp = [];
-        let st_dno = 100;
-        while (st_dno <= 105) {
-          for (let i = 0; i < latLongData.data.length - 1; i++) {
-            if (Math.floor(latLongData.data[i].DNo / 100) === st_dno) {
-              // console.log(
-              //   latLongData.data[i].DNo,
-              //   i,
-              //   latLongData.data[i].state_latitude,
-              //   latLongData.data[i].state_longitude
-              // );
-
-              console.log(latLongData.data[i]);
-            }
-          }
-          console.log("....................................");
-          st_dno++;
+      fetchStateLatlongData(),
+    ]).then(
+      ([latLongData, clusterData, stateClusterData, stateLatLongData]) => {
+        if (view === "state") {
+          setLatLong(stateLatLongData.data);
+          setClusters(stateClusterData.data);
+        } else if (view === "district") {
+          setLatLong(latLongData.data);
+          setClusters(clusterData.data);
         }
-
-        setClusters(stateClusterData.data);
-      } else if (view === "district") {
-        // console.log(latLongData.data);
-        // console.log(clusterData.data);
-
-        setLatLong(latLongData.data);
-        setClusters(clusterData.data);
       }
-      // setStateClusters(stateClusterData);
-      // setClusters(clusterData);
-    });
+    );
   }, [caste, category, std]);
-
-  // console.log(clusters.data);
-  // console.log(latLong.data);
+  // console.log(latLong, clusters);
 
   useEffect(() => {
     // Initialize the map
