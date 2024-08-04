@@ -300,6 +300,8 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
         let sum = 0;
 
         dropList.forEach((element) => {
+          console.log(element);
+
           sum = sum + element.values_.rate;
         });
 
