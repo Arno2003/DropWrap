@@ -76,8 +76,11 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
   const [latLong, setLatLong] = useState([]);
   const [clusters, setClusters] = useState([]);
   const [stateClusters, setStateClusters] = useState([]);
+  const [stateLatLong, setStateLatLong] = useState([]);
   const [cdHeaders, setCdHeaders] = useState([]);
   const [view, setView] = useState("state");
+  const [mapZoom, setMapZoom] = useState(0);
+  const [map, setMap] = useState();
 
   // Function to extract cluster from CSV data
   const extractCluster = (loc, clusters) => {
@@ -95,15 +98,24 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       const element = clusters[i];
 
       if (element.Location === loc) {
-        // console.log(element.Location, loc);
-        // console.log(element[colName]);
         cs = element[colName];
-
         break;
       }
     }
     return cs;
   };
+
+  useEffect(() => {
+    const handleView = () => {
+      if (mapZoom <= 6.5) {
+        setView("state");
+      } else {
+        setView("district");
+      }
+    };
+
+    handleView();
+  }, [mapZoom]);
 
   useEffect(() => {
     const fetchLatlongData = async () => {
@@ -149,16 +161,22 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       fetchStateLatlongData(),
     ]).then(
       ([latLongData, clusterData, stateClusterData, stateLatLongData]) => {
-        if (view === "state") {
-          setLatLong(stateLatLongData.data);
-          setClusters(stateClusterData.data);
-        } else if (view === "district") {
-          setLatLong(latLongData.data);
-          setClusters(clusterData.data);
-        }
+        setLatLong(latLongData.data);
+        setStateLatLong(stateLatLongData.data);
+        setClusters(clusterData.data);
+        setStateClusters(stateClusterData.data);
+        // if (view === "state") {
+        //   setLatLong(stateLatLongData.data);
+        //   setClusters(stateClusterData.data);
+        // } else if (view === "district") {
+        //   setLatLong(latLongData.data);
+        //   setClusters(clusterData.data);
+        // }
       }
     );
   }, [caste, category, std]);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     // Initialize the map
@@ -175,8 +193,9 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       }),
     });
 
-    // Create a vector source for the CSV data
+    // Create vector sources for the CSV data
     const vectorSource = new VectorSource();
+    const vectorSource2 = new VectorSource();
 
     let colName;
     if (std === "") {
@@ -187,58 +206,74 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       colName = "snr_" + category;
     }
 
-    for (let i = 0; i < latLong?.length; i++) {
-      const element = latLong[i];
+    // Populate vectorSource with features
+    latLong?.forEach((element) => {
+      const longitude = parseFloat(element["longitude"]);
+      const latitude = parseFloat(element["latitude"]);
+      const rate = parseInt(element[colName]);
 
-      // const longitude = element[cdHeaders[0]];
-      // const latitude = element[cdHeaders[1]];
-      let longitude, latitude;
-
-      longitude = element["longitude"];
-      latitude = element["latitude"];
-
-      // console.log(latitude, longitude);
-
-      const rateOp = () => {
-        return element[colName];
-      };
-      // console.log(element.Location);
-
-      const feature_obj = {
-        geometry: new Point(
-          fromLonLat([parseFloat(longitude), parseFloat(latitude)])
-        ),
-        rate: parseInt(rateOp()),
+      const feature = new Feature({
+        geometry: new Point(fromLonLat([longitude, latitude])),
+        rate,
         loc: element.Location,
         cs: extractCluster(element.Location, clusters) + 1,
-      };
+      });
 
-      // console.log(feature_obj);
-
-      const feature = new Feature(feature_obj);
       vectorSource.addFeature(feature);
-    }
+    });
 
-    // Create a source for clustering
+    // Populate vectorSource2 with features
+    stateLatLong?.forEach((element) => {
+      const longitude = parseFloat(element["longitude"]);
+      const latitude = parseFloat(element["latitude"]);
+      const rate = parseInt(element[colName]);
+
+      const feature = new Feature({
+        geometry: new Point(fromLonLat([longitude, latitude])),
+        rate,
+        loc: element.Location,
+        cs: extractCluster(element.Location, stateClusters) + 1,
+      });
+
+      vectorSource2.addFeature(feature);
+    });
+
+    // Create cluster sources
     const clusterSource = new Cluster({
-      distance: 60 / Math.pow(2, 0.1), // Adjust the cluster distance as needed
+      distance: 60 / Math.pow(2, 0.1),
       source: vectorSource,
     });
 
-    // Create a vector layer for clusters
+    const clusterSource2 = new Cluster({
+      distance: 60 / Math.pow(2, 0.1),
+      source: vectorSource2,
+    });
+
+    // Create vector layers for clusters
     const clusterLayer = new VectorLayer({
       source: clusterSource,
       style: clusterStyle,
     });
 
-    // Add the cluster layer to the map
-    map.addLayer(clusterLayer);
+    const clusterLayer2 = new VectorLayer({
+      source: clusterSource2,
+      style: clusterStyle,
+    });
+
+    // Add cluster layer based on view
+    if (view === "state") {
+      map.addLayer(clusterLayer);
+    } else if (view === "district") {
+      map.addLayer(clusterLayer2);
+    }
 
     // Update cluster distance based on map zoom level
     map.getView().on("change:resolution", function (evt) {
       const zoomLevel = map.getView().getZoom();
+      setMapZoom(zoomLevel);
       const newClusterDistance = 70 / Math.pow(2, zoomLevel - 5.5);
       clusterSource.setDistance(newClusterDistance);
+      clusterSource2.setDistance(newClusterDistance);
     });
 
     // Define overlay for displaying cluster information
