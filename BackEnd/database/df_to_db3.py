@@ -10,11 +10,11 @@ password = os.getenv("MONGO_PASSWORD_NEW")
 client = pymongo.MongoClient(
     f"mongodb+srv://hindol_banerjee:{password}@cluster0.u5akrs9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
-path = "BackEnd\\database\\stateWiseDataMerged.csv"
+path = "DATA\\RNN Data\\final_impressions_filtered_v2.csv"
 
 df = pd.read_csv(path)
 
 db = client['Other']
 
 data = df.to_dict(orient="records")
-db.state_clusters.insert_many(data)
+db.reasons.insert_many(data)

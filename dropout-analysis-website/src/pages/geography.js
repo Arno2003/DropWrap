@@ -201,14 +201,6 @@ const Geography = ({ mode }) => {
 
       setStateList(uniqueStateList);
       setDistrictList(uniqueDistrictList);
-
-      // if (uniqueStateList.length > 0) {
-      //   setState(uniqueStateList[0].State);
-      //   uniqueDistricts = reasonList
-      //     .filter((row) => row.State === uniqueStateList[0].State)
-      //     .map((row) => row.Location);
-      //   setDistrictList(uniqueDistricts);
-      // }
     };
     distList();
   }, [reasonList, state]);
@@ -217,28 +209,6 @@ const Geography = ({ mode }) => {
     setDist(districtList[0]?.Location);
     // console.log(districtList[0]?.Location);
   }, [state, districtList]);
-
-  // console.log(dist);
-
-  // useEffect(() => {
-  //   const updateDistrictList = () => {
-  //     if (state) {
-  //       const uniqueDistricts = reasonList
-  //         .filter((row) => row.State === state)
-  //         .map((row) => row.Location)
-  //         .filter((value, index, self) => self.indexOf(value) === index); // Removing duplicates
-  //       setDistrictList(uniqueDistricts);
-  //     }
-  //   };
-  //   updateDistrictList();
-  // }, [state, reasonList]);
-
-  // console.log(state);
-  // console.log(districtList);
-
-  // const handleStateChange = (event) => {
-  //   setState(event.target.value);
-  // };
 
   return (
     <>
