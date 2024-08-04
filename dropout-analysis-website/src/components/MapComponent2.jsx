@@ -77,7 +77,7 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
   const [clusters, setClusters] = useState([]);
   const [stateClusters, setStateClusters] = useState([]);
   const [cdHeaders, setCdHeaders] = useState([]);
-  const [view, setView] = useState("district");
+  const [view, setView] = useState("state");
 
   // Function to extract cluster from CSV data
   const extractCluster = (loc, clusters) => {
@@ -93,8 +93,12 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
 
     for (let i = 0; i < clusters.length; i++) {
       const element = clusters[i];
+
       if (element.Location === loc) {
+        // console.log(element.Location, loc);
+        // console.log(element[colName]);
         cs = element[colName];
+
         break;
       }
     }
@@ -155,7 +159,6 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       }
     );
   }, [caste, category, std]);
-  // console.log(latLong, clusters);
 
   useEffect(() => {
     // Initialize the map
@@ -199,6 +202,7 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
       const rateOp = () => {
         return element[colName];
       };
+      // console.log(element.Location);
 
       const feature_obj = {
         geometry: new Point(
