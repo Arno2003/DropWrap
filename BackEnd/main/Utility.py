@@ -230,6 +230,8 @@ class Utility:
         if subfolder_name == "IndiaDistricts" or subfolder_name == "states" or subfolder_name == "stateWiseData":
             return
         temp = subfolder_name.replace(" ", "_")
+        if os.path.exists(f"..\\..\\BackEnd\\database\\States") == False:
+            os.mkdir(f"..\\..\\BackEnd\\database\\States")
         output_file_all = f"..\\..\\BackEnd\\database\\States\\{temp}\\cluster.csv"
         
         # merging all the clusters into a single file
