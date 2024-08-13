@@ -230,7 +230,7 @@ class Utility:
         if subfolder_name == "IndiaDistricts" or subfolder_name == "states" or subfolder_name == "stateWiseData":
             return
         temp = subfolder_name.replace(" ", "_")
-        if os.path.exists(f"..\\..\\BackEnd\\database\\States") == False:
+        if os.path.exists(f"..\\..\\BackEnd\\database\\States\\{temp}") == False:
             os.mkdir(f"..\\..\\BackEnd\\database\\States\\{temp}")
         output_file_all = f"..\\..\\BackEnd\\database\\States\\{temp}\\cluster.csv"
         
@@ -265,6 +265,8 @@ class Utility:
     #################################### main calling function ##########################################
     def merge(dirPath="..\\..\\BackEnd\\Test\\ModelTesting\\outputData"):
         # dirPath = "..\\..\\BackEnd\\Test\\ModelTesting\\outputData"
+        if os.path.exists(f"..\\..\\BackEnd\\database\\States") == False:
+            os.mkdir(f"..\\..\\BackEnd\\database\\States")
         Utility.mergeFiles(dirPath)
     
     def mergeStateFiles():
