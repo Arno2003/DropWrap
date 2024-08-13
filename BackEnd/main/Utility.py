@@ -227,7 +227,8 @@ class Utility:
 
         # output directory for storing cluster data
         # output_file_all = f"BackEnd\database\{subfolder_name}\cluster.csv"
-        output_file_all = f"BackEnd\\Test\\ModelTesting\\outputData\\{subfolder_name}.csv"
+        temp = subfolder_name.replace(" ", "_")
+        output_file_all = f"BackEnd\\database\\States\\{temp}\\cluster.csv"
         
         # merging all the clusters into a single file
         df = pd.concat(dfList)

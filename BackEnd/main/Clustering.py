@@ -138,15 +138,7 @@ class Clustering:
         except Exception as e:
             print(e)
     
-    ##########################################################################################################
-    ################################# Cluster Formation for row, column cobinations ##########################
-    ##########################################################################################################
-    
-    def formCluster(dirLoc):
-        # util.serialNoAdd()
-        Clustering.formClusterSeparately(dirLoc)
-        util.merge()
-        
+    ############################## for preparing state wise data ###########################################
     def prepareStateData():
         import glob
 
@@ -300,6 +292,15 @@ class Clustering:
 
         print("Files merged successfully.")
 
+    ##########################################################################################################
+    ################################# Cluster Formation for row, column cobinations ##########################
+    ##########################################################################################################
+    
+    def formCluster(dirLoc):
+        # util.serialNoAdd()
+        Clustering.formClusterSeparately(dirLoc)
+        util.merge()
+    
     
     def __init__(self):
         self.util = util()
