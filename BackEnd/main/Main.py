@@ -9,8 +9,8 @@ class Main:
     
 if __name__ == "__main__":
     print("This is the main execution block")
-    # dirLoc = "DATA\\Test\\DistrictWiseData"
-    dirLoc = "DATA\\Test\\StateWiseData"
+    dirLoc = "DATA\\Test\\DistrictWiseData"
+    # dirLoc = "DATA\\Test\\StateWiseData"
     
-    # clst.formCluster(dirLoc)
-    util.saveDendrogram()
+    clst.formCluster(dirLoc)
+    # util.saveDendrogram()

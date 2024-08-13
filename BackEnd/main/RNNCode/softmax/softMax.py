@@ -44,7 +44,7 @@ def train_and_evaluate(features, y, data, colName, model_dir):
     # Build the RNN model
     model = build_model(X_train.shape[1])
 
-    # Use early stopping to prevent overfitting
+    # Early Stopping to prevent overfitting
     early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
     # Train the model
