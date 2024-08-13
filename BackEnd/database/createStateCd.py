@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-input_dir = "BackEnd\\database\\States"
+input_dir = "..\\..\\BackEnd\\database\\States"
 
 
 def computeStateData(df, state_name):

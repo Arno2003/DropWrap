@@ -90,7 +90,7 @@ print("\nImpression Values:")
 print(impressions)
 
 # Save the model
-model.save('BackEnd\\Test\\RNNCode\\softmax\\rnn_model.h5')
+model.save('..\\..\\BackEnd\\Test\\RNNCode\\softmax\\rnn_model.h5')
 
 # Evaluate the model on the test data
 test_loss, test_accuracy = model.evaluate(features, labels)

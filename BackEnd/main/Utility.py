@@ -227,8 +227,10 @@ class Utility:
 
         # output directory for storing cluster data
         # output_file_all = f"BackEnd\database\{subfolder_name}\cluster.csv"
+        if subfolder_name == "IndiaDistricts" or subfolder_name == "states" or subfolder_name == "stateWiseData":
+            return
         temp = subfolder_name.replace(" ", "_")
-        output_file_all = f"BackEnd\\database\\States\\{temp}\\cluster.csv"
+        output_file_all = f"..\\..\\BackEnd\\database\\States\\{temp}\\cluster.csv"
         
         # merging all the clusters into a single file
         df = pd.concat(dfList)
@@ -250,7 +252,7 @@ class Utility:
                 Utility.process_subfolder(dirPath, subfolder)
     
     def mergeFilesWhole():
-        dirPath = "BackEnd\\Test\\ModelTesting\\outputData\\IndiaDistricts"
+        dirPath = "..\\..\\BackEnd\\Test\\ModelTesting\\outputData\\IndiaDistricts"
         for subfolder in os.listdir(dirPath):
             subfolder_path = os.path.join(dirPath, subfolder)
             
@@ -259,8 +261,8 @@ class Utility:
                 Utility.process_subfolder(dirPath, subfolder)
     
     #################################### main calling function ##########################################
-    def merge(dirPath="BackEnd\\Test\\ModelTesting\\outputData"):
-        # dirPath = "BackEnd\\Test\\ModelTesting\\outputData"
+    def merge(dirPath="..\\..\\BackEnd\\Test\\ModelTesting\\outputData"):
+        # dirPath = "..\\..\\BackEnd\\Test\\ModelTesting\\outputData"
         Utility.mergeFiles(dirPath)
     
     def mergeStateFiles():
@@ -271,7 +273,7 @@ class Utility:
     #############################################################################################
     
     def saveDendrogram():
-        files = os.listdir("BackEnd\\Test\\ModelTesting\\outputData")
+        files = os.listdir("..\\..\\BackEnd\\Test\\ModelTesting\\outputData")
         for file in files:         
             # Load the CSV file
             if ".csv" not in file:

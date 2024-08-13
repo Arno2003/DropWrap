@@ -63,7 +63,7 @@
 # #             clusters = clustering.fit_predict(data)
 # #             data[cat + "_" +var + "_" +'Cluster'] = clusters
 
-# #             dirPath = "BackEnd\\Test\\ModelTesting\\outputData" + fileName.replace(".csv", "")
+# #             dirPath = "..\\..\\BackEnd\\Test\\ModelTesting\\outputData" + fileName.replace(".csv", "")
 # #             if not os.path.exists(dirPath):
 # #                 os.mkdir(path=dirPath)
             

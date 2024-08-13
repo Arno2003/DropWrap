@@ -7,7 +7,7 @@ import pandas as pd
 API_KEY = '13c00742ef784344aa1dc02d6b403008'
 GEOAPIFY_ENDPOINT = 'https://api.geoapify.com/v1/geocode/autocomplete'
 
-input_dir = "BackEnd\\database\\States"
+input_dir = "..\\..\\BackEnd\\database\\States"
 
 # Function to get latitude and longitude for a given location
 problemList = ["Arunachal_Pradesh",
@@ -122,7 +122,7 @@ for filename in os.listdir(folder_path):
             stateName = "_".join(state.split())
 
             if stateName not in problemList:
-                op_dir = f"BackEnd\\database\\States\\{stateName}"
+                op_dir = f"..\\..\\BackEnd\\database\\States\\{stateName}"
 
                 if not os.path.isdir(op_dir):
                     os.makedirs(op_dir)

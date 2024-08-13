@@ -17,7 +17,7 @@ client2 = pymongo.MongoClient(
 #### UPLOAD STATE WISE CLUSTERING AND COORDINATE DATA ####
 ##########################################################
 
-path = "BackEnd\\database\\States"
+path = "..\\..\\BackEnd\\database\\States"
 
 problemList = ["Arunachal_Pradesh",
                "Chandigarh", "Goa", "Ladakh", "Lakshadweep"]

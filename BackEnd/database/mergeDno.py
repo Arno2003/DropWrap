@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # base_dir = os.path.dirname(os.path.abspath(__file__))
-dno_path = "BackEnd\\database\\stateDNoMapping.csv"
-stateCluster_path = "BackEnd\\database\\stateWiseData.csv"
+dno_path = "..\\..\\BackEnd\\database\\stateDNoMapping.csv"
+stateCluster_path = "..\\..\\BackEnd\\database\\stateWiseData.csv"
 
 dnoDf = pd.read_csv(dno_path)
 
@@ -42,7 +42,7 @@ for ind, row in merged.iterrows():
 state_cluster = []
 for state in stateList:
     stateName = '_'.join(state.split())
-    op_dir = f"BackEnd\\database\\States\\{stateName}"
+    op_dir = f"..\\..\\BackEnd\\database\\States\\{stateName}"
     for ind, row in merged.iterrows():
         if row['Location'] == state:
             state_cluster.append(row)
