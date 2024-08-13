@@ -56,6 +56,7 @@ To generate impressions of factors leading to dropout, execute:
 
 ```bash
 cd RNNCode
+cd softmax
 python softmax.py
 ```
 

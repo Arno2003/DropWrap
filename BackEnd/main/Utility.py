@@ -237,9 +237,13 @@ class Utility:
         # merging all the clusters into a single file
         df = pd.concat(dfList)
         
-        extraCols = ['prim', 'snr', 'upPrim']
-        for col in extraCols:
-            df.drop(col, axis=1, inplace=True)
+        # extraCols = ['prim', 'snr', 'upPrim']
+        # for col in extraCols:
+        #     df.drop(col, axis=1, inplace=True)
+        
+        #     df.rename(columns={'upPrim': 'upPrim_Overall', 'snr': 'snr_Overall', 'prim': 'prim_Overall'}, inplace=True)
+        
+        
         
         df.to_csv(output_file_all)
         print(f"Success: All merged files combined into {output_file_all}")
@@ -267,6 +271,22 @@ class Utility:
         # dirPath = "..\\..\\BackEnd\\Test\\ModelTesting\\outputData"
         if os.path.exists(f"..\\..\\BackEnd\\database\\States") == False:
             os.mkdir(f"..\\..\\BackEnd\\database\\States")
+            
+        # ############# correcting the error due to invalid column name ###########
+        # for folder in os.listdir(dirPath):
+        #     folder_path = os.path.join(dirPath, folder)
+        #     for sub_folder in os.listdir(folder_path):
+        #         if sub_folder == "Merged":
+        #             sub_folder_path = os.path.join(folder_path, sub_folder)
+        #             for file in os.listdir(sub_folder_path):        
+        #                 file_path = os.path.join(sub_folder_path, file)
+        #                 df = pd.read_csv(file_path)
+        #                 if 'snr' in df.columns: 
+        #                     df.rename(columns={'upPrim': 'upPrim_Overall', 'snr': 'snr_Overall', 'prim': 'prim_Overall'}, inplace=True)
+        #                     df.to_csv(file_path, index=False)
+            
+        
+        # #########################################################################
         Utility.mergeFiles(dirPath)
     
     def mergeStateFiles():
