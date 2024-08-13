@@ -165,13 +165,6 @@ const MapComponent2 = ({ category, caste, std, classes, setAvgRate, mode }) => {
         setStateLatLong(stateLatLongData.data);
         setClusters(clusterData.data);
         setStateClusters(stateClusterData.data);
-        // if (view === "state") {
-        //   setLatLong(stateLatLongData.data);
-        //   setClusters(stateClusterData.data);
-        // } else if (view === "district") {
-        //   setLatLong(latLongData.data);
-        //   setClusters(clusterData.data);
-        // }
       }
     );
   }, [caste, category, std]);

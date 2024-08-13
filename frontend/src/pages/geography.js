@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import axios from "axios";
 import Layout from "@/components/Layout";
-import MapComponent from "@/components/MapComponent";
 import MapComponent2 from "@/components/MapComponent2";
 import { motion, useSpring, useInView, useMotionValue } from "framer-motion";
 import {
@@ -234,10 +233,6 @@ const Geography = ({ mode }) => {
                 <CasteDropDown caste={caste} setCaste={setCaste} />
                 <StdDropDown std={std} setStd={setStd} />
               </div>
-              {/* <ReasonsTab
-                reasonList={reasonList}
-                classes="text-dark w-[100%] mr-4 "
-              /> */}
 
               <ReasonsTab2
                 dropLabel="State"
@@ -286,25 +281,6 @@ const Geography = ({ mode }) => {
               setAvgRate={setAvgRate}
             />
           </div>
-
-          {/* <div>
-            <select onChange={handleStateChange} value={state}>
-              <option value="">Select State</option>
-              {stateList.map((state) => (
-                <option key={state.State} value={state.State}>
-                  {state.State}
-                </option>
-              ))}
-            </select>
-            <select>
-              <option value="">Select District</option>
-              {districtList.map((district) => (
-                <option key={district} value={district}>
-                  {district}
-                </option>
-              ))}
-            </select>
-          </div> */}
         </Layout>
       </div>
     </>

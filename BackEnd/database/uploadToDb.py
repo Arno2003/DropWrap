@@ -13,6 +13,10 @@ client = pymongo.MongoClient(
 client2 = pymongo.MongoClient(
     f"mongodb+srv://hindol_banerjee:{password}@cluster1.jf2mcdo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1")
 
+##########################################################
+#### UPLOAD STATE WISE CLUSTERING AND COORDINATE DATA ####
+##########################################################
+
 path = "BackEnd\\database\\States"
 
 problemList = ["Arunachal_Pradesh",
@@ -66,3 +70,18 @@ for file in list_state:
             db.state_latlong.insert_many(data)
 
         count += 1
+
+
+##########################################################
+#################### UPLOAD RNN DATA #####################
+##########################################################
+
+path_rnn = "DATA\\RNN Data\\final_impressions_filtered_v2.csv"
+
+df_rnn = pd.read_csv(path_rnn)
+client.drop_database('Other')
+
+db_rnn = client['Other']
+
+data = df_rnn.to_dict(orient="records")
+db_rnn.reasons.insert_many(data)
