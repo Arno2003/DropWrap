@@ -36,16 +36,35 @@ cd BackEnd
 To generate the clustering data, run the following command
 
 ```bash
-  cd main
-  python Main.py
+cd main
+python Main.py
 ```
 
 To generate impressions of factors leading to dropout, execute:
 
 ```bash
 cd RNNCode
-cd softmax
 python softmax.py
 ```
 
 Now the data processing is complete, now we need to upload the data into our MongoDB database
+
+```bash
+cd ../../database
+python uploadToDb.py
+```
+Now that we are done with running our ML models and uploading useful data to our database, we will run our next app locally.
+
+```bash
+cd frontend
+```
+Installing all dependencies:
+
+```bash
+npm i
+```
+Running the app in http://localhost:3000/
+
+```bash
+npm run dev
+```
