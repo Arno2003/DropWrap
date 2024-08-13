@@ -23,8 +23,3 @@ for state_name in os.listdir(input_dir):
     print(final_df.head())
     final_df.to_csv(output_path)
     # print(input_path)
-
-
-# test_path = "BackEnd\\database\\States\\Andhra_Pradesh\\latlong.csv"
-# df = pd.read_csv(test_path)
-#

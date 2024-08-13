@@ -7,9 +7,21 @@ import pandas as pd
 API_KEY = '13c00742ef784344aa1dc02d6b403008'
 GEOAPIFY_ENDPOINT = 'https://api.geoapify.com/v1/geocode/autocomplete'
 
+input_dir = "BackEnd\\database\\States"
+
 # Function to get latitude and longitude for a given location
 problemList = ["Arunachal_Pradesh",
                "Chandigarh", "Goa", "Ladakh", "Lakshadweep"]
+
+
+def computeStateData(df, state_name):
+    df = df.drop(columns=['latitude', 'longitude'])
+    df = df.rename(columns={'state_latitude': 'latitude',
+                   'state_longitude': 'longitude'})
+
+    grouped_df = df.groupby('Social Category').mean().reset_index()
+    grouped_df['Location'] = state_name
+    return grouped_df
 
 
 def get_lat_lng(location):
@@ -121,3 +133,13 @@ for filename in os.listdir(folder_path):
 
                 print(
                     f"#################COMPLETED {state}####################")
+
+
+for state_name in os.listdir(input_dir):
+    input_path = input_dir+"\\"+state_name+"\\latlong.csv"
+    output_path = input_dir+"\\"+state_name+"\\state_latlong.csv"
+    df = pd.read_csv(input_path)
+
+    final_df = computeStateData(df, ' '.join(state_name.split('_')))
+    print(final_df.head())
+    final_df.to_csv(output_path)
