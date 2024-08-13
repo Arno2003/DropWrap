@@ -231,7 +231,7 @@ class Utility:
             return
         temp = subfolder_name.replace(" ", "_")
         if os.path.exists(f"..\\..\\BackEnd\\database\\States") == False:
-            os.mkdir(f"..\\..\\BackEnd\\database\\States")
+            os.mkdir(f"..\\..\\BackEnd\\database\\States\\{temp}")
         output_file_all = f"..\\..\\BackEnd\\database\\States\\{temp}\\cluster.csv"
         
         # merging all the clusters into a single file
